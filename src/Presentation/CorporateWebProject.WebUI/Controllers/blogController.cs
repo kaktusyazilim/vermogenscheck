@@ -13,14 +13,12 @@ namespace Corporate.WebUI.Controllers
 {
     public class blogController : Controller
     {
-
         private readonly IBlogRepository _blogRepository;
         private readonly ICategoryRepository _categoryRepository;
         private readonly IUserRepository _userRepository;
         private readonly ISocialMediaRepository _socialMediaRepository;
         private readonly IMemoryCache _memoryCache;
         private readonly IServiceRepository _serviceRepository;
-
         public blogController(IBlogRepository blogRepository, ICategoryRepository categoryRepository, IUserRepository userRepository, IMemoryCache memoryCache, ISocialMediaRepository socialMediaRepository, IServiceRepository serviceRepository)
         {
             _blogRepository = blogRepository;
@@ -30,7 +28,6 @@ namespace Corporate.WebUI.Controllers
             _socialMediaRepository = socialMediaRepository;
             _serviceRepository = serviceRepository;
         }
-
         public async Task<IActionResult> Index(int sayfa = 1, string category = "", string searchText = "")
         {
             ServiceVM model = new ServiceVM(HttpContext, _memoryCache);
