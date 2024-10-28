@@ -1,0 +1,129 @@
+﻿@model CorporateWebProject.WebUI.Models.ServiceVM
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Manager/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-6">
+                <h3>@(Model.Modul!=null?Model.Modul.Title:"")</h3>
+            </div>
+            <div class="col-6">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="@(Model.Modul!=null?"/manager"+Model.Modul.Url:"")@(Model.Page!=null?Model.Page.Url:"/index")">
+                            <svg class="stroke-icon">
+                                <use href="/manager/assets/svg/icon-sprite.svg#stroke-home"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">@(Model.Modul!=null?Model.Modul.Title:"")</li>
+                    <li class="breadcrumb-item active">@(Model.Page!=null?Model.Page.Title:Model.Modul.Title+" Ekle")</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row starter-main">
+        <div class="col-sm-12">
+            <div class="card">
+
+                <div class="card-body">
+                    <form class="row g-3 needs-validation custom-input" enctype="multipart/form-data" action="/manager/@Model.Modul!.Url/create" method="post" novalidate="">
+                        <div class="col-6">
+                            <label class="form-label" asp-for="SmtpSetting.Server">Server</label>
+                            <input ty class="form-control input-validate" data-error="Lütfen server bilginizi giriniz" asp-for="SmtpSetting.Server" type="text" placeholder="Server bilginizi giriniz." required="">
+
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label" asp-for="SmtpSetting.Port">Port</label>
+                            <input ty class="form-control input-validate" data-error="Lütfen Port bilginizi giriniz" asp-for="SmtpSetting.Port" type="text" placeholder="Port bilginizi giriniz." required="">
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label" asp-for="SmtpSetting.Mail">Mail</label>
+                            <input ty class="form-control input-validate" data-error="Lütfen Mail bilginizi giriniz" asp-for="SmtpSetting.Mail" type="text" placeholder="Mail bilginizi giriniz." required="">
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label" asp-for="SmtpSetting.Mail">Mail Şifre</label>
+                            <input ty class="form-control input-validate" data-error="Lütfen Mail şifre bilginizi giriniz" asp-for="SmtpSetting.Mail" type="text" placeholder="Mail şifre bilginizi giriniz." required="">
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label" asp-for="SmtpSetting.Mail">Mail Başlığı</label>
+                            <input ty class="form-control input-validate" data-error="Lütfen Mail başlığı bilginizi giriniz" asp-for="SmtpSetting.Mail" type="text" placeholder="Mail başlığı bilginizi giriniz." required="">
+                        </div>
+
+
+
+                        <div class="col-6">
+                            <label class="form-label" asp-for="Category.LangId">Mail Bilginiz Hangi Dilde Kullanılacak</label>
+                            @Html.DropDownListFor(x => x.Category.LangId, new SelectList(Model.LanguageList, "Id", "Name"), "Lütfen bir dil seçiniz", new { @class = "form-control input-validate", data_error = "Lütfen kategori için bir dil seçiniz", required = "" })
+
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-primary" type="submit">Kaydet</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Container-fluid Ends-->
+
+@section js{
+    <script src="/manager/assets/js/dropzone/dropzone.js"></script>
+    <script src="/manager/assets/js/dropzone/dropzone-script.js"></script>
+    <script src="/manager/assets/js/select2/select2.full.min.js"></script>
+    <script src="/manager/assets/js/select2/select2-custom.js"></script>
+    <script src="/manager/assets/js/editors/quill.js"></script>
+    <script src="/manager/assets/js/form-validation-custom.js"></script>
+    <script src="https://cdn.ckeditor.com/4.16.0/full-all/ckeditor.js"></script>
+
+    <script>
+        CKEDITOR.replace('editor', {
+            toolbar: 'Full',
+            toolbar_Full:
+                [
+                    { name: 'document', items: ['Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates'] },
+                    { name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo'] },
+                    { name: 'editing', items: ['Find', 'Replace', '-', 'SelectAll', '-', 'SpellChecker', 'Scayt'] },
+                    {
+                        name: 'forms', items: ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton',
+                            'HiddenField']
+                    },
+                    '/',
+                    { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat'] },
+                    {
+                        name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv',
+                            '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl']
+                    },
+                    { name: 'links', items: ['Link', 'Unlink', 'Anchor'] },
+                    { name: 'insert', items: ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe'] },
+                    '/',
+                    { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
+                    { name: 'colors', items: ['TextColor', 'BGColor'] },
+                    { name: 'tools', items: ['Maximize', 'ShowBlocks', '-', 'About'] }
+                ],
+            extraPlugins: 'iframe',
+            enterMode: CKEDITOR.ENTER_BR,
+            shiftEnterMode: CKEDITOR.ENTER_P,
+            filebrowserBrowseUrl: '/manager/files/Browse',
+            filebrowserUploadUrl: '/manager/files/create'
+        });
+
+
+    </script>
+
+}
+
+@section css {
+    <link rel="stylesheet" type="text/css" href="/manager/assets/css/vendors/quill.snow.css">
+    <link rel="stylesheet" type="text/css" href="/manager/assets/css/vendors/select2.css">
+    <link rel="stylesheet" type="text/css" href="/manager/assets/css/vendors/dropzone.css">
+}

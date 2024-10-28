@@ -1,0 +1,199 @@
+﻿
+@{
+    ViewData["Title"] = Model.Portfolio.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string categoryNameString = "";
+    Model.PortfolioCategoryMapList.Select(x => x.CategoryName).ToList().ForEach(x => categoryNameString += x + " / ");
+}
+
+@section tags {
+    <link rel="canonical" href="https://www.kaktusyazilim.com/referanslar/@Model.Portfolio.FriendlyUrl" type="text/html" />
+
+    <meta name="description" content="@(new HtmlString(Model.Portfolio.MetaDescription))" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Kaktüs Yazılım">
+    <meta property="og:title" content="@(new HtmlString(Model.Portfolio.MetaDescription))">
+    <meta property="og:description" content="@(new HtmlString(Model.Portfolio.MetaDescription))">
+    <meta property="og:url" content="https://www.kaktusyazilim.com/referanslar/@Model.Portfolio.FriendlyUrl">
+    <meta property="og:locale" content="tr_TR">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@@kaktusyazilimcom">
+    <meta name="twitter:title" content="Kaktüs Yazılım">
+    <meta name="twitter:url" content="https://www.kaktusyazilim.com/referanslar/@Model.Portfolio.FriendlyUrl">
+    <meta name="twitter:description" content="@(new HtmlString(Model.Portfolio.MetaDescription))">
+    <link rel="image_src" href="@("https://www.kaktusyazilim.com"+Model.Portfolio.Mockup)" />
+    <meta name="twitter:image" content="@("https://www.kaktusyazilim.com"+Model.Portfolio.Mockup)" />
+    <meta property="og:image:alt" content="@Model.Portfolio.Title" />
+    <meta property="og:image" content="@("https://www.kaktusyazilim.com"+Model.Portfolio.Mockup)" />
+
+
+}
+
+<div style="margin-top:100px;z-index:0 !important" class="inner-banner">
+    <img src="/site/assets/images/bg/inner-bannerdot.png" class="inner-bannerdot" alt="image">
+    <img src="/site/assets/images/bg/inner-bannerwave.png" class="inner-bannerwave" alt="image">
+    <a class="down-arrow-icon" href="#project-details">
+        <svg viewBox="0 0 14 26" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M13.8182 18.469L7.24862 25.7462L0.679032 18.469C0.272584 18.0188 0.592074 17.3 1.19862 17.3L6.74862 17.3L6.74862 1C6.74862 0.723857 6.97248 0.5 7.24862 0.5C7.52477 0.5 7.74862 0.723857 7.74862 1L7.74862 17.3L13.2986 17.3C13.9052 17.3 14.2247 18.0188 13.8182 18.469Z" />
+        </svg>
+    </a>
+    <div class="container">
+        <div class="row d-flex justify-content-center align-items-center text-center">
+            <div class="col-md-6">
+                <h2 class="inner-banner-title wow fadeInLeft" data-wow-duration="1.5s" data-wow-delay=".2s">@Model.Portfolio.Title</h2>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb gap-3">
+                        <li class="breadcrumb-item"><a href="/">Anasayfa</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">@Model.Portfolio.Title</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="project-details-section pt-120" id="project-details">
+
+    <div class="container">
+        <div class="row justify-contenet-center gy-5">
+            <div class="col-lg-7">
+                <div class="proj-details-single">
+                    <div style="display:flex;justify-content:center">
+                        <img style="height:480px" src="@Model.Portfolio.Mockup" alt="image" class="img-fluid">
+
+                    </div>
+                    <ul class="project-meta-list gap-3">
+
+                        <li>
+                            <div class="icon" >
+                                <img src="/site/assets/images/icons/client-icon.svg" alt="image">
+                            </div>
+                            <div class="text">
+                                <h5>Müşteri Adı</h5>
+                                <p>@Model.Portfolio.ClientFullName</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="icon">
+                                <img src="/site/assets/images/icons/category-icon.svg" alt="image">
+                            </div>
+                            <div class="text">
+                                <h5>Hizmet</h5>
+                                @try
+                                {
+                                    <p>@(categoryNameString!=null && categoryNameString.Length>0? categoryNameString.Substring(0, categoryNameString.Length-2): categoryNameString)</p>
+                                }
+                                catch (Exception)
+                                {
+                                    <p>@categoryNameString</p>
+                                }
+                            </div>
+                        </li>
+
+                      
+                            @if (Model.Portfolio.Website != null && Model.Portfolio.Website != "")
+                            {
+                                <li>
+                                    <div class="icon">
+                                        <img src="/site/assets/images/icons/website-icon.svg" style="height:30px" alt="image">
+                                    </div>
+                                    <div class="text">
+                                        <h5>Web Sitesi</h5>
+                                        @try
+                                        {
+                                            <p><a target="_blank" href="@Model.Portfolio.Website">@(Model.Portfolio.Website.Split('.')[1]+"."+Model.Portfolio.Website.Split('.')[2])</a></p>
+                                        }
+                                        catch (Exception)
+                                        {
+                                            <p><a target="_blank" href="@Model.Portfolio.Website">@(Model.Portfolio.Website)</a></p>
+                                        }
+
+                                    </div>
+                                </li>
+
+                            }
+                            else
+                            {
+                                <li>
+                                    <div class="icon">
+                                        <img src="/site/assets/images/icons/calendar2.svg" alt="image" loading="lazy">
+                                    </div>
+                                    <div class="text">
+                                        <h5>Tarih</h5>
+                                        <p>@Model.Portfolio.CreateDate.ToString("dd MMMM yyyy")</p>
+                                    </div>
+                                </li>
+                            }
+
+                       
+                           
+                      
+
+                    </ul>
+                    <h4>Proje Detayları</h4>
+                    <p class="para">@Html.Raw(Model.Portfolio.FullDescription)</p>
+
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="proj-details-right">
+                    <div class="title-area">
+                        <span>@Model.CategoryList.FirstOrDefault(x => x.Id == Model.Portfolio.CategoryId).Name</span>
+                        <h2>@Model.Portfolio.Title</h2>
+                    </div>
+                    <p class="para">@Model.Portfolio.ShortDescription</p>
+                    <div class="proj-details-imgs">
+                        <div class="row g-4">
+                            <div class="col-lg-6 col-md-6 col-sm-6 text-center">
+                                <img src="/site/assets/images/bg/project-d1.png" class="img-fluid" alt="image">
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 text-center">
+                                <img src="/site/assets/images/bg/project-d2.png" class="img-fluid" alt="image">
+                            </div>
+                        </div>
+                    </div>
+                    @await Html.PartialAsync("~/views/shared/_bannerPartial.cshtml")
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="portfolio-section pt-120 pb-120">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="section-title primary5">
+                    <span>- Referenslar -</span>
+                    <h3>İş Vitrini</h3>
+                    <p class="para">Harika UI/UX deneyimleri yaratan tüm ürünlerimiz için projenizin işletme maliyetlerinde azalmadan en iyi şekilde yararlanın.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row position-relative justify-content-center g-4">
+            @foreach (var item in Model.PortfolioList.Take(3))
+            {
+                <div class="col-lg-4 col-md-6 col-sm-10">
+                    <div class="portfolio-item1 wow fadeInDown" data-wow-duration="1.5s" data-wow-delay="0.2s">
+                        <div class="portfolio-img">
+                            <img alt="image" src="@item.Mockup">
+                        </div>
+                        <div class="portfolio-content">
+                            <span>@Model.CategoryList.FirstOrDefault(x => x.Id == item.CategoryId).Name</span>
+                            <h4><a href="/referanslar/@item.FriendlyUrl">@item.Title</a></h4>
+                            <a href="/referanslar/@item.FriendlyUrl" class="text-btn">
+                                Detaylar<svg width="18" height="10" viewBox="0 0 18 10" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M11.1818 1.38021V5V8.61979C11.1818 8.78083 11.3624 8.87583 11.4951 8.7846L17 5L11.4951 1.2154C11.3624 1.12417 11.1818 1.21917 11.1818 1.38021Z" />
+                                    <path d="M1 4.5C0.723858 4.5 0.5 4.72386 0.5 5C0.5 5.27614 0.723858 5.5 1 5.5V4.5ZM11.4951 1.2154L11.2119 1.62742L11.2119 1.62742L11.4951 1.2154ZM17 5L17.2833 5.41202L17.8826 5L17.2833 4.58798L17 5ZM11.4951 8.7846L11.2119 8.37258L11.2119 8.37258L11.4951 8.7846ZM1 5.5H11.1818V4.5H1V5.5ZM11.6818 5V1.38021H10.6818V5H11.6818ZM11.2119 1.62742L16.7167 5.41202L17.2833 4.58798L11.7784 0.803376L11.2119 1.62742ZM16.7167 4.58798L11.2119 8.37258L11.7784 9.19662L17.2833 5.41202L16.7167 4.58798ZM11.6818 8.61979V5H10.6818V8.61979H11.6818ZM11.2119 8.37258C11.4109 8.23573 11.6818 8.37824 11.6818 8.61979H10.6818C10.6818 9.18342 11.3139 9.51593 11.7784 9.19662L11.2119 8.37258ZM11.6818 1.38021C11.6818 1.62176 11.4109 1.76427 11.2119 1.62742L11.7784 0.803377C11.3139 0.484066 10.6818 0.81658 10.6818 1.38021H11.6818Z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+</div>
+
+
+@await Html.PartialAsync("~/views/shared/_brandsPartial.cshtml")

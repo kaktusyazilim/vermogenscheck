@@ -1,0 +1,91 @@
+﻿
+@model CorporateWebProject.WebUI.Models.ServiceVM
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Manager/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-6">
+                <h3>@(Model.Modul!=null?Model.Modul.Title:"")</h3>
+            </div>
+            <div class="col-6">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="@(Model.Modul!=null?"/manager/"+Model.Modul.Url:"")@(Model.Page!=null?Model.Page.Url:"/index")">
+                            <svg class="stroke-icon">
+                                <use href="/manager/assets/svg/icon-sprite.svg#stroke-home"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">@(Model.Modul!=null?Model.Modul.Title:"")</li>
+                    <li class="breadcrumb-item active">@(Model.Page!=null?Model.Page.Title:"Liste")</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row starter-main">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-end">
+                        <a href="@("/manager/"+Model.Modul.Url)/create" class="btn btn-success btnCreate">Yeni @(Model.Page!=null?Model.Page.Title:Model.Modul.Title) Ekle</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="dt-ext table-responsive">
+                        <table class="display" id="export-button">
+                            <thead>
+                                <tr>
+                                    <th>Başlık</th>
+                                    <th>Modül</th>
+                                    <th>Sayfa</th>
+                                    <th>Tarih</th>
+                                    <th>İşlemler</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var item in Model.TypeList)
+                                {
+                                    var modules = Model.ModulList.FirstOrDefault(x => x.Id == item.ModulId);
+                                    <tr>
+                                        <td>@item.Name</td>
+                                        <td>@(modules==null?"Bağlı Deği":modules.Title)</td>
+                                        <td>@(item.IsPage==true?"Sayfa":"Sayfa değil")</td>
+                                        <td>@item.CreateDate</td>
+                                        <td>
+                                            <ul class="action">
+                                                <li class="edit"> <a href="/manager/@Model.Modul.Url/update?id=@item.ItemGuid"><i style="font-size: 18px" class="icon-pencil-alt"></i></a></li>
+                                                <li class=""> <a style="cursor:pointer"  onclick="btnPassive('@item.ItemGuid', '/manager/@Model.Modul.Url/passive')" ><i style="color: orange !important;  font-size: 18px" class="icon-archive"></i></a></li>
+                                                <li class="delete"><a  style="cursor:pointer"  onclick="btnDelete('@item.ItemGuid', '/manager/@Model.Modul.Url/delete')"  ><i style="font-size:18px" class="icon-trash"></i></a></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+
+                                <tr>
+                                    <th>Başlık</th>
+                                    <th>Modül</th>
+                                    <th>Sayfa</th>
+                                    <th>Tarih</th>
+                                    <th>İşlemler</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Container-fluid Ends-->

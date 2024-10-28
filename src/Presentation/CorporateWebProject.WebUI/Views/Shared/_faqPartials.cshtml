@@ -1,0 +1,35 @@
+﻿
+<div class="faq-section pt-120 pb-120">
+    <img src="/site/assets/images/bg/watermark2-bg.png" alt="image" class="watermark2-bg">
+    <div class="container">
+        <div class="row g-4 justify-content-center">
+            <div class="col-lg-4">
+                <div class="sidebar-card wow fadeInLeft" data-wow-duration="1.5s" data-wow-delay=".2s">
+                    <h2>
+                       Daha fazla sorunuz için bizimle
+                    </h2>
+                    <a href="/iletisim" class="eg-btn btn--primary4 btn--lg">İletişime Geçin</a>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="faq-wrap wow fadeInRight" data-wow-duration="1.5s" data-wow-delay=".2s">
+                    @foreach (var item in Model.FaqList.Where(x=>x.CategoryId==0).ToList())
+                    {
+                        <div class="faq-item hover-btn">
+                            <span></span>
+                            <h5 id="@("heading"+item.Queue)" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#@("collapse"+item.Queue)" aria-controls="@("collapse"+item.Queue)">
+                                @item.Queue. @Html.Raw(item.Question)
+                            </h5>
+                            <div id="@("collapse"+item.Queue)" class="accordion-collapse collapse" aria-labelledby="@("heading"+item.Queue)">
+                                <div class="faq-body">
+                                   @Html.Raw(item.Answer)
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

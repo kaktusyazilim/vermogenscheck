@@ -1,0 +1,132 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section title{ 
+@Model.Blog.Title - 
+}
+<section class="banner_02">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb"><a href="/">@Model.Translate["Home"]</a>><a href="/@Model.Translate["Categories"].ToLower()/@Model.Category.FriendlyUrl">@Model.Category.Name</a>><span>@Model.Blog.Title</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="sp_2_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="blog_content">
+                    <h2 class="sb_title">@Model.Blog.Title</h2>
+                    <div class="post_banner_meta clearfix">
+                        <img src="@Model.User.Photo" alt="@Model.User.DisplayName">
+                        <span class="fi1cm_author"><a href="#">@Model.User.DisplayName</a></span>
+                        <span class="fi1cm_date">-<a href="#"><i class="twi-clock2"></i>@Model.Blog.CreateDate.ToString("dd MMMM yyyy")</a></span>
+                        <a class="view" href="#"><i class="magro-fire"></i>120</a>
+                        <a class="like" href="#"><i class="magro-view"></i>1.1k</a>
+                    </div>
+                    <div class="sb_img">
+                        <img style="min-width:100%" src="@Model.Blog.Photo" alt="" />
+                        <a href="/@Model.Translate["Categories"].ToLower()/@Model.Category.FriendlyUrl" class="cats blues2">@Model.Category.Name</a>
+                    </div>
+                 @Html.Raw(Model.Blog.FullDescription)
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="sb_tags clearfix">
+                                @if (Model.Blog.Tags != null && Model.Blog.Tags.Length != 0)
+                                {
+                                    <h5>@Model.Translate["Tags"]</h5>
+                                    @foreach (var item in Model.Blog.Tags.Split(','))
+                                    {
+                                        <a href="/search?@item">@item.ToLower()</a>
+
+                                    }
+                                }
+
+
+                            </div>
+                            <div class="sb_share clearfix">
+                                <h5>@Model.Translate["Share"]</h5>
+                                <a href="#"><img src="/site/images/share.png" alt="" /></a>
+                            </div>
+                            <div class="post_author">
+                                <img src="/site/images/author.jpg" alt="">
+                                <span>@Model.Translate["Writer"]</span>
+                                <h4><a href="#">@Model.User.DisplayName</a></h4>
+                                <p>
+                                    Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et
+                                    voluptates repudiandae sint et molestiae non recusanda
+                                </p>
+                            </div>
+                            @*<div class="comment_area">
+                                <h3 class="cm_title"><i class="twi-facebook-messenger"></i>Comments 25</h3>
+                                <h3 class="cm_title"><i class="twi-facebook-square"></i>Facebook</h3>
+                                <ol class="comment_list">
+                                    <li>
+                                        <div class="single-comment">
+                                            <img src="/site/images/c1.jpg" alt="">
+                                            <div class="authorDetails">
+                                                <h5><a href="#">Matt Cloey</a></h5>
+                                                <span> Apr 30, 2018 at 10:58 am</span>
+                                            </div>
+                                            <div class="comment">
+                                                Lorem ipsum dolor sit amet consectetur adipiscing elit. Vestibulum ac vehicula leo.
+                                                Donec urna lacus gravida ac at dignissim vehicula.
+                                            </div>
+                                            <a class="comment-reply-link" href="#">Reply</a>
+                                        </div>
+                                        <ul class="children">
+                                            <li>
+                                                <div class="single-comment">
+                                                    <img src="/site/images/c2.jpg" alt="">
+                                                    <div class="authorDetails">
+                                                        <h5><a href="#">Mark Smith</a></h5>
+                                                        <span> Apr 30, 2018 at 12:00 pm</span>
+                                                    </div>
+                                                    <div class="comment">
+                                                        Lorem ipsum dolor sit amet consectetur adipiscing elit. Vestibulum ac vehicula leo.
+                                                        Donec urna lacus gravida ac at dignissim vehicula.
+                                                    </div>
+                                                    <a class="comment-reply-link" href="#">Reply</a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="single-comment">
+                                            <img src="/site/images/c3.jpg" alt="">
+                                            <div class="authorDetails">
+                                                <h5><a href="#">Jawn Staff</a></h5>
+                                                <span> Apr 31, 2019 at 11:58 am</span>
+                                            </div>
+                                            <div class="comment">
+                                                Lorem ipsum dolor sit amet consectetur adipiscing elit. Vestibulum ac vehicula leo.
+                                                Donec urna lacus gravida ac at dignissim vehicula.
+                                            </div>
+                                            <a class="comment-reply-link" href="#">Reply</a>
+                                        </div>
+                                    </li>
+                                </ol>
+                                <div class="commentForm">
+                                    <h3><i class="twi-staylinked"></i>Leave a Reply</h3>
+                                    <form action="#" method="post">
+                                        <input placeholder="Name:" name="author" type="text">
+                                        <input placeholder="Email:" name="author" type="email">
+<textarea name="comment" placeholder="Comment:"></textarea>
+                                        <input name="submit" value="Post Comment" type="submit" id="submit">
+                                    </form>
+                                </div>
+                            </div>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

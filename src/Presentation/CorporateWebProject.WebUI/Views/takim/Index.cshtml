@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewData["Title"] = "Takım";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="team-section2 pt-120 pb-120 position-relative overflow-hidden">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="section-title primary1">
+                    <span>-Kaktüs Ekibi-</span>
+                    <h3>Yaratıcı Genç ve Dinamik Ekibimiz</h3>
+                    <p class="para">Dijital dünyadaki ihtiyaçlarınızı gelişmiş ve deneyimli ekibimiz ile sizlere yaratıyoruz.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center g-4">
+            @foreach (var item in Model.TeamList)
+            {
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-10">
+                    <div class="single-team2 style-4 wow fadeInDown" data-wow-duration="1.5s" data-wow-delay="0.2s">
+                        <div class="team-image">
+                            <img src="@item.Photo" alt="image">
+                            <div class="social-area gap-3">
+                                <ul class="social-links d-flex justify-content-center align-items-center flex-row gap-3">
+                                    @*<li><a href="https://www.instagram.com/"><i class='bx bxl-instagram'></i></a></li>
+                                    <li><a href="https://www.facebook.com/"><i class='bx bxl-facebook'></i></a></li>
+                                    <li><a href="https://www.twitter.com/"><i class='bx bxl-twitter'></i></a></li>
+                                    <li><a href="https://www.pinterest.com/"><i class='bx bxl-pinterest-alt'></i></a></li>*@
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="team-content">
+                            <h4 class="name">@item.FullName</h4>
+                            <p class="designation">@item.Job</p>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+

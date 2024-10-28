@@ -1,0 +1,37 @@
+﻿
+
+
+<div class="feature-section position-relative overflow-hidden pt-120 pb-120">
+    <img src="/site/assets/images/bg/dotted-bg.svg" alt="image" class="dotted-bg">
+    <img src="/site/assets/images/bg/watermark2-bg.png" alt="image" class="watermark2-bg">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8 col-sm-10">
+                <div class="section-title3 primary4 text-cener">
+                    <span>- Neden Bizi Seçmelisiniz? -</span>
+                    <h3>Bizi Seçmeniz İçin Nedenler</h3>
+                    <p>
+                        Profesyonellikten uzak, yarım kalan işlerden bıktıysanız sizleri müşterilerimiz arasında görmekten mutluluk duyarız. Her proje bizim için değerlidir. İhtiyaçlarınızı dikkatli bir şekilde dinliyor çözümler üretiyoruz.
+
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center g-4">
+            @foreach (var item in Model.WhyUsList)
+            {
+                <div class="col-lg-4 col-md-6 col-sm-10">
+                    <div class="service-item2 style-2 wow fadeInDown" data-wow-duration="1.5s" data-wow-delay="0.2s">
+                        <div class="service-content">
+                            <span class="sn">@item.Queue.ToString("00")</span>
+                            <h4>@item.Name</h4>
+                            <p class="para">@item.Description</p>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+        </div>
+    </div>
+</div>

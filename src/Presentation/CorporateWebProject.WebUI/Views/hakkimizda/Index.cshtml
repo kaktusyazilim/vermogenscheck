@@ -1,0 +1,134 @@
+﻿
+@{
+    ViewData["Title"] = "Hakkımızda";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section tags {
+    <link rel="canonical" href="https://www.kaktusyazilim.com/hakkimizda" type="text/html" />
+
+    <meta name="description" content="@(new HtmlString( Model.CurrentSettings.MetaDescription))" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Kaktüs Yazılım">
+    <meta property="og:title" content="@(new HtmlString(Model.CurrentSettings.MetaDescription))">
+    <meta property="og:description" content="@(new HtmlString(Model.CurrentSettings.MetaDescription))">
+    <meta property="og:url" content="https://www.kaktusyazilim.com">
+    <meta property="og:locale" content="tr_TR">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@@kaktusyazilimcom">
+    <meta name="twitter:title" content="Kaktüs Yazılım">
+    <meta name="twitter:url" content="https://www.kaktusyazilim.com">
+    <meta name="twitter:description" content="@(new HtmlString(Model.CurrentSettings.MetaDescription))">
+}
+
+<div style="margin-top:100px;z-index:0 !important" class="inner-banner">
+    <img src="/site/assets/images/bg/inner-bannerdot.png" class="inner-bannerdot" alt="image">
+    <img src="/site/assets/images/bg/inner-bannerwave.png" class="inner-bannerwave" alt="image">
+    <a class="down-arrow-icon" href="#about">
+        <svg viewBox="0 0 14 26" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M13.8182 18.469L7.24862 25.7462L0.679032 18.469C0.272584 18.0188 0.592074 17.3 1.19862 17.3L6.74862 17.3L6.74862 1C6.74862 0.723857 6.97248 0.5 7.24862 0.5C7.52477 0.5 7.74862 0.723857 7.74862 1L7.74862 17.3L13.2986 17.3C13.9052 17.3 14.2247 18.0188 13.8182 18.469Z" />
+        </svg>
+    </a>
+    <div class="container">
+        <div class="row d-flex justify-content-center align-items-center text-center">
+            <div class="col-md-6">
+                <h2 class="inner-banner-title wow fadeInLeft" data-wow-duration="1.5s" data-wow-delay=".2s">Hakkımızda</h2>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb gap-3">
+                        <li class="breadcrumb-item"><a href="/">Anasayfa</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Hakkımızda</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="about1-section pt-120 pb-120" id="about">
+    <img src="/site/assets/images/bg/section-bg1.png" class="img-fluid section-bg1" alt="">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-6 order-lg-1 order-2">
+                <div class="about1-content wow fadeInLeft" data-wow-duration="1.5s" data-wow-delay="0.2s">
+                    <span>
+                        - Şirketimiz Hakkında -
+                    </span>
+                    <h3>Müşterilerimize istisnai özellikler sunmaya kendimizi adadık.</h3>
+                    <p class="para">
+                        Firmamız, köklü bir yazılım geçmişi ve deneyimli kadrosuyla, müşterilerimize en iyi yazılım çözümlerini sunmayı hedefleyen bir teknoloji firmasıdır. Misyonumuz, müşteri memnuniyetini en üst düzeyde tutmak, yenilikçi yaklaşımlarımızla müşterilerimize fark yaratmak ve işletmelerinin büyümesine katkıda bulunmaktır.
+                    </p>
+                    <p class="para">       Yazılım geliştirme sürecinde, işletmelerin ihtiyaçlarına uygun, özelleştirilmiş çözümler sunarak, rakiplerinden ayrışmalarını sağlıyoruz. Ekip olarak, en son teknolojileri takip ederek, projelerimizi geliştirmek ve müşterilerimize daha da ileri seviyelerde yazılım çözümleri sunmak için kendimizi sürekli olarak yeniliyoruz.</p>
+
+
+
+                    <ul class="about-list">
+                        <li>Projelerinizin devamlılığınız bizim için çok önemli.</li>
+                        <li>Proje güvenliği ve performansı için özel teknolojiler kullanıyoruz.</li>
+                        <li>Özel Yazılımlar ile firmanızın farklarını yaratıyoruz.</li>
+                    </ul>
+                    <p class="para">
+                        Müşterilerimizin işletmelerine katkıda bulunmak, bize büyük bir gurur ve motivasyon kaynağıdır. Bu nedenle, müşterilerimizle yakın bir işbirliği içinde çalışarak, ihtiyaçlarına uygun, en uygun maliyetli ve verimli çözümleri sunmak için gayret gösteriyoruz.
+                    </p>
+                    <p class="para">     Ekibimiz, müşterilerimize yüksek kaliteli hizmetler sunmak için birlikte çalışır. Her projenin başından sonuna kadar, müşterilerimizle yakın bir işbirliği içinde oluruz. Projenin gereksinimlerine ve müşterilerimizin beklentilerine uygun bir şekilde, en iyi yazılım çözümlerini sunmak için titiz bir çalışma yürütürüz.</p>
+
+                    <p class="para">
+                        Firmanızın ihtiyaçlarına özel, kaliteli yazılım çözümleri sunarak, işletmenizin büyümesine katkıda bulunmak için sabırsızlanıyoruz.
+                    </p>
+                </div>
+            </div>
+            @*<div class="col-lg-6 order-lg-2 order-1">
+                    <div class="about-images wow fadeInRight" data-wow-duration="1.5s" data-wow-delay="0.2s">
+                        <div class="row g-0">
+                            <div class="col-6">
+                                <img src="/site/assets/images/bg/about11.png" class="about11 img-fluid" alt="image">
+                                <div class="experience-tag">
+                                    <div class="tag-inner">
+                                        <img src="/site/assets/images/icons/medal-icon.svg" alt="image">
+                                        <h5>5+ Yıl Deneyim</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 position-relative">
+                                <img src="/site/assets/images/bg/about12.png" class="about12 img-fluid" alt="image">
+                                <img src="/site/assets/images/bg/about13.png" class="about13 img-fluid" alt="image">
+                                <img src="/site/assets/images/icons/sun-icon.svg" class="sun-icon" alt="image">
+                                <img src="/site/assets/images/icons/about-dot.svg" class="about-dot" alt="image">
+                                <img src="/site/assets/images/icons/about-triangle.svg" class="about-triangle" alt="image">
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+
+            <div class="col-lg-6 order-lg-2 order-1">
+                <div class="about-images wow fadeInRight" data-wow-duration="1.5s" data-wow-delay="0.2s">
+                    <div class="row g-0">
+                        <div class="col-6">
+                            <img src="/uploads/kaktus-team-4.jpeg" style="border-radius:31px;" class="about11 img-fluid" alt="image">
+                            <div class="experience-tag">
+                                <div class="tag-inner">
+                                    <img src="/site/assets/images/icons/medal-icon.svg" alt="image">
+                                    <h5>5+ Yıl Deneyim</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 position-relative">
+                            <img style="width:100%;border-radius:31px" src="/uploads/kaktus-team-1.jpeg" class="about12 img-fluid" alt="image">
+                            <img style="border-radius:31px" src="/uploads/kaktus-team-3.jpeg" class="about13 img-fluid" alt="image">
+
+                            <img src="/site/assets/images/icons/sun-icon.svg" class="sun-icon" alt="image">
+                            <img src="/site/assets/images/icons/about-dot.svg" class="about-dot" alt="image">
+                            <img src="/site/assets/images/icons/about-triangle.svg" class="about-triangle" alt="image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@await Html.PartialAsync("~/views/shared/_brandsPartial.cshtml")
+<div style="margin-bottom:150px"></div>
+
+@await Html.PartialAsync("~/views/shared/_counterPartial.cshtml")
+@*@await Html.PartialAsync("~/views/shared/_teamPartial.cshtml")*@
+
+

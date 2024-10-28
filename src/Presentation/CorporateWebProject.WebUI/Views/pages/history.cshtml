@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewData["Title"] = "history";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+    <div class="page-header-container">
+        <div class="container">
+            <div class="page-header" style="background-color: #c6dded">
+                <h1 class="page-title">Tarihçe</h1>
+                <nav class="breadcrumb">
+                    <a class="breadcrumb-item" href="/">Ana Sayfa</a>
+                    <span class="breadcrumb-item active" aria-current="page">Tarihçe</span>
+                </nav>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="page-with-sidebar">
+        <div class="container" style="background-color: #e4f1fa;">
+
+            <div class="row">
+                <div class="container-title">
+                    <h2>Tarihçe</h2>
+                </div>
+                <div class="timeline-container container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="main-timeline">
+                                @foreach (var item in Model.HistoryList)
+                                {
+                                    if (item.Queue % 2 == 0)
+                                    {
+                                        <div class="timeline">
+                                            <div class="timeline-content">
+                                                <div class="timeline-year">@item.Year</div>
+                                                <h3 class="title">@item.Title</h3>
+                                                <p class="description">
+                                                    @Html.Raw(item.Description)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="timeline">
+                                            <div class="timeline-content">
+                                                <div class="timeline-year">@item.Year</div>
+                                                <h3 class="title">@item.Title</h3>
+                                                <p class="description">
+                                                    @Html.Raw(item.Description)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+</main>
+

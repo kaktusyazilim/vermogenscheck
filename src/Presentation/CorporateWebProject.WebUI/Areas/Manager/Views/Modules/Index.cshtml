@@ -1,0 +1,90 @@
+﻿
+@model CorporateWebProject.WebUI.Models.ServiceVM
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Manager/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-6">
+                <h3>@(Model.NewModul!=null?Model.NewModul.Title:"")</h3>
+            </div>
+            <div class="col-6">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="@(Model.NewModul!=null?"/manager/"+Model.NewModul.Url:"")@(Model.Page!=null?Model.Page.Url:"/index")">
+                            <svg class="stroke-icon">
+                                <use href="/manager/assets/svg/icon-sprite.svg#stroke-home"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">@(Model.NewModul!=null?Model.NewModul.Title:"")</li>
+                    <li class="breadcrumb-item active">@(Model.Page!=null?Model.Page.Title:"Liste")</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row starter-main">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-end">
+                        <a href="/manager/modules/create" class="btn btn-success btnCreate">Yeni Modül Ekle</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="dt-ext table-responsive custom-scrollbar html-expert-table">
+                        <table class="display table-striped myTable" >
+                            <thead>
+                                <tr>
+                                    <th width="20">Sıra</th>
+                                    <th>Başlık</th>
+                                    <th>Url</th>
+                                    <th>Tarih</th>
+                                    <th>İşlemler</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var item in Model.NewModulList)
+                                {
+                                    <tr class="@item.IsPassive " >
+                                        <td style="max-width:20px" width="20">@item.Queue</td>
+                                        <td>@item.Title</td>
+                                        <td>@item.Url</td>
+                                        <td>@item.CreateDate</td>
+
+                                        <td>
+                                            <ul class="action">
+                                                <li class="edit"> <a href="/manager/@Model.NewModul.Url/update?id=@item.Id"><i class="fa-regular fa-pen-to-square"></i></a></li>
+                                                <li class="passive "><a style="cursor:pointer" onclick="btnPassive('@item.ItemGuid', '/manager/@Model.NewModul.Url/passive')"><i class="fa-solid fa-trash-can"></i></a></li>
+                                                <li class="delete"><a style="cursor:pointer" onclick="btnDelete('@item.ItemGuid', '/manager/@Model.NewModul.Url/delete')"><i class="fa-solid fa-trash-can"></i></a></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th width="20">Sıra</th>
+                                    <th>Başlık</th>
+                                    <th>Url</th>
+                                    <th>Tarih</th>
+                                    <th>İşlemler</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+  
+    </div>
+</div>
+<!-- Container-fluid Ends-->

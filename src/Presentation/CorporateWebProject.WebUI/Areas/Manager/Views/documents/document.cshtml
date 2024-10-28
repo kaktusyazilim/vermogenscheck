@@ -1,0 +1,627 @@
+﻿
+@{
+    ViewData["Title"] = "document";
+    Layout = "~/Areas/manager/Views/Shared/_Layout.cshtml";
+    var documentSize = Model.DocumentList.Sum(x => x.Size);
+}
+
+<div class="container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-6">
+                <h3>@(Model.Modul!=null?Model.Modul.Title:"") </h3>
+            </div>
+            <div class="col-6">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="@(Model.Modul!=null?"/manager/"+Model.Modul.Url:"")@(Model.Page!=null?Model.Page.Url:"/index")">
+                            <svg class="stroke-icon">
+                                <use href="/manager/assets/svg/icon-sprite.svg#stroke-home"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">@(Model.Modul!=null?Model.Modul.Title:"")</li>
+                    <li class="breadcrumb-item active">@(Model.Page!=null?Model.Page.Title:"Liste")</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-xl-3 box-col-6 pe-0">
+            <div class="md-sidebar">
+                <a class="btn btn-primary md-sidebar-toggle" href="javascript:void(0)">file filter</a>
+                <div class="md-sidebar-aside job-left-aside custom-scrollbar">
+                    <div class="file-sidebar">
+                        <div class="card">
+                            <div class="card-body">
+                                <ul>
+                                    <li>
+                                        <div style="cursor:pointer" onclick="window.location.href='/manager/documents'" class="btn btn-light"><i data-feather="home">                                    </i>Tüm Klasörler </div>
+                                    </li>
+                                    @foreach (var item in Model.FolderList.Where(x => x.IsGeneral == true).ToList())
+                                    {
+                                        var documents = Model.DocumentList.Where(x => x.FolderGuid == item.ItemGuid && x.IsPassive == false && x.IsDeleted == false).ToList();
+                                        <li>
+                                            <div style="cursor:pointer" onclick="window.location.href='/manager/documents/document/@item.ItemGuid'" class="btn @(Model.Folder.ItemGuid==item.ItemGuid?"btn-primary":"btn-light")"><i data-feather="folder"></i>@item.Name    </div>
+                                        </li>
+                                    }
+
+                                </ul>
+                                <hr>
+                                <ul>
+                                    <li>
+                                        <div class="btn btn-outline-primary"><i data-feather="database">   </i>Depo   </div>
+                                        <div class="m-t-15">
+                                            <div class="progress sm-progress-bar mb-1">
+                                                <div class="progress-bar bg-primary" role="progressbar" style="width:@((documentSize / 1073741824).ToString("N2")+"%");" aria-valuenow="@((documentSize / 1073741824).ToString("N2"))" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                            <p>@((documentSize / 1073741824).ToString("N2")) GB Kullanıldı</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <hr>
+                                <ul>
+                                    <li>
+                                        <div class="btn btn-outline-primary"><i data-feather="database">   </i>Şirket Klösörleri   </div>
+                                    </li>
+                                    @foreach (var item in Model.FolderList.Where(x => x.IsGeneral == false).ToList())
+                                    {
+                                        var documents = Model.DocumentList.Where(x => x.FolderGuid == item.ItemGuid && x.IsPassive == false && x.IsDeleted == false).ToList();
+                                        <li>
+                                            <div style="cursor:pointer" onclick="window.location.href='/manager/documents/document/@item.ItemGuid'" class="btn @(Model.Folder.ItemGuid==item.ItemGuid?"btn-primary":"btn-light")"><i data-feather="folder"></i>@(item.Name.Length>30? item.Name.Substring(0,30): item.Name)    </div>
+                                        </li>
+                                    }
+
+
+                                </ul>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form enctype="multipart/form-data" id="frmFilePost" action="/manager/files/UploadData" method="post" hidden>
+            <input name="folderGuid" value="@Model.Folder.ItemGuid" />
+            @*<input name="companyGuid" value="@Model.Company.ItemGuid" />*@
+            <input type="file" multiple name="file" id="fileInput" />
+        </form>
+        <div class="col-xl-9 col-md-12 box-col-12">
+            <div class="file-content">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex align-items-between">
+                            <div class="form-inline" action="#" method="get">
+                                <div class="form-group mb-0">
+                                    <i class="fa fa-search"></i>
+                                    <input class="form-control-plaintext" id="searchInput" type="text" placeholder="Search...">
+                                </div>
+                            </div>
+                            <div class="flex-grow-1 file-buttons">
+                                <div onclick="$('#Folder_Name').val(''); $('#MdlFolderShows').modal('show')" class="btn btn-outline-primary ms-2"><i class="fa fa-plus">   </i><span style="margin-left:10px">Klasör Oluştur </span> </div>
+
+                                @*<div onclick="$('#MdlFolderShows').modal('show')" class="btn btn-outline-primary ms-2"><i data-feather="upload">   </i>Upload  </div>*@
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="card-body file-manager">
+
+                        <div class="d-flex justify-content-between">
+                            <h4 class="mb-3">@(Model.Folder.TopGuid!=""?Model.SubFolder.Name+" > ":"") @Model.Folder.Name </h4>
+                            <button class="btn btn-outline-success" onclick="$('#fileInput').click()">Dosya Yükle</button>
+                        </div>
+                        <ul class="folder" style="margin-bottom:20px">
+                            @*<li class="folder-box">
+                                    <div class="media">
+                                        <i class="fa fa-file-archive-o f-36 txt-warning"></i>
+                                        <div class="media-body ms-3">
+                                            <h6 class="mb-0">Endless admin</h6>
+                                            <p>204 files, 50mb</p>
+                                        </div>
+                                    </div>
+                                </li>*@
+                            @foreach (var item in Model.FolderList.Where(x => x.IsGeneral == true).ToList())
+                            {
+                                var documents = Model.DocumentList.Where(x => x.FolderGuid == item.ItemGuid && x.IsPassive == false && x.IsDeleted == false).ToList();
+                                <li class="folder-box multiple-box" style="@(item.IsPassive==true?"opacity:0.5":"")" data-item="@item.ItemGuid" id="folder-box" data-type="folder">
+                                    <div style="cursor:pointer;" onclick="window.location.href='/manager/documents/document/@item.ItemGuid'">
+                                        <div class="media">
+                                            <i class="fa fa-folder f-36 txt-warning"></i>
+                                            <div class="media-body ms-3">
+                                                <h6 class="mb-0">@(item.Name.Length>50? item.Name.Substring(0,49): item.Name)</h6>
+                                                <p> @documents.Count() dosya, @((documents.Sum(x => x.Size)/1000000).ToString("N2")) MB</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+
+                        </ul>
+                        <h6 class="mt-4">Klasörler</h6>
+                        <ul class="folder" style="margin-bottom:20px">
+                            @*<li class="folder-box">
+                                    <div class="media">
+                                        <i class="fa fa-file-archive-o f-36 txt-warning"></i>
+                                        <div class="media-body ms-3">
+                                            <h6 class="mb-0">Endless admin</h6>
+                                            <p>204 files, 50mb</p>
+                                        </div>
+                                    </div>
+                                </li>*@
+                            @foreach (var item in Model.FolderList.Where(x => x.IsGeneral == false).ToList())
+                            {
+                                var documents = Model.DocumentList.Where(x => x.FolderGuid == item.ItemGuid && x.IsPassive == false && x.IsDeleted == false).ToList();
+                                <li class="folder-box multiple-box" style="@(item.IsPassive==true?"opacity:0.5":"")" data-item="@item.ItemGuid" data-type="folder">
+                                    <div style="cursor:pointer;" onclick="window.location.href='/manager/documents/document/@item.ItemGuid'">
+                                        <div class="media">
+                                            <i class="fa fa-folder f-36 txt-warning"></i>
+                                            <div class="media-body ms-3">
+                                                <h6 title="@item.Name" class="mb-0">@(item.Name.Length>20? item.Name.Substring(0,20): item.Name)</h6>
+                                                <p> @documents.Count() dosya, @((documents.Sum(x => x.Size)/1000000).ToString("N2")) MB</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+
+                        </ul>
+                        <h6>Son Yüklenen Dosyalar</h6>
+                        <ul class="files" id="dropArea">
+                            @foreach (var item in Model.DocumentList.OrderByDescending(x => x.CreateDate).Take(24).ToList())
+                            {
+                                var createUser = Model.UserList.FirstOrDefault(x => x.Id == item.CreateUserId);
+                                <li style="@(item.IsPassive==true?"opacity:0.5;":"")" class="file-box multiple-box" data-type="document" data-item="@item.ItemGuid">
+                                    <div style="cursor:pointer" onclick="window.open('@item.FilePath')">
+                                        <div class="file-top">
+                                            @if (item.Name.Contains(".pdf"))
+                                            {
+                                                <i class="fa fa-file-pdf-o txt-primary"></i><i class="fa fa-ellipsis-v f-14 ellips"></i>
+                                            }
+                                            else if (item.Name.Contains(".mp3") || item.Name.Contains(".mp4"))
+                                            {
+                                                <i class="fa fa-file-audio-o txt-primary"></i><i class="fa fa-ellipsis-v f-14 ellips"></i>
+                                            }
+                                            else if (item.Name.Contains(".mp4"))
+                                            {
+                                                <i class="fa fa-file-video-o txt-primary"></i><i class="fa fa-ellipsis-v f-14 ellips"></i>
+                                            }
+                                            else if (item.Name.Contains(".doc"))
+                                            {
+                                                <i class="fa fa-file-word-o txt-primary"></i><i class="fa fa-ellipsis-v f-14 ellips"></i>
+                                            }
+                                            else if (item.Name.Contains(".zip") || item.Name.Contains(".rar"))
+                                            {
+                                                <i class="fa fa-file-archive-o txt-secondary"></i><i class="fa fa-ellipsis-v f-14 ellips"></i>
+                                            }
+                                            else if (item.Name.Contains(".txt"))
+                                            {
+
+                                                <i class="fa fa-file-text-o txt-info"></i><i class="fa fa-ellipsis-v f-14 ellips"></i>
+                                            }
+                                            else if (item.Name.Contains(".html"))
+                                            {
+
+                                                <i class="fa fa-file-text-o txt-info"></i><i class="fa fa-ellipsis-v f-14 ellips"></i>
+                                            }
+                                            else if (item.Name.Contains(".xls") || item.Name.Contains(".xlsx"))
+                                            {
+                                                <i class="fa fa-file-excel-o txt-success"></i><i class="fa fa-ellipsis-v f-14 ellips"></i>
+                                            }
+                                            else
+                                            {
+                                                <img src="@item.FilePath" style="max-height:70px" />
+
+                                            }
+                                        </div>
+                                        <div class="file-bottom">
+                                            <h6>@item.Name </h6>
+                                            <p class="mb-1">@((item.Size / 1000000).ToString("N2")) MB</p>                                        <p> <b>Yükleyen : </b>@(createUser==null?"":createUser.DisplayName)</p>
+                                        </div>
+                                    </div>
+
+                                </li>
+                            }
+
+                        </ul>
+
+                    </div>
+                    <div id="progressBar">
+                        <div id="progressBarFill"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section css {
+    <link rel="stylesheet" type="text/css" href="/manager/assets/css/vendors/quill.snow.css">
+    <link rel="stylesheet" type="text/css" href="/manager/assets/css/vendors/select2.css">
+    <link rel="stylesheet" type="text/css" href="/manager/assets/css/vendors/dropzone.css">
+    <style>
+        #progressBar {
+            width: 100%;
+            height: 20px;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        #progressBarFill {
+            width: 0%;
+            height: 100%;
+            background-color: #4caf50;
+        }
+    </style>
+}
+
+
+<!-- Modal -->
+<div class="modal fade bd-example-modal-lg" id="MdlFolderShows" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-lg" role="document">
+        <form action="/manager/folderpermissions/create" method="post" class="modal-content">
+            <input hidden asp-for="Folder.TopGuid" value="@Model.Folder.ItemGuid" />
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Klasör Oluştur</h5>
+                <button onclick="$('#MdlFolderShows').modal('hide')" type="button" class="close" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class=" row col-sm-12">
+                    <div class="mb-3">
+                        <label asp-for="Folder.Name">Klasör Adı:</label>
+                        <input class="form-control input-validate custom-text-white" type="text" asp-for="Folder.Name" data-error="Lütfen klasör adını giriniz." placeholder="Klasör adını giriniz" required="">
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                <button type="submit" class="btn btn-primary">Kaydet</button>
+            </div>
+        </form>
+    </div>
+</div>
+<ul class="context-menu" id="context-menu" style="display:none;">
+    <li><div style="color:black;font-weight:bold" id="btnDocDelete" href="#">Sil</div></li>
+    <li><div style="color:black;font-weight:bold" id="btnDocPassive" href="#">Pasif Et</div></li>
+</ul>
+<style>
+    .context-menu {
+        position: absolute;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        padding: 5px;
+        z-index: 100;
+    }
+
+        .context-menu li {
+            padding: 5px;
+            cursor: pointer;
+        }
+
+            .context-menu li:hover {
+                background-color: #ddd;
+            }
+</style>
+
+
+@section js{
+    <script src="/manager/assets/js/dropzone/dropzone.js"></script>
+    <script src="/manager/assets/js/dropzone/dropzone-script.js"></script>
+    <script src="/manager/assets/js/select2/select2.full.min.js"></script>
+    <script src="/manager/assets/js/select2/select2-custom.js"></script>
+    <script src="/manager/assets/js/editors/quill.js"></script>
+    <script src="/manager/assets/js/form-validation-custom.js"></script>
+    <script src="https://cdn.ckeditor.com/4.16.0/full-all/ckeditor.js"></script>
+
+
+    <script>
+
+        function allSelectFnc() {
+            var selectList = $('.allSelect');
+            $.each(selectList, function (i, item) {
+                if (selectList[i].attributes["checked"] != null) {
+                    item.removeAttribute('checked');
+                }
+                else {
+                    selectList[i].setAttribute("checked", "checked")
+                }
+            })
+        }
+        // Sağ tıklama olayını dinleme
+        $(document).ready(function () {
+            $(document).on("click", "#btnDocDelete", function () {
+                if (clickItem.attributes["data-type"].value == "folder") {
+                    $.ajax({
+                        url: "/manager/folderpermissions/delete",
+                        data: { id: clickItem.attributes["data-item"].value },
+                        success: function (result) {
+                            if (result == "Y") {
+                                clickItem.remove();
+                            }
+                        }
+                    })
+                }
+                else {
+                    if (clickItem.attributes["data-type"].value == "document") {
+                        $.ajax({
+                            url: "/manager/documents/delete",
+                            data: { id: clickItem.attributes["data-item"].value },
+                            success: function (result) {
+                                if (result == "Y") {
+                                    clickItem.remove();
+                                }
+                            }
+                        })
+                    }
+                    else {
+                        $.ajax({
+                            url: "/manager/folderpermissions/passive",
+                            data: { id: clickItem.attributes["data-item"].value },
+                            success: function (result) {
+                                if (result == "Y") {
+                                    clickItem.remove();
+                                }
+                            }
+                        })
+                    }
+
+                }
+
+            })
+            $(document).on("click", "#btnDocPassive", function () {
+
+                if (clickItem.attributes["data-type"].value == "folder") {
+                    $.ajax({
+                        url: "/manager/folderpermissions/passive",
+                        data: { id: clickItem.attributes["data-item"].value },
+                        success: function (result) {
+                            if (result == "Y") {
+                                if (clickItem.style.opacity == "0.5") {
+                                    clickItem.style.opacity = "1";
+
+                                } else {
+                                    clickItem.style.opacity = "0.5";
+
+                                }
+                            }
+                        }
+                    })
+                }
+                else {
+                    $.ajax({
+                        url: "/manager/documents/passive",
+                        data: { id: clickItem.attributes["data-item"].value },
+                        success: function (result) {
+                            if (result == "Y") {
+                                if (clickItem.style.opacity == "0.5") {
+                                    clickItem.style.opacity = "1";
+
+                                } else {
+                                    clickItem.style.opacity = "0.5";
+
+                                }
+                            }
+                        }
+                    })
+                }
+
+            })
+            let clickItem = "";
+
+            const defaultBackgroundColor = "#1D1E26";
+            const fileBoxes = document.querySelectorAll(".multiple-box");
+            for (const fileBox of fileBoxes) {
+                fileBox.addEventListener("contextmenu", (event) => {
+                    if (clickItem != "") {
+                        clickItem.style.backgroundColor = defaultBackgroundColor;
+                    }
+                    // Sağ tıklama menüsünü göster
+                    var currentGuid = event.currentTarget.attributes["data-item"].value;
+                    clickItem = event.currentTarget;
+                    if (clickItem.style.opacity == "0.5") {
+                        $("#btnDocPassive").text("Aktif Et")
+
+                    } else {
+                        $("#btnDocPassive").text("Pasif Et")
+
+                    }
+                    if (clickItem.attributes["data-type"].value == "folder") {
+                        $("#btnFolderUpdate").css("display", "");
+                        $("#btnFolderUpdate").attr("onclick", "window.location.href='/manager/folderpermissions/update?id=" + currentGuid + "';");
+                        $(".btnFolderUpdate").css("display", "");
+                    }
+                    else {
+                        $("#btnFolderUpdate").css("display", "none");
+                        $(".btnFolderUpdate").css("display", "none");
+                    }
+                    $("#btnDocDelete").attr("data-item", event.currentTarget.attributes["data-item"].value);
+                    $(".context-menu").attr("data-item", currentGuid);
+                    createRightMenu()
+
+                    event.preventDefault();
+                    showContextMenu(event.pageX, event.pageY);
+                });
+            }
+            let menu = $("#context-menu")[0];
+
+            function createRightMenu() {
+
+
+
+            }
+            document.addEventListener("click", () => {
+                menu.style.display = "none";
+                if (clickItem != "") {
+                    clickItem.style.backgroundColor = defaultBackgroundColor;
+
+                }
+            });
+            // Sağ tıklama menüsünü oluşturma
+            function showContextMenu(x, y) {
+
+                menu.style.left = `${x - 60}px`; // Fare imlecinin biraz yanına yerleştirmek için 5 piksel eklendi.
+                menu.style.top = `${y - 120}px`;
+                menu.style.display = "";
+                clickItem.style.backgroundColor = "gray";
+
+
+                // Menü öğelerine tıklama olaylarını ekleme
+
+            }
+
+
+
+
+              // Arama inputunu seçin
+      const searchInput = document.getElementById("searchInput");
+
+      // Dosya listesi öğelerini bir diziye alın
+      const fileListItems = document.querySelectorAll(".file-box");
+
+      // Arama yapılırken tetiklenecek fonksiyon
+      const searchFiles = (event) => {
+          const searchTerm = event.target.value.toLowerCase(); // Arama terimini küçük harfe çevirin
+
+          // Tüm dosya listesi öğelerini dolaşın
+          for (const fileListItem of fileListItems) {
+              const fileName = fileListItem.querySelector(".file-bottom h6").textContent.toLowerCase(); // Dosya adını küçük harfe çevirin
+
+              // Arama terimi dosya adında bulunuyorsa öğeyi gösterin, aksi halde gizleyin
+              if (fileName.includes(searchTerm)) {
+                  fileListItem.style.display = "";
+              } else {
+                  fileListItem.style.display = "none";
+              }
+          }
+      };
+
+      // Arama inputuna yazma olayı ekleyin
+      searchInput.addEventListener("keyup", searchFiles);
+
+
+      var dropArea = document.getElementById('dropArea');
+      var progressBarFill = document.getElementById('progressBarFill');
+
+      // Dosya sürüklendiği alandan çıkıldığında gerçekleşecek olay
+      dropArea.addEventListener('dragover', function (e) {
+          e.preventDefault(); // varsayılan davranışı engelle
+          dropArea.style.background = 'gray';
+      });
+
+      // Dosya sürükleme işlemi tamamlandığında gerçekleşecek olay
+      dropArea.addEventListener('drop', function (e) {
+          e.preventDefault(); // varsayılan davranışı engelle
+          dropArea.style.background = '#262932';
+
+          var files = e.dataTransfer.files; // sürüklenen dosya
+          uploadFile(files);
+      });
+
+      // Dosya yükleme fonksiyonu
+      function uploadFile(files) {
+          for (var i = 0; i < files.length; i++) {
+
+              var formData = new FormData();
+              formData.append('file', files[i]);
+              formData.append('folderGuid', '@Model.Folder.ItemGuid');
+              formData.append('companyGuid', '@(Model.Company!=null? Model.Company.ItemGuid:"")');
+              $.ajax({
+                  url: "/manager/files/UploadData", // Dosya yükleme scripti
+                  type: "POST",
+                  data: formData, // Boş form data
+                  contentType: false, // Dosya içeriğini belirtmek için
+                  processData: false, // Veriyi form data olarak gönderme
+                  cache: false,
+                  beforeSend: function () {
+                      $("#progressBar").html(files[i].name+ "Yükleniyor...");
+                  },
+                  success: function (data) {
+                      var item = data.data;
+                      $("#fileList").prepend(`  <li class="file-box">
+    <a href="${item.filePath}" target="_blank">
+        <div class="file-top">  <i class="fa fa-file-image-o txt-primary"></i><i class="fa fa-ellipsis-v f-14 ellips"></i></div>
+        <div class="file-bottom">
+            <h6>${item.name} </h6>
+            <p class="mb-1">${item.size}</p>
+            <p> <b>last open : </b>1 hour ago</p>
+        </div>
+    </a>
+</li>`)
+                      $("#progressBar").html("Yükleme tamamlandı!");
+                      window.location.reload();
+                  },
+                  error: function (jqXHR, textStatus, errorThrown) {
+                      $("#progressBar").html("Yükleme başarısız!");
+                      console.error("Hata: " + textStatus, errorThrown);
+                  },
+                  xhr: function () {
+                      var xhr = new window.XMLHttpRequest();
+                      xhr.upload.addEventListener("progress", function (evt) {
+                          if (evt.lengthComputable) {
+                              var percentComplete = (evt.loaded / evt.total) * 100;
+                              $("#progressBar").html("Yüklenme: " + percentComplete + "%");
+                          }
+                      }, false);
+                      return xhr;
+                  }
+              }).done(function (data) {
+                  // Sunucudan gelen cevabı işleme (isteğe bağlı)
+              });
+          }
+      }
+      dropArea.addEventListener('dragleave', function (e) {
+          e.preventDefault(); // varsayılan davranışı engelle
+          dropArea.style.background = '#262932'; // Arka plan rengini geriye dön
+      });
+        })
+
+
+        $("#fileInput").change(function () {
+            $('#frmFilePost').submit();
+        })
+        $('#frmFilePost').submit(function (e) {
+            e.preventDefault();
+            var data = $(this);
+            var files = data[0][1].files;
+            for (var i = 0; i < files.length; i++) {
+ var formData = new FormData();
+formData.append('file', files[i]);
+formData.append('folderGuid', '@Model.Folder.ItemGuid');
+formData.append('companyGuid', '@(Model.Company!=null? Model.Company.ItemGuid:"")');
+
+$.ajax({
+    url: '/manager/files/UploadData',
+    method: 'POST',
+    processData: false,
+    contentType: false,
+    cache: false,
+    enctype: 'multipart/form-data',
+    data: formData,
+    success: function (result) {
+        if (i == files.length) { window.location.reload(); }  }
+})
+            }
+
+        })
+
+    </script>
+
+
+
+
+
+
+}

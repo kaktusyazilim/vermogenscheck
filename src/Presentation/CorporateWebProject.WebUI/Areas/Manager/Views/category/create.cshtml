@@ -1,0 +1,157 @@
+﻿@model CorporateWebProject.WebUI.Models.ServiceVM
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Manager/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-6">
+                <h3>@(Model.Modul!=null?Model.Modul.Title:"")</h3>
+            </div>
+            <div class="col-6">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="@(Model.Modul!=null?"/manager"+Model.Modul.Url:"")@(Model.Page!=null?Model.Page.Url:"/index")">
+                            <svg class="stroke-icon">
+                                <use href="/manager/assets/svg/icon-sprite.svg#stroke-home"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">@(Model.Modul!=null?Model.Modul.Title:"")</li>
+                    <li class="breadcrumb-item active">@(Model.Page!=null?Model.Page.Title:Model.Modul.Title+" Ekle")</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row starter-main">
+        <div class="col-sm-12">
+            <div class="card">
+
+                <div class="card-body">
+                    <form class="row g-3 needs-validation custom-input" enctype="multipart/form-data" action="/manager/@Model.Modul!.Url/create" method="post" novalidate="">
+                        <div class="col-12">
+                            <label class="form-label" asp-for="Category.Queue">Kategori Sırası</label>
+                            <input ty class="form-control input-validate" data-error="Lütfen kategori sırasını giriniz." asp-for="Category.Queue" type="number" placeholder="Kategori sırasını giriniz" required="">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label" asp-for="Category.Name">Kategori Adı</label>
+                            <input class="form-control input-validate" asp-for="Category.Name" data-error="Lütfen kategori adını giriniz." type="text" placeholder="Kategorinizin görüntülenecek adını giriniz" required="">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label" asp-for="Category.TypeId">Kategori Tipi</label>
+                            @Html.DropDownListFor(x => x.Category.TypeId, new SelectList(Model.TypeList, "Id", "Name"), "Lütfen bir tip seçiniz", new { @class = "form-control input-validate", data_error = "Lütfen kategori için bir tip seçiniz" })
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label" asp-for="Category.IsLink">Bu kategori bir linke yönlendirilsin mi?</label>
+                            <select class="form-control input-valid categoryislink" asp-for="Category.IsLink" data-error="Lütfen bir seçenek seçiniz.">
+                                <option>Bir seçenek seçiniz</option>
+                                <option value="true">Evet</option>
+                                <option value="false">Hayır</option>
+                            </select>
+                        </div>
+                        <div class="col-12" id="categoryurl" style="display:none">
+                            <label class="form-label" for="validationCustom01" asp-for="Category.FriendlyUrl">Kategori Url</label>
+                            <input class="form-control input-validate" data-error="Lütfen kategori urlsini giriniz." asp-for="Category.FriendlyUrl" type="text" placeholder="Kategori urlsini giriniz">
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label" asp-for="Category.IsModul">Bu kategoriyi kontrol panelinde ayrı modül olarak göster</label>
+                            <select class="form-control input-valid " asp-for="Category.IsModul" data-error="Lütfen bir seçenek seçiniz.">
+                                <option>Bir seçenek seçiniz</option>
+                                <option value="true">Evet</option>
+                                <option value="false">Hayır</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label" asp-for="Category.IsPage">Bu kategori sayfa olarak inşa et</label>
+                            <select class="form-control input-valid categoryispage" asp-for="Category.IsPage" data-error="Lütfen bir seçenek seçiniz.">
+                                <option>Bir seçenek seçiniz</option>
+                                <option value="true">Evet</option>
+                                <option value="false">Hayır</option>
+                            </select>
+                        </div>
+
+                        <div id="ispageContent" style="display:none">
+                            <div class="col-sm-12">
+                                <div class="mb-3">
+                                    <label asp-for="Category.ShortDescription">Kategori Özet Açıklama:</label>
+                                    <textarea class="form-control ispageinputs" type="text" asp-for="Category.ShortDescription" data-error="Lütfen kategori için kısa bir açıklama giriniz." placeholder="Lütfen kategori için kısa bir açıklama giriniz."></textarea>
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <label class="form-label" for="editor">Kategori Açıklaması</label>
+                                    <textarea class="form-control input-valid ispageinputs" placeholder="Lütfen kategorizin tüm içeriğini giriniz" id="editor" asp-for="Category.FullDescription" data-error="Lütfen bir açıklama giriniz."></textarea>
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <label class="form-label" for="editor">Kategori Fotoğrafı</label>
+                                    <input class="form-control input-valid ispageinputs" type="file" name="files" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Kategori Fotoğraf Galerisi</label>
+                            <input class="form-control input-validate" name="pictures" multiple type="file">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label" asp-for="Category.LangId">Kategori Dili</label>
+                            @Html.DropDownListFor(x => x.Category.LangId, new SelectList(Model.LanguageList, "Id", "Name"), "Lütfen bir dil seçiniz", new { @class = "form-control input-validate", data_error = "Lütfen kategori için bir dil seçiniz", required = "" })
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-primary" type="submit">Kaydet</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Container-fluid Ends-->
+
+@section js{
+    <script src="/manager/assets/js/dropzone/dropzone.js"></script>
+    <script src="/manager/assets/js/dropzone/dropzone-script.js"></script>
+    <script src="/manager/assets/js/select2/select2.full.min.js"></script>
+    <script src="/manager/assets/js/select2/select2-custom.js"></script>
+    <script src="/manager/assets/js/editors/quill.js"></script>
+    <script src="/manager/assets/js/form-validation-custom.js"></script>
+
+ 
+    <script>
+        $(document).ready(function () {
+            $(".categoryislink").change(function () {
+                if ($(this).val() == "false") {
+                    $("#categoryurl").hide();
+                }
+                else {
+                    $("#categoryurl").show();
+
+                }
+            })
+
+            $(".categoryispage").change(function () {
+                if ($(this).val() == "false") {
+                    $("#ispageContent").hide();
+                    $(".ispageinputs").removeAttr("required");
+                }
+                else {
+                    $("#ispageContent").show();
+                    $(".ispageinputs").attr("required", "required")
+
+                }
+            })
+        })
+    </script>
+}
+
+@section css {
+    <link rel="stylesheet" type="text/css" href="/manager/assets/css/vendors/quill.snow.css">
+    <link rel="stylesheet" type="text/css" href="/manager/assets/css/vendors/select2.css">
+    <link rel="stylesheet" type="text/css" href="/manager/assets/css/vendors/dropzone.css">
+}

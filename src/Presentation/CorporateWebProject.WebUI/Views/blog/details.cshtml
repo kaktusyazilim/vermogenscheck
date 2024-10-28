@@ -1,0 +1,279 @@
+﻿
+@{
+    ViewData["Title"] = Model.Blog.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    if(Model.Blog.MetaDescription==null || Model.Blog.MetaDescription=="")
+    {
+        Model.Blog.MetaDescription = Model.Blog.ShortDescription;
+    }
+}
+@section css{
+    <style>
+        .content img {
+            max-width: 100%
+        }
+    </style>
+}
+
+@section tags {
+    <link rel="canonical" href="https://www.kaktusyazilim.com/blog/@Model.Blog.FriendlyUrl" type="text/html" />
+
+    <meta name="description" content="@(new HtmlString(Model.Blog.MetaDescription))" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Kaktüs Yazılım">
+    <meta property="og:title" content="@(new HtmlString(Model.Blog.Title))">
+    <meta property="og:description" content="@(new HtmlString(Model.Blog.MetaDescription))">
+    <meta property="og:url" content="https://www.kaktusyazilim.com/blog/@Model.Blog.FriendlyUrl">
+    <meta property="og:locale" content="tr_TR">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@@kaktusyazilimcom">
+    <meta name="twitter:title" content="Kaktüs Yazılım">
+    <meta name="twitter:url" content="https://www.kaktusyazilim.com/blog/@Model.Blog.FriendlyUrl">
+    <meta name="twitter:description" content="@(new HtmlString(Model.Blog.MetaDescription))">
+    <link rel="image_src" href="@("https://www.kaktusyazilim.com"+Model.Blog.Photo)" />
+    <meta name="twitter:image" content="@("https://www.kaktusyazilim.com"+Model.Blog.Photo)" />
+    <meta property="og:image:alt" content="@(new HtmlString(Model.Blog.Title)) " />
+    <meta property="og:image" content="@("https://www.kaktusyazilim.com"+Model.Blog.Photo)" />
+}
+<div style="margin-top:100px;z-index:0 !important" class="inner-banner">
+    <img src="/site/assets/images/bg/inner-bannerdot.png" class="inner-bannerdot" alt="image">
+    <img src="/site/assets/images/bg/inner-bannerwave.png" class="inner-bannerwave" alt="image">
+    <a class="down-arrow-icon" href="#blog-details">
+        <svg viewBox="0 0 14 26" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M13.8182 18.469L7.24862 25.7462L0.679032 18.469C0.272584 18.0188 0.592074 17.3 1.19862 17.3L6.74862 17.3L6.74862 1C6.74862 0.723857 6.97248 0.5 7.24862 0.5C7.52477 0.5 7.74862 0.723857 7.74862 1L7.74862 17.3L13.2986 17.3C13.9052 17.3 14.2247 18.0188 13.8182 18.469Z" />
+        </svg>
+    </a>
+    <div class="container">
+        <div class="row d-flex justify-content-center align-items-center text-center">
+            <div class="col-md-6">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb gap-3">
+                        <li class="breadcrumb-item"><a href="/">Blog</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><h1 style="font-weight:bold;">@Model.Blog.Title</h1></li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="blog-details pt-120 pb-120" id="blog-details">
+    <div class="container">
+        <div class="row gy-5">
+            <div class="col-lg-8">
+                <div class="blog-details-area">
+                    <div class="blog-details-single">
+                        <h1>@Model.Blog.Title</h1>
+                        <ul class="meta ms-0 ps-0">
+                            <li class="author">
+                                <img style="max-height:35px;border-radius:40px" src="@Model.User.Photo" alt="image"><span>@Model.User.DisplayName</span>
+                            </li>
+                            <li class="date">
+                                <img src="/site/assets/images/icons/blog-stand-calndr.svg" alt="image"><span>@Model.Blog.CreateDate.ToString("dd MMMM yyyy")</span>
+                            </li>
+                        </ul>
+                        <div class="image">
+
+                            <img src="@Model.Blog.Photo" class="img-fluid" alt="image">
+                        </div>
+                        <div class="content">
+                            @Html.Raw(Model.Blog.FullDescription)
+                        </div>
+                        <div class="row blogd-category-area g-4">
+                            <div class="col-lg-6">
+                                <div class="category-box">
+                                    <h4>Genel Etiketler:</h4>
+                                    <ul class="cat-list">
+                                        <li><a href="#">izmir yazılım Firması</a></li>
+                                        <li><a href="#">özel Yazılım firması</a></li>
+                                        <li><a href="#">dijital pazarlama ajansı</a></li>
+                                        <li><a href="#">izmir seo</a></li>
+                                        <li><a href="#">sosyal medya yönetimi</a></li>
+                                        <li><a href="#">web tasarım</a></li>
+                                        <li><a href="#">dijital pazarlama</a></li>
+                                        <li><a href="#">sosyal medya uzmanı</a></li>
+                                        <li><a href="#">seo uzmanı</a></li>
+                                        <li><a href="#">mobil uygulama</a></li>
+                                        <li><a href="#">websitesi</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="category-box">
+                                    <h4>Etiketler:</h4>
+                                    <ul class="cat-list">
+                                        @foreach (var item in Model.Blog.Tags.Split(','))
+                                        {
+                                            <li><a href="#">@item</a></li>
+
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="commetn-area">
+                                                <div class="comment-title">
+                                                    <h3>03 Comments</h3>
+                                                </div>
+                                                <ul class="comment-list">
+                                                    <li>
+                                                        <div class="comment-item">
+                                                            <div class="image">
+                                                                <img src="/site/assets/images/blog/comment-author1.png" alt="image">
+                                                            </div>
+                                                            <div class="content">
+                                                                <div class="comment-meta">
+                                                                    <h5>Loretta Shelton</h5><span>25 January, 2022</span>
+                                                                </div>
+                                                                <p>With the most complete toolkit on the market for businesses that want to accept online payments, Stripe has established itself as “The new standard in online payments</p>
+                                                                <button class="reply">Reply<i class="bi bi-reply"></i></button>
+                                                            </div>
+                                                        </div>
+                                                        <ul class="comment-reply">
+                                                            <li>
+                                                                <div class="comment-item">
+                                                                    <div class="image">
+                                                                        <img src="/site/assets/images/blog/comment-author2.png" alt="image">
+                                                                    </div>
+                                                                    <div class="content">
+                                                                        <div class="comment-meta">
+                                                                            <h5>Loretta Shelton</h5><span>25 January, 2022</span>
+                                                                        </div>
+                                                                        <p>With the most complete toolkit on the market for businesses that want to accept online payments, Stripe has established itself as “The new standard in online payments</p>
+                                                                        <button class="reply">Reply<i class="bi bi-reply"></i></button>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <div class="comment-item">
+                                                            <div class="image">
+                                                                <img src="/site/assets/images/blog/comment-author3.png" alt="image">
+                                                            </div>
+                                                            <div class="content">
+                                                                <div class="comment-meta">
+                                                                    <h5>Darrell Steward</h5><span>25 August, 2022</span>
+                                                                </div>
+                                                                <p>With the most complete toolkit on the market for businesses that want...</p>
+                                                                <button class="reply">Reply<i class="bi bi-reply"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="comment-respond">
+                                                <div class="comment-title">
+                                                    <h3>Write A Comments</h3>
+                                                    <p>Your email address will not be published.</p>
+                                                </div>
+                                                <form>
+                                                    <div class="row g-4">
+                                                        <div class="col-lg-6">
+                                                            <div class="form-inner">
+                                                                <input type="text" name="fname" placeholder="Your Name: *">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="form-inner">
+                                                                <input type="text" name="fname" placeholder="Email Address:">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <div class="form-inner">
+                                                                <input type="text" name="fname" placeholder="Website:">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <div class="form-inner">
+                        <textarea name="message" cols="30" rows="6" placeholder="Write a Comments"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12 text-start">
+                                                            <input type="submit" value="Submit Now " class="eg-btn btn--submit">
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>*@
+
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="blog-sidebar">
+                    <div class="blog-widget-item">
+                        <div class="search-area">
+                            <div class="blog-widget-body">
+                                <form action="/blog" method="get">
+                                    <div class="search-with-btn">
+                                        <input type="text" name="searchText" placeholder="Blog arayın">
+                                        <button><i class="bi bi-search"></i></button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blog-widget-item">
+                        <div class="recent-blog">
+                            <h5 class="blog-widget-title">Son Bloglar</h5>
+                            <div class="blog-widget-body">
+                                <ul class="recent-post-list">
+                                    @foreach (var item in Model.BlogList.OrderByDescending(x => x.CreateDate).Take(4).ToList())
+                                    {
+                                        <li>
+                                            <a href="/blog/@item.FriendlyUrl">
+                                                <div class="recent-post-item">
+                                                    <div class="recent-post-img">
+                                                        <img style="height:100px;width:90px" src="@item.Photo" alt="image">
+                                                    </div>
+                                                    <div class="recent-post-content">
+                                                        <h6>@item.Title</h6>
+                                                        <div class="meta">
+                                                            <img src="/site/assets/images/icons/post-calendar.svg" alt="image">
+                                                            <p>@item.CreateDate.ToString("dd MMMM yyyy")</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    }
+
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blog-widget-item">
+                        <div class="blog-category">
+                            <h5 class="blog-widget-title">Post Kategorileri</h5>
+                            <div class="blog-widget-body">
+                                <ul class="category-list">
+                                    @foreach (var item in Model.CategoryList.Where(x => x.TypeId == 14).ToList())
+                                    {
+                                        <li><a href="#"><span>@item.Name</span><span><i class="bi bi-chevron-right"></i></span></a></li>
+                                    }
+
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blog-widget-item">
+                        <div class="follow-area">
+                            <h5 class="blog-widget-title mb-1">Bizi Takip Edin</h5>
+                            <p class="para">Bizi Sosyal Medyada takip edin</p>
+                            <div class="blog-widget-body">
+                                <ul class="follow-list d-flex flex-row align-items-start gap-4">
+                                    <li><a target="_blank" href="https://www.facebook.com/kaktusyazilimcom"><i class='bx bxl-facebook'></i></a></li>
+                                    <li><a  target="_blank" href="https://www.twitter.com/kaktusyazilim"><i class='bx bxl-twitter'></i></a></li>
+                                    <li><a  target="_blank" href="https://www.instagram.com/kaktusyazilimcom"><i class='bx bxl-instagram'></i></a></li>
+                                    <li><a  target="_blank" href="https://www.linkedin.com/company/kakt%C3%BCs-yaz%C4%B1l%C4%B1m/"><i class='bx bxl-linkedin'></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

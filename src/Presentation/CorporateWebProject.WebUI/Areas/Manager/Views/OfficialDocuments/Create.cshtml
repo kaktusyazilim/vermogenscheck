@@ -1,0 +1,104 @@
+﻿@model CorporateWebProject.WebUI.Models.ServiceVM
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Manager/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-6">
+                <h3>@(Model.Modul!=null?Model.Modul.Title:"")</h3>
+            </div>
+            <div class="col-6">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="@(Model.Modul!=null?"/manager"+Model.Modul.Url:"")@(Model.Page!=null?Model.Page.Url:"/index")">
+                            <svg class="stroke-icon">
+                                <use href="/manager/assets/svg/icon-sprite.svg#stroke-home"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">@(Model.Modul!=null?Model.Modul.Title:"")</li>
+                    <li class="breadcrumb-item active">@(Model.Page!=null?Model.Page.Title:Model.Modul.Title+" Ekle")</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row starter-main">
+        <div class="col-sm-12">
+            <div class="card">
+
+                <div class="card-body">
+                    <form class="row g-3 needs-validation custom-input" enctype="multipart/form-data" action="/manager/@Model.Modul!.Url/create" method="post" novalidate="">
+                        <div class="col-6">
+                            <label class="form-label" asp-for="OfficialDocument.CategoryGuid">Döküman Kategorisi</label>
+                            @Html.DropDownListFor(x => x.OfficialDocument.CategoryGuid, new SelectList(Model.CategoryList, "ItemGuid", "Name"), "Lütfen bir kategori seçiniz", new { @class = "form-control input-validate", data_error = "Lütfen döküman kategorisini seçiniz", required = "" })
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label" asp-for="OfficialDocument.SubCategoryGuid">Kişinin görüntülenme sırasını giriniz.</label>
+                            @Html.DropDownListFor(x => x.OfficialDocument.SubCategoryGuid, new SelectList(Model.SubCategoryList, "ItemGuid", "SubCategoryName"), "Lütfen bir alt kategori seçiniz", new { id = "subcategory", @class = "form-control input-validate", data_error = "Lütfen Kişinin kategorisini seçiniz", required = "" })
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label" asp-for="OfficialDocument.Name">Döküman Adı</label>
+                            <input class="form-control input-validate" data-error="Lütfen Döküman Adı bilgisini giriniz" asp-for="OfficialDocument.Name" type="text" placeholder="Döküman Adını giriniz" required="">
+                        </div>
+
+                        <div class="col-6">
+                            <label class="form-label" for="files">Dökümanı Ekleyiniz</label>
+                            <input class="form-control input-validate" data-error="Lütfen Döküman Adı bilgisini giriniz" name="files" type="file" id="files" placeholder="Döküman Adını giriniz">
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label" asp-for="OfficialDocument.Color">Başlık Rengi</label>
+                            <input asp-for="OfficialDocument.Color" class="form-control input-validate" value="#004e96" data-error="Lütfen başlık rengini seçiniz" type="color" placeholder="Başlık Rengini Belirleyiniz">
+                        </div>
+
+                        <div class="col-6">
+                            <label class="form-label" asp-for="OfficialDocument.IsSubTitle">Alt Başlık Olarak Belirle</label>
+                            <select class="form-control input-validate" asp-for="OfficialDocument.IsSubTitle" data-error="Lütfen döküman tipini belirleyiniz">
+                                <option value="false">Hayır bu bir alt başlık değil</option>
+                                <option value="true">Evet bu bir alt başlık</option>
+                            </select>
+                        </div>
+
+
+
+
+                        <div class="col-12">
+                            <button class="btn btn-primary" type="submit">Kaydet</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Container-fluid Ends-->
+
+
+@section js{
+
+<script>
+    $(document).ready(function () {
+        $("#OfficialDocument_CategoryGuid").change(function () {
+            $.ajax({
+                url: "/manager/subcategory/GetSubcategoryForCategory",
+                data: { id: $(this).val() },
+                success: function (data) {
+                    $("#subcategory").empty();
+
+                    $.each(data, function (i, item) {
+                        $("#subcategory").append(`<option value="${item.itemguid}">${item.subCategoryName}</option>`)
+                    })
+                }
+            })
+        })
+    })
+</script>
+
+} 

@@ -1,0 +1,49 @@
+{
+  "profiles": {
+    "CorporateWebProject.WebUI": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production",
+        "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation",
+        "ASPNETCORE_URLS": "http://192.168.1.11:7203;http://192.168.1.11:5048"
+      },
+      "dotnetRunMessages": true,
+      "hotReloadEnabled": true,
+      "applicationUrl": "http://192.168.1.11:5000;http://192.168.1.11:5001"
+    },
+    "WSL": {
+      "commandName": "WSL2",
+      "launchBrowser": true,
+      "launchUrl": "http://192.168.1.11:7203",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production",
+        "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation",
+        "ASPNETCORE_URLS": "http://192.168.1.11:7203;http://192.168.1.11:5048"
+      },
+      "distributionName": ""
+    },
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production",
+        "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation",
+        "ASPNETCORE_URLS": "http://192.168.1.11:7203;http://192.168.1.11:5048"
+      }
+    }
+  },
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "environmentVariables": {
+      "ASPNETCORE_ENVIRONMENT": "Production",
+      "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation",
+      "ASPNETCORE_URLS": "http://192.168.1.11:7203;http://192.168.1.11:5048"
+    },
+    "iisExpress": {
+      "applicationUrl": "http://192.168.1.11:35283",
+      "sslPort": 44354
+    }
+  }
+}

@@ -1,0 +1,129 @@
+﻿@model CorporateWebProject.WebUI.Models.ServiceVM
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Manager/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-6">
+                <h3>@(Model.Modul!=null?Model.Modul.Title:"")</h3>
+            </div>
+            <div class="col-6">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="@Model.Folder.Name">
+                            <svg class="stroke-icon">
+                                <use href="/manager/assets/svg/icon-sprite.svg#stroke-home"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">@Model.Folder.Name)</li>
+                    <li class="breadcrumb-item active">@Model.Folder.Name</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row starter-main">
+        <div class="col-sm-12">
+            <div class="card">
+
+                <div class="card-body">
+                    <form class="row g-3 needs-validation custom-input" enctype="multipart/form-data" action="/manager/folderpermissions/update" method="post" novalidate="">
+                        
+                        @Html.HiddenFor(x=>x.Folder.ItemGuid)
+                        <div class="  col-sm-12">
+                            <div class="mb-3">
+                                <label asp-for="Folder.Name">Klasör Adı:</label>
+                                <input class="form-control input-validate" type="text" asp-for="Folder.Name" data-error="Lütfen klasör adını giriniz." placeholder="Klasör adını giriniz" required="">
+                            </div>
+                            <div class="d-flex justify-content-between mb-4">
+                                <h5>Klasörü Görüntüleyecek Şirketler</h5>
+                                <div class="form-check checkbox checkbox-primary mb-0">
+                                    <input class="form-check-input allSelect" asp-for="Folder.IsGeneral" id="selectAll" onclick="allSelectFnc()" type="checkbox">
+                                    <label class="form-check-label" for="selectAll">Herkes Görüntülesin</label>
+                                </div>
+                            </div>
+
+                            <hr />
+
+                            <div class="col-12">
+                                <table class="table table-hover table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Firma Adı</th>
+                                            <th class="text-center">
+                                                Görüntüleme
+                                            </th>
+                                            <th class="text-center">Ekleme</th>
+                                            <th class="text-center">Silme</th>
+                                            <th class="text-center">Hepsi</th>
+                                        </tr>
+
+                                    </thead>
+                                    <tbody>
+                                        @for (int i = 0; i < Model.FolderPermissionList.Count(); i++)
+                                        {
+                                            var company = Model.CompanyList.FirstOrDefault(x => x.ItemGuid == Model.FolderPermissionList[i].CompanyGuid);
+                                            var currentPermission = Model.CurrentFolderPermissionList.FirstOrDefault(x => x.FolderGuid == Model.FolderPermissionList[i].FolderGuid && x.CompanyGuid == Model.FolderPermissionList[i].CompanyGuid);
+                                            @if(currentPermission!=null)
+                                            {
+                                                Model.FolderPermissionList[i].AuthDelete = currentPermission.AuthDelete;
+                                                Model.FolderPermissionList[i].AuthRead = currentPermission.AuthRead;
+                                                Model.FolderPermissionList[i].CreateDate = Model.FolderPermissionList[i].CreateDate;
+                                            }
+                                            <input asp-for="@Model.FolderPermissionList[i].CompanyGuid" value="@company.ItemGuid" hidden />
+                                            <tr>
+                                                <td>@company.Name</td>
+                                                <td class="text-center">
+                                                    <input asp-for="@Model.FolderPermissionList[i].AuthRead" style="height:30px;width:30px" class="form-check-input allSelect" type="checkbox">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input asp-for="@Model.FolderPermissionList[i].AuthCreate" style="height:30px;width:30px" class="form-check-input allSelect" type="checkbox">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input asp-for="@Model.FolderPermissionList[i].AuthDelete" style="height:30px;width:30px" class="form-check-input allSelect" type="checkbox">
+                                                </td>
+                                                <td class="text-center">
+                                                    <input style="height:30px;width:30px" class="form-check-input allSelect" type="checkbox">
+                                                </td>
+                                            </tr>
+
+                                        }
+
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Firma Adı</th>
+                                            <th class="text-center">
+                                                Görüntüleme
+                                            </th>
+                                            <th class="text-center">Ekleme</th>
+                                            <th class="text-center">Silme</th>
+                                            <th class="text-center">Hepsi</th>
+
+                                        </tr>
+                                    </tfoot>
+                                </table>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-12">
+                            <button class="btn btn-primary" type="submit">Kaydet</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Container-fluid Ends-->

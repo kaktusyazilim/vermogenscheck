@@ -1,0 +1,74 @@
+﻿@model CorporateWebProject.WebUI.Models.ServiceVM
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Manager/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-6">
+                <h3>@(Model.Modul!=null?Model.Modul.Title:"")</h3>
+            </div>
+            <div class="col-6">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="@(Model.Modul!=null?"/manager"+Model.Modul.Url:"")@(Model.Page!=null?Model.Page.Url:"/index")">
+                            <svg class="stroke-icon">
+                                <use href="/manager/assets/svg/icon-sprite.svg#stroke-home"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">@(Model.Modul!=null?Model.Modul.Title:"")</li>
+                    <li class="breadcrumb-item active">@(Model.Page!=null?Model.Page.Title:Model.Modul.Title+" Ekle")</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row starter-main">
+        <div class="col-sm-12">
+            <div class="card">
+
+                <div class="card-body">
+                    <form class="row g-3 needs-validation custom-input" enctype="multipart/form-data" action="/manager/@Model.Modul.Url/update" method="post" novalidate="">
+                        @Html.HiddenFor(x => x.Type.ItemGuid)
+                        <div class="col-12">
+                            <label class="form-label" asp-for="@Model.Type.Name">Tip Adı</label>
+                            <input class="form-control input-validate" asp-for="@Model.Type.Name" data-error="Lütfen tip adını giriniz." type="text" placeholder="Oluşturulacak tipin adını giriniz" required="">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label" asp-for="@Model.Type.ModulId">Modül</label>
+                            @Html.DropDownListFor(x => x.Type.ModulId, new SelectList(Model.ModulList, "Id", "Title"), "Bağlamak istediğiniz modülü seçiniz", new { @class = "form-control",data_val="false" })
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label" asp-for="Type.ShortDescription">Kısa Açıklama</label>
+                            <input class="form-control" placeholder="Kısa Açıklama" asp-for="Type.ShortDescription" data-val="false" />
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label" asp-for="Type.Icon">Tip Icon</label>
+                            <input class="form-control " data-val="false" name="pictures" type="file" />
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label" asp-for="Type.IsPage">Oluşturulacak Tip bir sayfamı?</label>
+                            <select class="form-control">
+                                <option value="">Bir seçenek seçiniz</option>
+                                <option value="true">Evet</option>
+                                <option value="false">Hayır</option>
+                            </select>
+                        </div>
+
+                        <div class="col-12">
+                            <button class="btn btn-primary" type="submit">Kaydet</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Container-fluid Ends-->

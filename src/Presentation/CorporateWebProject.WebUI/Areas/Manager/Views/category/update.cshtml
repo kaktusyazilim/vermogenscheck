@@ -1,0 +1,195 @@
+﻿
+@{
+    ViewData["Title"] = "update";
+    Layout = "~/Areas/Manager/Views/Shared/_Layout.cshtml";
+}
+
+<form class="row g-3 needs-validation custom-input" enctype="multipart/form-data" action="/manager/@Model.Modul!.Url/update" method="post" novalidate="">
+    @Html.HiddenFor(x => x.Category.ItemGuid)
+    <div class="col-12">
+        <label class="form-label" asp-for="@Model.Category.Queue">Kategori Sırası</label>
+        <input class="form-control input-validate" data-error="Lütfen kategori sırasını giriniz." asp-for="@Model.Category.Queue" type="text" placeholder="Kategori sırasını giriniz" required="">
+
+    </div>
+    <div class="col-12">
+        <label class="form-label" asp-for="@Model.Category.Name">Kategori Adı</label>
+        <input class="form-control input-validate" asp-for="@Model.Category.Name" data-error="Lütfen kategori adını giriniz." type="text" placeholder="Kategorinizin görüntülenecek adını giriniz" required="">
+
+    </div>
+
+    <div class="col-12">
+        <label class="form-label" asp-for="@Model.Category.TypeId">Kategori Tipi</label>
+        @Html.DropDownListFor(x => x.Category.TypeId, new SelectList(Model.TypeList, "Id", "Name"), "Lütfen bir tip seçiniz", new { @class = "form-control input-validate", data_error = "Lütfen kategori için bir tip seçiniz" })
+
+    </div>
+
+    <div class="col-12">
+        <label class="form-label" asp-for="@Model.Category.IsLink">Bu kategori bir linke yönlendirilsin mi?</label>
+        <select class="form-control input-valid categoryislink" asp-for="@Model.Category.IsLink" data-error="Lütfen bir seçenek seçiniz.">
+            <option>Bir seçenek seçiniz</option>
+            <option value="true">Evet</option>
+            <option value="false">Hayır</option>
+        </select>
+
+    </div>
+
+    <div class="col-12" id="categoryurl" style="display:@(Model.Category.IsLink==true?"":"none")">
+        <label class="form-label" for="validationCustom01" asp-for="Category.FriendlyUrl">Kategori Url</label>
+        <input class="form-control input-validate" data-error="Lütfen kategori urlsini giriniz." asp-for="Category.FriendlyUrl" type="text" placeholder="Kategori urlsini giriniz">
+    </div>
+
+
+    <div class="col-12">
+        <label class="form-label" asp-for="Category.IsModul">Bu kategoriyi kontrol panelinde ayrı modül olarak göster</label>
+        <select id="ismodulselect" class="form-control input-valid " asp-for="Category.IsModul" data-error="Lütfen bir seçenek seçiniz.">
+            <option>Bir seçenek seçiniz</option>
+            <option value="true">Evet</option>
+            <option value="false">Hayır</option>
+        </select>
+    </div>
+
+    <div id="ismodul" style="display:@(Model.Category.IsModul==true?"":"none")">
+        <div class="col-12">
+            <label class="form-label" asp-for="NewModul.Queue">Modül Sırasını Giriniz</label>
+            <input class="form-control input-valid ismodul" asp-for="NewModul.Queue" placeholder="Sol menüdeki görüntünlenme sırasını giriniz." data-error="Lütfen bir modül sırasını giriniz." />
+        </div>
+        <div class="col-12">
+            <label class="form-label" asp-for="NewModul.Title">Modul Adını Giriniz.</label>
+            <input class="form-control input-valid ismodul" asp-for="NewModul.Title" placeholder="Sol menüdeki görüntülenme adını giriniz" data-error="Lütfen modüla adını giriniz." />
+        </div>
+    </div>
+
+
+
+    <div class="col-12">
+        <label class="form-label" asp-for="@Model.Category.IsPage">Bu kategori sayfa olarak inşa et</label>
+        <select class="form-control input-valid categoryispage" asp-for="@Model.Category.IsPage" data-error="Lütfen bir seçenek seçiniz.">
+            <option>Bir seçenek seçiniz</option>
+            <option value="true">Evet</option>
+            <option value="false">Hayır</option>
+        </select>
+
+    </div>
+    <div id="ispageContent" style="display:@(Model.Category.IsPage==true?"":"none")">
+        <div class="col-sm-12">
+            <div class="mb-3">
+                <label asp-for="Category.ShortDescription">Kategori Özet Açıklama:</label>
+                <textarea class="form-control ispageinputs" type="text" asp-for="Category.ShortDescription" data-error="Lütfen kategori için kısa bir açıklama giriniz." placeholder="Lütfen kategori için kısa bir açıklama giriniz."></textarea>
+            </div>
+
+            <div class="col-12 mb-3">
+                <label class="form-label" for="editor">Kategori Açıklaması</label>
+                <textarea class="form-control input-valid ispageinputs" placeholder="Lütfen kategorizin tüm içeriğini giriniz" id="editor" asp-for="Category.FullDescription" data-error="Lütfen bir açıklama giriniz."></textarea>
+
+            </div>
+
+            <div class="col-12">
+                <label class="form-label">Kategori Fotoğraf Galerisi</label>
+                <input class="form-control input-validate" name="pictures" multiple type="file">
+            </div>
+
+            <div class="col-12 mb-3">
+                <label class="form-label" for="editor">Kategori Fotoğrafı</label>
+                <input class="form-control input-valid " type="file" name="files" />
+
+            </div>
+        </div>
+
+    </div>
+    <div class="col-12">
+        <label class="form-label" asp-for="@Model.Category.LangId">Kategori Dili</label>
+        @Html.DropDownListFor(x => x.Category.LangId, new SelectList(Model.LanguageList, "Id", "Name"), "Lütfen bir dil seçiniz", new { @class = "form-control input-validate", data_error = "Lütfen kategori için bir dil seçiniz", required = "" })
+
+    </div>
+
+    <div class="col-12">
+        <button class="btn btn-primary" type="submit">Kaydet</button>
+    </div>
+</form>
+
+
+@section js{
+    <script src="/manager/assets/js/dropzone/dropzone.js"></script>
+    <script src="/manager/assets/js/dropzone/dropzone-script.js"></script>
+    <script src="/manager/assets/js/select2/select2.full.min.js"></script>
+    <script src="/manager/assets/js/select2/select2-custom.js"></script>
+    <script src="/manager/assets/js/editors/quill.js"></script>
+    <script src="/manager/assets/js/form-validation-custom.js"></script>
+
+    <script>
+        CKEDITOR.replace('editor', {
+            toolbar: 'Full',
+            toolbar_Full:
+                [
+                    { name: 'document', items: ['Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates'] },
+                    { name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo'] },
+                    { name: 'editing', items: ['Find', 'Replace', '-', 'SelectAll', '-', 'SpellChecker', 'Scayt'] },
+                    {
+                        name: 'forms', items: ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton',
+                            'HiddenField']
+                    },
+                    '/',
+                    { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat'] },
+                    {
+                        name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv',
+                            '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl']
+                    },
+                    { name: 'links', items: ['Link', 'Unlink', 'Anchor'] },
+                    { name: 'insert', items: ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe'] },
+                    '/',
+                    { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
+                    { name: 'colors', items: ['TextColor', 'BGColor'] },
+                    { name: 'tools', items: ['Maximize', 'ShowBlocks', '-', 'About'] }
+                ],
+            extraPlugins: 'iframe',
+            enterMode: CKEDITOR.ENTER_BR,
+            shiftEnterMode: CKEDITOR.ENTER_P,
+            filebrowserBrowseUrl: '/manager/files/Browse',
+            filebrowserUploadUrl: '/manager/files/create'
+        });
+
+
+    </script>
+    <script>
+        $(document).ready(function () {
+
+            $("#ismodulselect").change(function () {
+                if ($(this).val()=="true") {
+                    $("#ismodul").show();
+                }
+                else {
+                    $("#ismodul").hide();
+
+                }
+            })
+
+            $(".categoryislink").change(function () {
+                if ($(this).val() == "false") {
+                    $("#categoryurl").hide();
+                }
+                else {
+                    $("#categoryurl").show();
+
+                }
+            })
+
+            $(".categoryispage").change(function () {
+                if ($(this).val() == "false") {
+                    $("#ispageContent").hide();
+                    $(".ispageinputs").removeAttr("required");
+                }
+                else {
+                    $("#ispageContent").show();
+                    $(".ispageinputs").attr("required", "required")
+
+                }
+            })
+        })
+    </script>
+}
+
+@section css {
+    <link rel="stylesheet" type="text/css" href="/manager/assets/css/vendors/quill.snow.css">
+    <link rel="stylesheet" type="text/css" href="/manager/assets/css/vendors/select2.css">
+    <link rel="stylesheet" type="text/css" href="/manager/assets/css/vendors/dropzone.css">
+}

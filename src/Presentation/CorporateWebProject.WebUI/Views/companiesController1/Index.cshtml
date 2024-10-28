@@ -1,0 +1,548 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section css {
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="/site/css/icofont.min.css" />
+}
+@section js {
+    <script src="https://code.iconify.design/iconify-icon/1.0.3/iconify-icon.min.js"></script>
+}
+<section class="shop_page">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3">
+                <aside class="widget mag_social_widget">
+                    <h3 class="widget_title">
+                        <span>Sektörler</span>
+                    </h3>
+                    <article class="filter-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Makine Sanayi
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                İhracatçı
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Üretici Firma
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                İthalatçı
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Toptancı
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Hizmet
+                            </label>
+                        </div>
+                        <div class="form-check mb-4">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Perakendeci
+                            </label>
+                        </div>
+                    </article> <!-- filter-group  .// -->
+                </aside>
+                <div class="popular-section-ads pb-0 pt-0">
+
+                    <aside class="widget mag_social_widget">
+                        <h3 class="widget_title">
+                            <span>Kategoriler</span>
+                        </h3>
+                        <article class="filter-group">
+                            <form class="pb-4">
+                                <br>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search">
+                                    <div class="input-group-append">
+
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Makine Sanayi
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Gıda Endüstrisi
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Tekstil-Moda
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Otomotiv
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Mobilya
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    İhracat-İthalat Firmalar
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Elektrik-Elektronik
+                                </label>
+                            </div>
+                            <br>
+                        </article> <!-- filter-group  .// -->
+                    </aside>
+
+                    <aside class="widget mag_social_widget">
+                        <h3 class="widget_title">
+                            <span>Ülkeler</span>
+                        </h3>
+                        <article class="filter-group">
+                            <form class="pb-4 justify-content-center">
+                                <br>
+                                <div class="input-group mb-4">
+                                    <input type="text" class="form-control" placeholder="Search">
+
+                                    <div class="input-group-append">
+
+                                    </div>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+
+                                        Türkiye
+                                    </label>
+                                    <iconify-icon icon="twemoji:flag-turkey" width="20" height="20" style=""></iconify-icon>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Hİndistan
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Çİn
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        ABD
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        İngiltere
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Rusya
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Mısır
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        İtalya
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        İspanya
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Hollanda
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Kanada
+                                    </label>
+                                </div>
+
+                            </form>
+                        </article> <!-- filter-group  .// -->
+                    </aside>
+
+
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-12">
+
+
+
+                <div class="d-flex justify-content-end">
+
+
+                    <button type="button" class="btn btn-primary bg-white border border-primary text-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@@mdo">Mesaj Gönder</button>
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Mesaj Gönder</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="mb-3">
+                                            <label for="recipient-name" class="col-form-label">Alıcı:</label>
+                                            <input type="text" class="form-control" id="recipient-name">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="message-text" class="col-form-label">Mesaj:</label>
+                                            <textarea class="form-control" id="message-text"></textarea>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                                    <button type="button" class="btn btn-primary bg-white border border-primary text-primary">Gönder</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Tüm Firmaları Seç
+                    </label>
+                </div>
+                <div class="card mb-3 shadow bg-white roundedbg-body-tertiary rounded border-2">
+                    <div class="card-body ">
+                        <div class="row">
+
+                            <div class="col-md-3 border-5">
+
+
+                                <img class="card-img-top pt-4" src="/uploads/tarım.jpg" alt="Card image cap">
+
+                            </div>
+                            <div class="col-md-6 align-items-center mt-3">
+                                <iconify-icon icon="twemoji:flag-turkey" width="25" height="25"></iconify-icon>
+                                <iconify-icon icon="material-symbols:workspace-premium" width="25" height="25"></iconify-icon>
+                                <a href="#">Makine Sanayi</a>
+
+
+
+
+                                <h6 class="card-text ">
+                                    <a href="#" style="color:black ;">Metkarsan Tarım Makinaları Otomotiv Sanayi ve Dış Ticaret Limited Şirketi </a>
+                                </h6>
+                                <p class="aciklama" style="font-size:small ;">1990'dan beri hizmet vren firmamızda kaliteli ürünler üretmeye ilk günkü gibi devam ediyoruz <i class="icofont-badge" style="font-size: larger;"></i></p>
+
+                                <ul class="etiket d-flex " style="margin-left:-30px;">
+
+                                    <li class="etiket1" style=" margin-right: 20px; border-radius: 8px; background-color: #D5DBDB ;padding:5px; font-size: 10px; list-style-type: none;"><a href="#">etiket1</a></li>
+                                    <li class="etiket1" style="margin-right: 20px; border-radius: 8px; background-color: #D5DBDB ;padding:5px; font-size: 10px; list-style-type: none;"><a href="#">etiket2</a></li>
+                                    <li class="etiket1" style="border-radius: 8px; background-color: #D5DBDB ;padding:5px; font-size: 10px; list-style-type: none;"><a href="#">etiket3</a></li>
+
+
+                                </ul>
+
+                            </div>
+
+                            <div class="col-md-3 border-5 mt-4 border-0" style="padding:10;">
+
+                                <div class="card border-0 pb-2" style="">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item d-flex">
+                                            <iconify-icon icon="twemoji:stop-button" width="25" height="25"></iconify-icon><a href="#" style="margin-left: 9px!important;margin:auto;">Detaylar!</a>
+                                        </li>
+                                        <li class="list-group-item pb-2 pt-2 d-flex"><iconify-icon icon="logos:google-gmail" width="25" height="25"></iconify-icon><a href="#" style="margin-left: 9px!important;margin:auto;">Mail Gönder!</a></li>
+                                        <li class="list-group-item  pt-2 d-flex"><iconify-icon icon="teenyicons:appointments-outline" width="25" height="25"></iconify-icon><a style="margin-left: 9px!important;margin:auto;" href="#">Randevu Alın</a></li>
+                                        <li class="list-group-item  pt-2 d-flex"><iconify-icon icon="akar-icons:zoom-fill" width="25" height="25"></iconify-icon><a style="margin-left: 9px!important;margin:auto;" href="#">Randevu Alın</a></li>
+
+
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+                <div class="card mb-3 shadow bg-white roundedbg-body-tertiary rounded border-2">
+                    <div class="card-body">
+                        <div class="row">
+
+                            <div class="col-md-3 border-5">
+
+
+                                <img class="card-img-top pt-4"
+                                     src="/uploads/tarım.jpg" alt="Card
+                                            image cap">
+
+                            </div>
+                            <div class="col-md-6 align-items-center
+                                        mt-3">
+                                <iconify-icon icon="twemoji:flag-turkey"
+                                              width="25" height="25"></iconify-icon>
+                                <iconify-icon icon="material-symbols:workspace-premium"
+                                              width="25" height="25"></iconify-icon>
+                                <a href="#">Makine Sanayi</a>
+
+
+
+
+                                <h6 class="card-text">
+                                    <a href="#"
+                                       style="color:black ;">
+                                        Metkarsan
+                                        Tarım Makinaları Otomotiv Sanayi
+                                        ve Dış Ticaret Limited Şirketi
+                                    </a>
+                                </h6>
+                                <p class="aciklama"
+                                   style="font-size:small ;">
+                                    1990'dan
+                                    beri hizmet vren firmamızda kaliteli
+                                    ürünler üretmeye ilk günkü gibi
+                                    devam ediyoruz
+                                </p>
+
+                                <ul class="etiket d-flex "
+                                    style="margin-left:-30px;">
+
+                                    <li class="etiket1" style="
+                                                margin-right: 20px;
+                                                border-radius: 8px;
+                                                background-color: #D5DBDB
+                                                ;padding:5px; font-size: 10px;
+                                                list-style-type: none;">
+                                        <a href="#">etiket1</a>
+                                    </li>
+                                    <li class="etiket1"
+                                        style="margin-right: 20px;
+                                                border-radius: 8px;
+                                                background-color: #D5DBDB
+                                                ;padding:5px; font-size: 10px;
+                                                list-style-type: none;">
+                                        <a href="#">etiket2</a>
+                                    </li>
+                                    <li class="etiket1"
+                                        style="border-radius: 8px;
+                                                background-color: #D5DBDB
+                                                ;padding:5px; font-size: 10px;
+                                                list-style-type: none;">
+                                        <a href="#">etiket3</a>
+                                    </li>
+                                </ul>
+
+                            </div>
+
+                            <div class="col-md-3 border-5 mt-4
+                                        border-0">
+
+                                <div class="card border-0 pb-2">
+                                    <ul class="list-group
+                                                list-group-flush ">
+                                        <li class="list-group-item
+                                                    d-flex">
+                                            <iconify-icon icon="twemoji:stop-button"></iconify-icon><a href="#"
+                                                                                                       style="margin-left:
+                                                        9px!important;margin:auto;">Detaylar!</a>
+                                        </li>
+                                        <li class="list-group-item pb-2
+                                                    pt-2 d-flex">
+                                            <iconify-icon icon="logos:google-gmail"></iconify-icon><a href="#"
+                                                                                                      style="margin-left:
+                                                        9px!important;margin:auto;">
+                                                Mail
+                                                Gönder!
+                                            </a>
+                                        </li>
+                                        <li class="list-group-item pt-2
+                                                    d-flex">
+                                            <iconify-icon icon="teenyicons:appointments-outline"></iconify-icon><a style="margin-left:
+                                                        9px!important;margin:auto;"
+                                                                                                                   href="#">Randevu Alın</a>
+                                        </li>
+                                        <li class="list-group-item pt-2
+                                                    d-flex">
+                                            <iconify-icon icon="akar-icons:zoom-fill"></iconify-icon><a style="margin-left:
+                                                        9px!important;margin:auto;"
+                                                                                                        href="#">Randevu Alın</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card mb-3 shadow bg-white roundedbg-body-tertiary rounded border-2">
+                    <div class="card-body ">
+                        <div class="row">
+
+                            <div class="col-md-3 border-5">
+
+
+                                <img class="card-img-top pt-4"
+                                     src="/uploads/tarım.jpg"
+                                     alt="Card image cap">
+
+                            </div>
+                            <div class="col-md-6 align-items-center
+                                            mt-3">
+                                <iconify-icon icon="twemoji:flag-turkey"
+                                              width="25" height="25"></iconify-icon>
+                                <iconify-icon icon="material-symbols:workspace-premium"
+                                              width="25" height="25"></iconify-icon>
+                                <a href="#">Makine Sanayi</a>
+                                <h6 class="card-text">
+                                    <a href="#"
+                                       style="color:black ;">
+                                        Metkarsan
+                                        Tarım Makinaları Otomotiv
+                                        Sanayi ve Dış Ticaret
+                                        Limited Şirketi
+                                    </a>
+                                </h6>
+                                <p class="aciklama"
+                                   style="font-size:small ;">
+                                    1990'dan
+                                    beri hizmet vren firmamızda
+                                    kaliteli ürünler üretmeye ilk
+                                    günkü gibi devam ediyoruz
+                                </p>
+                                <ul class="etiket d-flex "
+                                    style="margin-left:-30px;">
+
+                                    <li class="etiket1" style="
+                                                    margin-right: 20px;
+                                                    border-radius: 8px;
+                                                    background-color: #D5DBDB
+                                                    ;padding:5px; font-size:
+                                                    10px; list-style-type:
+                                                    none;"><a href="#">etiket1</a></li>
+                                    <li class="etiket1"
+                                        style="margin-right: 20px;
+                                                    border-radius: 8px;
+                                                    background-color: #D5DBDB
+                                                    ;padding:5px; font-size:
+                                                    10px; list-style-type:
+                                                    none;"><a href="#">etiket2</a></li>
+                                    <li class="etiket1"
+                                        style="border-radius: 8px;
+                                                    background-color: #D5DBDB
+                                                    ;padding:5px; font-size:
+                                                    10px; list-style-type:
+                                                    none;"><a href="#">etiket3</a></li>
+                                </ul>
+
+                            </div>
+
+                            <div class="col-md-3 border-5 mt-4
+                                            border-0">
+
+                                <div class="card border-0 pb-2 ">
+                                    <ul class="list-group
+                                                    list-group-flush ">
+                                        <li class="list-group-item
+                                                        d-flex">
+                                            <iconify-icon icon="twemoji:stop-button"></iconify-icon><a href="#"
+                                                                                                       style="margin-left:
+                                                            9px!important;margin:auto;">Detaylar!</a>
+                                        </li>
+                                        <li class="list-group-item
+                                                        pb-2 pt-2 d-flex">
+                                            <iconify-icon icon="logos:google-gmail"></iconify-icon><a href="#"
+                                                                                                      style="margin-left:
+                                                            9px!important;margin:auto;">
+                                                Mail
+                                                Gönder!
+                                            </a>
+                                        </li>
+                                        <li class="list-group-item
+                                                        pt-2 d-flex">
+                                            <iconify-icon icon="teenyicons:appointments-outline"></iconify-icon><a style="margin-left:
+                                                            9px!important;margin:auto;"
+                                                                                                                   href="#">
+                                                Randevu
+                                                Alın
+                                            </a>
+                                        </li>
+                                        <li class="list-group-item
+                                                        pt-2 d-flex">
+                                            <iconify-icon icon="akar-icons:zoom-fill"></iconify-icon><a style="margin-left:
+                                                            9px!important;margin:auto;"
+                                                                                                        href="#">
+                                                Randevu
+                                                Alın
+                                            </a>
+                                        </li>
+
+
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

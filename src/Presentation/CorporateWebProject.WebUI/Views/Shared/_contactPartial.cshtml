@@ -1,0 +1,66 @@
+﻿
+<div class="form-section pt-120 pb-120" id="faq">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-6">
+                <div class="section-title primary4">
+                    <span>-Kaktüs Yazılım-</span>
+                    <h3>Bizimle iletişime geçin</h3>
+                    <p class="para">Projenizi inşa etmek ve iş birlikleri için bizimle hemen iletişime geçin.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-8">
+                <form action="/iletisim/sendMessage" method="post" id="frmContact">
+                    @Html.AntiForgeryToken()
+                    <div class="row g-4">
+                        <div class="col-lg-6">
+                            <div class="form-inner">
+                                <input type="text" asp-for="ContactDTO.FullName" placeholder="Adınız: *" required>
+                                <span class="error" asp-validation-for="ContactDTO.FullName"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-inner">
+                                <input type="text" asp-for="ContactDTO.Mail" placeholder="Mail Adresiniz:" required>
+                                <span class="error" asp-validation-for="ContactDTO.Mail"></span>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-inner">
+                                <input type="text" asp-for="ContactDTO.Phone" placeholder="Telefon Numaranız:" required>
+                                <span class="error" asp-validation-for="ContactDTO.Phone"></span>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-inner">
+                                <input type="text" asp-for="ContactDTO.Subject" placeholder="İletişim Konunuz:" required>
+                                <span class="error" asp-validation-for="ContactDTO.Subject"></span>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-inner">
+                                <textarea cols="30" rows="6" asp-for="ContactDTO.Message" placeholder="Mesajınız " required></textarea>
+                                <span class="error" asp-validation-for="ContactDTO.Message"></span>
+
+                            </div>
+                        </div>
+                        <div id="successMessage" style="display:none" class="col-lg-12">
+                            <div class="form-inner">
+                                <p style="color:var(--primary-color4);text-align:center;font-weight:600">Mesajınız başarıyla gönderildi. Sizinle en kısa sürede iletişime geçeceğiz.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 text-center">
+                            <input type="submit" value="Gönder" class="eg-btn btn--submit">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

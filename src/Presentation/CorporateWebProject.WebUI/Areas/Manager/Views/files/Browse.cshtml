@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewData["Title"] = "Browse";
+    Layout = "~/Areas/Manager/Views/Shared/_Layout.cshtml";
+}
+
+<div class="app-file-content p-2">
+    <h5>Tüm Dosyalar (@Model.LocalFiles.Count())</h5>
+
+    <!-- App File - Recent Accessed Files Section Starts -->
+    <label class="app-file-label">En Son Yüklenen Dosyalar</label>
+    <div class="row app-file-recent-access">
+        @foreach (var item in Model.LocalFiles.OrderByDescending(x => x.CreationTime).ToList())
+        {
+            <div class="col-md-3 col-6">
+                <div class="card border shadow-none mb-1 fileExplorer" data-path="/uploads/@item.Name">
+                    <div class="card-content">
+                        <div class="app-file-content-logo card-img-top">
+                            <img class="d-block mx-auto" src="/uploads/@item.Name" height="170" width="100%" alt="Card image cap">
+                        </div>
+                        <div class="card-body p-50">
+                            <div class="app-file-recent-details">
+                                <div class="app-file-name font-size-small font-weight-bold">@item.Name</div>
+                                <div class="app-file-size font-size-small text-muted mb-25">@(item.Length/1000) MB</div>
+                                <div class="app-file-last-access font-size-small text-muted">Yüklenme Tarihi : @item.CreationTime</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+
+    </div>
+
+</div>
+
+
+@section js{
+    <script>
+      $(document).ready(function () {
+          var funcNum =@(Context.Request.Query["CKEditorFuncNum"]+";")
+              $(".fileExplorer").on("click", function () {
+                  var path = $(this).data("path");
+                  window.opener.CKEDITOR.tools.callFunction(funcNum, path);
+                  window.close();
+              }).hover(function () {
+                  $(this).css("cursor", "pointer");
+
+              })
+      })
+    </script>
+}

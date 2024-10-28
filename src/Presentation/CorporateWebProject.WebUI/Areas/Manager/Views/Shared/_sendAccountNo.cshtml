@@ -1,0 +1,56 @@
+﻿
+<div class="modal fade bd-example-modal-xl" id="sendAccountNo" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <form data-table=".sendAccountNo" action="/manager/visaClients/save" data-modal="#sendAccountNo" method="post" id="frmSendAccount" class="modal-content">
+
+            <div class="modal-header d-flex justify-content-between">
+                <h4 style="margin:auto" class="custom-text-white">Yeni Vize Müşterisi</h4>
+                <button class="btn-close py-0" style="margin-left:5px;font-size:22px" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body dark-modal">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="project-box">
+
+                            <div class="row">
+                                <div class="col-lg-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Hesap Numaralarını Link Olarak Göndermek İçin</label>
+                                        <input class="form-control custom-text-white" value="https://wwww.uplifeacademy.com/hesap-numalarımız" />
+                                        <small>Yukarıdaki linki müşteriye iletiniz.</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class=" col-lg-12 col-sm-12">
+                                <div class="form-group">
+                                    <label>Veya Sms Olarak Gönderin</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-sm-12">
+                                <div class="form-group">
+                                    <label>Telefon</label>
+                                    <input class="form-control  custom-text-white" placeholder="05" />
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-sm-12">
+                                <div class="form-group">
+                                    <label>Mesaj İçeriği</label>
+                                 <textarea class="form-control  custom-text-white" placeholder="Mesajınızı giridiniz" rows="5"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-center mt-3">
+                                <button type="submit" id="visaSubmitButton" class="btn btn-light w-100 custom-text-white"><i class="fa fa-send"> SMS Gönder</i></button>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>

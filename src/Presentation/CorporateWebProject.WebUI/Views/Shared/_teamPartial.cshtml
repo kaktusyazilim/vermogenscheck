@@ -1,0 +1,45 @@
+﻿
+<div class="team-section2 pb-120 position-relative overflow-hidden">
+    <img src="/site/assets/images/bg/watermark1-bg.webp" class="watermark1-bg" alt="image">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8 col-sm-10">
+                <div class="section-title3 primary4 text-cener">
+                    <span>- Kaktüs Yazılım Ekibi -</span>
+                    <h3>Projelerinizi inşa etmeye hazırız</h3>
+                    <p>
+                       Projeler inşa eden ekibimiz ile işletme faaliyetlerinizi azaltmadan en performanslı ve gelişmiş UI/UX tasarım deneyimlerimizden faydalanın.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center g-4">
+            @foreach (var item in Model.TeamList)
+            {
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-10">
+                    <div class="single-team2 style-2 wow fadeInDown" data-wow-duration="1.5s" data-wow-delay="0.2s">
+                        <div class="team-image">
+                            <img src="@item.Photo" alt="image">
+                            <div class="social-area gap-3">
+                                @*<ul class="social-links d-flex justify-content-center align-items-center flex-row gap-3">
+                                    <li><a href="https://www.instagram.com/"><i class='bx bxl-instagram'></i></a></li>
+                                    <li><a href="https://www.facebook.com/"><i class='bx bxl-facebook'></i></a></li>
+                                    <li><a href="https://www.twitter.com/"><i class='bx bxl-twitter'></i></a></li>
+                                    <li>
+                                        <a href="https://www.pinterest.com/"><i class='bx bxl-pinterest-alt'></i></a>
+                                    </li>
+                                </ul>*@
+                            </div>
+                        </div>
+                        <div class="team-content">
+                            <h4 class="name">@item.FullName</h4>
+                            <p class="designation">@item.Job</p>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+</div>
+
