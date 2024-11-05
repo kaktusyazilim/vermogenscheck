@@ -17,6 +17,7 @@ namespace CorporateWebProject.WebUI.Controllers
             _contactCategoryRepository = contactCategoryRepository;
             _exchangeRepository = exchangeRepository;
             _memoryCache = memoryCache;
+
         }
 
         public async Task<IActionResult> Index(string Exchange)
