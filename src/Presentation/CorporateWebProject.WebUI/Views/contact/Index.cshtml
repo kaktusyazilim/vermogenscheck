@@ -1,0 +1,76 @@
+﻿<main>
+
+    <section class="contact-sec">
+        <div class="head">
+            <div class="title">
+                <h2><span>Kommunikation für</span><br /> Heemann Vermögensverwaltung AG</h2>
+            </div>
+            <div class="cards">
+                <div class="card">
+                    <div class="icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="text">
+                        <h3>Email</h3>
+                        <p>
+                            <a href="mailto:@Model.CurrentSettings.Mail">@Model.CurrentSettings.Mail</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="icon">
+                        <i class="fas fa-map"></i>
+                    </div>
+                    <div class="text">
+                        <h3>Adresse</h3>
+                        <p>@Html.Raw(Model.CurrentSettings.Address)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="body">
+            <div class="contact-form">
+                @await Html.PartialAsync("_contactFormPartial")
+            </div>
+        </div>
+
+
+    </section>
+</main>
+
+@section js {
+    <script>
+        $(document).ready(function () {
+            $(".Contactform").submit(function (e) {
+                e.preventDefault();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/contact",
+                    data: $(".form").serialize(),
+                    success: function (response) {
+                        if (response == true) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Ihre Anfrage wurde erfolgreich gesendet.',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }
+                        else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Ihre Anfrage wurde nicht gesendet.',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }
+
+                        $(".Contactform")[0].reset();
+                    }
+                });
+            });
+        });
+    </script>
+}

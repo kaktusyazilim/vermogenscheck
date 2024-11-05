@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="designer" content="Mehmet Sarı">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vermögenscheck</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet" href="/themes/includes/css/sweetAlert/sweetalert2.min.css">
+    <link rel="stylesheet" href="/themes/includes/css/flickity/flickity.css">
+    <link rel="stylesheet" href="/themes/includes/css/components.css">
+    <link rel="stylesheet" href="/themes/includes/css/style.css">
+    @Html.Raw(Model.CurrentSettings.HeaderScripts)
+</head>
+
+<body>
+    <div class="cookieModal" style="display:none;">
+        <p>Wir verwenden <a href="">Cookies</a>, um sicherzustellen, dass Sie die beste Erfahrung auf unserer Website machen.</p>
+        <a class="btn">Akzeptieren</a>
+    </div>
+
+    <header>
+        <div class="navbar">
+            <a href="/" class="left">
+                <div class="logo">
+                    <img src="/themes/assets/image/logo2.svg" alt="">
+                </div>
+            </a>
+
+            <div class="burger ">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+
+            <div class="right">
+                <div class="menu">
+                    <ul>
+                        <li><a href="/">Startseite</a></li>
+                        <li><a href="/conditions">AGB</a></li>
+                        <li><a href="/privacy">Datenschutzrichtlinie</a></li>
+                        <li><a href="/contact">Impressum</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        @RenderBody()
+
+        @Html.Raw(Model.CurrentSettings.BodyScripts)
+    </main>
+
+    @if (Model.IsFooterActive)
+    {
+        <footer>
+            <div class="head">
+                <div class="left">
+                    <div class="logo">
+                        <img src="/themes/assets/image/logo2.svg" alt="">
+                    </div>
+
+                    @*<div class="socials">
+                            <ul>
+                                <li><a href="index.html"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="index.html"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="index.html"><i class="fab fa-instagram"></i></a></li>
+                                <li><a href="index.html"><i class="fab fa-linkedin-in"></i></a></li>
+                            </ul>
+                        </div>*@
+                </div>
+                <div class="right">
+                    <div class="menu">
+                        <ul>
+                            <li><a href="/">Startseite</a></li>
+                            <li><a href="/conditions">AGB</a></li>
+                            <li><a href="/privacy">Datenschutzrichtlinie</a></li>
+                            <li><a href="/contact">Kontakt</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2024 Vermögenscheck24. Alle Rechte vorbehalten.</p>
+            </div>
+
+        </footer>
+    }
+
+    <script src="/themes/includes/js/jquery/jquery-3.7.1.min.js"></script>
+    <script src="/themes/includes/js/iMask/imask.min.js"></script>
+    <script src="/themes/includes/js/sweetAlert/sweetalert2.all.min.js"></script>
+
+    <script src="/themes/includes/js/lenis/lenis.min.js"></script>
+    <script src="/themes/includes/js/flickity/flickity.pkgd.min.js"></script>
+
+    <script src="/themes/includes/js/gsap/gsap.min.js"></script>
+    <script src="/themes/includes/js/gsap/ScrollTrigger.min.js"></script>
+    <script src="/themes/includes/js/gsap/MotionPathPlugin.min.js"></script>
+    <script src="/themes/includes/js/gsap/Flip.min.js"></script>
+
+    <script src="/themes/includes/js/main.js"></script>
+    <script src="/themes/includes/js/home.js"></script>
+    @Html.Raw(Model.CurrentSettings.FooterScripts)
+    <script>
+        var cookieModal = document.querySelector('.cookieModal');
+        var cookieBtn = cookieModal.querySelector('.btn');
+
+        cookieBtn.addEventListener('click', function () {
+            cookieModal.style.display = 'none';
+
+            localStorage.setItem('cookieBannerDisplayed', 'true');
+        });
+
+        if (!localStorage.getItem('cookieBannerDisplayed')) {
+            cookieModal.style.display = 'flex';
+        }
+    </script>
+    @RenderSection("js", required: false)
+</body>
+</html>

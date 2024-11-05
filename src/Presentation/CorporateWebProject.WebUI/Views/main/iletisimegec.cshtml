@@ -1,0 +1,292 @@
+﻿
+@{
+    ViewData["Title"] = "İletişim Merkezi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section tags {
+    <link rel="canonical" href="https://www.kaktusyazilim.com/iletisimegec" type="text/html" />
+    <meta name="description" content="@(new HtmlString( Model.CurrentSettings.MetaDescription))" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Kaktüs Yazılım">
+    <meta property="og:title" content="@(new HtmlString(Model.CurrentSettings.MetaDescription))">
+    <meta property="og:description" content="@(new HtmlString(Model.CurrentSettings.MetaDescription))">
+    <meta property="og:url" content="https://www.kaktusyazilim.com">
+    <meta property="og:locale" content="tr_TR">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@@kaktusyazilimcom">
+    <meta name="twitter:title" content="Kaktüs Yazılım">
+    <meta name="twitter:url" content="https://www.kaktusyazilim.com">
+    <meta name="twitter:description" content="@(new HtmlString(Model.CurrentSettings.MetaDescription))">
+}
+<div style="margin-top:100px;z-index:0 !important" class="inner-banner">
+    <img src="/site/assets/images/bg/inner-bannerdot.png" class="inner-bannerdot" alt="image">
+    <img src="/site/assets/images/bg/inner-bannerwave.png" class="inner-bannerwave" alt="image">
+    <a class="down-arrow-icon" href="#faq">
+        <svg viewBox="0 0 14 26" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M13.8182 18.469L7.24862 25.7462L0.679032 18.469C0.272584 18.0188 0.592074 17.3 1.19862 17.3L6.74862 17.3L6.74862 1C6.74862 0.723857 6.97248 0.5 7.24862 0.5C7.52477 0.5 7.74862 0.723857 7.74862 1L7.74862 17.3L13.2986 17.3C13.9052 17.3 14.2247 18.0188 13.8182 18.469Z" />
+        </svg>
+    </a>
+    <div class="container">
+        <div class="row d-flex justify-content-center align-items-center text-center">
+            <div class="col-md-6">
+                <h2 class="inner-banner-title wow fadeInLeft" data-wow-duration="1.5s" data-wow-delay=".2s">İletişim Merkezi</h2>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb gap-3">
+                        <li class="breadcrumb-item"><a href="/">Anasayfa</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">İletişim Merkezi</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .my-contact-button {
+        cursor: pointer;
+    }
+</style>
+<div class="service3-section">
+    <div class="container">
+        <div class="row justify-content-center g-4">
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 my-contact-button" onclick="contactFunction('tel:@Model.CurrentSettings.Phone1.Replace("+","")')">
+                <div class="service-item3 wow fadeInUp" data-wow-duration="1.5s" data-wow-delay=".2s">
+                    <div class="icon">
+                        <svg height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M14.05 6C15.0268 6.19057 15.9244 6.66826 16.6281 7.37194C17.3318 8.07561 17.8095 8.97326 18 9.95M14.05 2C16.0793 2.22544 17.9716 3.13417 19.4163 4.57701C20.8609 6.01984 21.7721 7.91101 22 9.94M18.5 21C9.93959 21 3 14.0604 3 5.5C3 5.11378 3.01413 4.73086 3.04189 4.35173C3.07375 3.91662 3.08968 3.69907 3.2037 3.50103C3.29814 3.33701 3.4655 3.18146 3.63598 3.09925C3.84181 3 4.08188 3 4.56201 3H7.37932C7.78308 3 7.98496 3 8.15802 3.06645C8.31089 3.12515 8.44701 3.22049 8.55442 3.3441C8.67601 3.48403 8.745 3.67376 8.88299 4.05321L10.0491 7.26005C10.2096 7.70153 10.2899 7.92227 10.2763 8.1317C10.2643 8.31637 10.2012 8.49408 10.0942 8.64506C9.97286 8.81628 9.77145 8.93713 9.36863 9.17882L8 10C9.2019 12.6489 11.3501 14.7999 14 16L14.8212 14.6314C15.0629 14.2285 15.1837 14.0271 15.3549 13.9058C15.5059 13.7988 15.6836 13.7357 15.8683 13.7237C16.0777 13.7101 16.2985 13.7904 16.74 13.9509L19.9468 15.117C20.3262 15.255 20.516 15.324 20.6559 15.4456C20.7795 15.553 20.8749 15.6891 20.9335 15.842C21 16.015 21 16.2169 21 16.6207V19.438C21 19.9181 21 20.1582 20.9007 20.364C20.8185 20.5345 20.663 20.7019 20.499 20.7963C20.3009 20.9103 20.0834 20.9262 19.6483 20.9581C19.2691 20.9859 18.8862 21 18.5 21Z" stroke="#27AE60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                    </div>
+                    <div class="content">
+                        <h4><a href="service-details.html">Telefon ile iletişime geç</a></h4>
+                        <p class="para">Günün 24 saati bizimle telefon üzerinden iletişime geçebilirsiniz.</p>
+                    </div>
+                    <a onclick="contactFunction('tel:@Model.CurrentSettings.Phone1.Replace("+","")')" class="read-more-icon">
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 my-contact-button" onclick="contactFunction('https://api.whatsapp.com/send?phone=902329998965&text=Hizmetleriniz hakkında bilgi almak istiyorum&source=&data=')">
+                <div class="service-item3 wow fadeInUp" data-wow-duration="1.5s" data-wow-delay=".4s">
+                    <div class="icon">
+                        <svg height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M3.50002 12C3.50002 7.30558 7.3056 3.5 12 3.5C16.6944 3.5 20.5 7.30558 20.5 12C20.5 16.6944 16.6944 20.5 12 20.5C10.3278 20.5 8.77127 20.0182 7.45798 19.1861C7.21357 19.0313 6.91408 18.9899 6.63684 19.0726L3.75769 19.9319L4.84173 17.3953C4.96986 17.0955 4.94379 16.7521 4.77187 16.4751C3.9657 15.176 3.50002 13.6439 3.50002 12ZM12 1.5C6.20103 1.5 1.50002 6.20101 1.50002 12C1.50002 13.8381 1.97316 15.5683 2.80465 17.0727L1.08047 21.107C0.928048 21.4637 0.99561 21.8763 1.25382 22.1657C1.51203 22.4552 1.91432 22.5692 2.28599 22.4582L6.78541 21.1155C8.32245 21.9965 10.1037 22.5 12 22.5C17.799 22.5 22.5 17.799 22.5 12C22.5 6.20101 17.799 1.5 12 1.5ZM14.2925 14.1824L12.9783 15.1081C12.3628 14.7575 11.6823 14.2681 10.9997 13.5855C10.2901 12.8759 9.76402 12.1433 9.37612 11.4713L10.2113 10.7624C10.5697 10.4582 10.6678 9.94533 10.447 9.53028L9.38284 7.53028C9.23954 7.26097 8.98116 7.0718 8.68115 7.01654C8.38113 6.96129 8.07231 7.046 7.84247 7.24659L7.52696 7.52195C6.76823 8.18414 6.3195 9.2723 6.69141 10.3741C7.07698 11.5163 7.89983 13.314 9.58552 14.9997C11.3991 16.8133 13.2413 17.5275 14.3186 17.8049C15.1866 18.0283 16.008 17.7288 16.5868 17.2572L17.1783 16.7752C17.4313 16.5691 17.5678 16.2524 17.544 15.9269C17.5201 15.6014 17.3389 15.308 17.0585 15.1409L15.3802 14.1409C15.0412 13.939 14.6152 13.9552 14.2925 14.1824Z" fill="#27AE60"></path> </g></svg>
+                    </div>
+                    <div class="content">
+                        <h4><a onclick="contactFunction('https://api.whatsapp.com/send?phone=902329998965&text=Hizmetleriniz hakkında bilgi almak istiyorum&source=&data=')">Whatsapp ile iletişime geç</a></h4>
+                        <p class="para">İstediğiniz zaman bizimle whatsapp üzerinden iletişime geçebilirsiniz</p>
+                    </div>
+                    <a href="service-details.html" class="read-more-icon">
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 my-contact-button" onclick="contactFunction('mailto:@Model.CurrentSettings.Mail')">
+                <div class="service-item3 wow fadeInUp" data-wow-duration="1.5s" data-wow-delay=".6s">
+                    <div class="icon">
+                        <svg height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M11.5947 19H6.2C5.07989 19 4.51984 19 4.09202 18.782C3.71569 18.5903 3.40973 18.2843 3.21799 17.908C3 17.4802 3 16.9201 3 15.8V8.2C3 7.0799 3 6.51984 3.21799 6.09202C3.40973 5.71569 3.71569 5.40973 4.09202 5.21799C4.51984 5 5.0799 5 6.2 5H17.8C18.9201 5 19.4802 5 19.908 5.21799C20.2843 5.40973 20.5903 5.71569 20.782 6.09202C21 6.51984 21 7.0799 21 8.2V12M20.6067 8.26229L15.5499 11.6335C14.2669 12.4888 13.6254 12.9165 12.932 13.0827C12.3192 13.2295 11.6804 13.2295 11.0677 13.0827C10.3743 12.9165 9.73279 12.4888 8.44975 11.6335L3.14746 8.09863M18 13.5L19.4107 15.5584L21.8042 16.2639L20.2825 18.2416L20.3511 20.7361L18 19.9L15.6489 20.7361L15.7175 18.2416L14.1958 16.2639L16.5893 15.5584L18 13.5Z" stroke="#27AE60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                    </div>
+                    <div class="content">
+                        <h4><a href="service-details.html">Mail ile iletişime geç</a></h4>
+                        <p class="para">Hafta sonu farketmeksizin mail ile bizimle iletişime geçebilirsiniz.</p>
+                    </div>
+                    <a onclick="contactFunction('mailto:@Model.CurrentSettings.Mail')" class="read-more-icon">
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 my-contact-button" onclick="contactFunction('#proposal-form')">
+                <div class="service-item3 wow fadeInUp" data-wow-duration="1.5s" data-wow-delay=".8s">
+                    <div class="icon">
+                        <svg height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4 7C4 5.11438 4 4.17157 4.58579 3.58579C5.17157 3 6.11438 3 8 3H16C17.8856 3 18.8284 3 19.4142 3.58579C20 4.17157 20 5.11438 20 7V15C20 17.8284 20 19.2426 19.1213 20.1213C18.2426 21 16.8284 21 14 21H10C7.17157 21 5.75736 21 4.87868 20.1213C4 19.2426 4 17.8284 4 15V7Z" stroke="#27AE60" stroke-width="2"></path> <path d="M15 18L15 21M9 18L9 21" stroke="#27AE60" stroke-width="2" stroke-linecap="round"></path> <path d="M9 8L15 8" stroke="#27AE60" stroke-width="2" stroke-linecap="round"></path> <path d="M9 12L15 12" stroke="#27AE60" stroke-width="2" stroke-linecap="round"></path> </g></svg>
+                    </div>
+                    <div class="content">
+                        <h4><a href="service-details.html">Teklif İste</a></h4>
+                        <p class="para">Aşağıdaki form'a iletişim bilgilerinizi bırakın biz sizi arayalım.</p>
+                    </div>
+                    <a href="#faq" class="read-more-icon">
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+<div class="job-details-section pb-120 pt-120" id="proposal-form">
+    <div class="container">
+        <div class="row d-flex justify-content-center gy-5">
+            <div class="col-lg-6">
+                <div class="job-details-wrap">
+                    <h3>Sayın Yetkili</h3>
+                    <p class="para mb-4"><strong>Yazılım projeleriniz için en iyi çözümleri sunmaya hazırız! Teklif talep formumuzla, ihtiyaçlarınıza uygun özelleştirilmiş çözümleri size sunabilmemiz için bize rehberlik edeceksiniz. </strong></p>
+                    <h4>Dikkat etmeniz gerekenler :</h4>
+                    <p class="para">
+                        <h5>Açık ve Detaylı Bilgi:</h5> Formu doldururken projenizin detaylarını ve gereksinimlerini açıklayıcı bir şekilde belirtmek önemlidir. Ne tür bir yazılım ihtiyacınız olduğunu, projenizin amacını ve hedeflerini net bir şekilde ifade etmek, doğru çözümlerin sunulmasını sağlar.
+
+                        <h5>Teknik Gereksinimler:</h5> Eğer projeniz belirli teknik gereksinimlere ihtiyaç duyuyorsa, bu gereksinimleri ayrıntılı olarak belirtmek önemlidir. Kullanılacak teknolojiler, platformlar veya entegrasyonlar gibi teknik detaylar, projenizin başarılı bir şekilde yönetilmesine yardımcı olacaktır.
+
+
+                        <h5> Esneklik ve İhtiyaçlar:</h5> Formu doldururken, projenizde hangi alanlarda esnek olabileceğinizi veya öncelikli ihtiyaçlarınızı belirtebilirsiniz. Bu, firmaların daha iyi çözümler sunmasına yardımcı olabilir.
+
+                        <h4>Veya :</h4>
+
+                        <strong style="text-decoration:underline">Form' a sadece iletişim bilgilerinizi bırakın sizi hemen arayalım.</strong>
+
+
+                    </p>
+                    <h4>Sahip Olacaklarınız :</h4>
+                    <ul class="about-list">
+                        <li>Ücretsiz 6 Ay Destek Sağlıyoruz</li>
+                        <li>En Gelişmiş Teknolojileri Kullanıyoruz</li>
+                        <li>Uygun Fiyat Anlayışımız Var</li>
+                        <li>Yaratıcı Stratejiler İle Firmanızı Büyütüyoruz</li>
+                        <li>7/24 Müşteri Hizmetleri Hakkına Sahipsiniz</li>
+                    </ul>
+
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="apply-form">
+                    <div class="apply-form-title">
+                        <h4>Teklif Formu:</h4>
+                        <p>Size en uygun, en kaliteli ve en yaratıcı hizmete bir adımınız kaldı! :</p>
+                    </div>
+                    <form action="/proposal/send" method="post">
+                        <div class="row g-4">
+                            <div class="col-lg-6">
+                                <div class="form-inner">
+                                    <input type="text" asp-for="Proposal.Name" placeholder="Adınız: ">
+                                    <span class="error" asp-validation-for="Proposal.Name"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-inner">
+                                    <input type="text" asp-for="Proposal.Surname" placeholder="Soyadınız: ">
+                                    <span class="error" asp-validation-for="Proposal.Surname"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-inner">
+                                    <input type="text" asp-for="Proposal.Mail" placeholder="Mail adresiniz: ">
+                                    <span class="error" asp-validation-for="Proposal.Mail"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-inner">
+                                    <input type="text" asp-for="Proposal.Phone" placeholder="Telefon numaranız: ">
+                                    <span class="error" asp-validation-for="Proposal.Phone"></span>
+
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-inner">
+                                    <input type="text" asp-for="Proposal.BrandName" placeholder="Marka adınız:">
+                                    <span class="error" asp-validation-for="Proposal.BrandName"></span>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-inner">
+                                    <input type="text" asp-for="Proposal.Website" placeholder="Website adresiniz : ">
+                                    <span class="error" asp-validation-for="Proposal.Website"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-inner">
+                                    <input type="text" asp-for="Proposal.Target" placeholder="Hedefleriniz ve Beklentileriniz (isteğe bağlı): ">
+                                    <span class="error" asp-validation-for="Proposal.Target"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-inner">
+                                    <input type="text" asp-for="Proposal.Tehnical" placeholder="Teknik Gereksinimler (isteğe bağlı) :">
+                                    <span class="error" asp-validation-for="Proposal.Tehnical"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-inner">
+                                    <input type="text" asp-for="Proposal.Money" placeholder="Bütçe Aralığı (isteğe bağlı): ">
+                                    <span class="error" asp-validation-for="Proposal.Money"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-inner">
+                                    <textarea cols="30" rows="6" asp-for="Proposal.Message" placeholder="Eklemek İstedikleriniz"></textarea>
+                                    <span class="error" asp-validation-for="Proposal.Message"></span>
+
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12 " style="padding:0px 30px 30px 30px">
+                                <div class="row">
+                                    <h3 style="text-align:center;margin-bottom:20px">Teklif Almak İstediğiniz Hizmetler</h3>
+                                    <input hidden type="text" name="Proposal.Services" id="ServiceValues" style="min-width:17px;margin-right:3px" />
+                                    @foreach (var item in Model.ServiceList.Where(x => x.TypeId == 16 && x.IsPassive == false && x.IsDeleted == false).OrderBy(x => new Random().Next()))
+                                    {
+
+                                        <div class="col-6">
+                                            <div style="display:flex;justify-content:start; ">
+                                                <input type="checkbox" class="proposalService" value="@item.Title" id="@item.FriendlyUrl" style="min-width:17px;margin-right:3px" />
+
+                                                <label style="display: block; /* or inline-block */ text-overflow: ellipsis; word-wrap: break-word; overflow: hidden; max-height: 2.2em; line-height: 1.8em; " for="@item.FriendlyUrl">@(item.Title.Contains("Web")? (item.Title + " ..") : item.Title)</label>
+                                            </div>
+                                        </div>
+                                    }
+
+                                </div>
+
+                            </div>
+                            <div id="successMessage" style="display:none" class="col-lg-12">
+                                <div class="form-inner">
+                                    <p style="color:var(--primary-color4);text-align:center;font-weight:600">Mesajınız başarıyla gönderildi. Sizinle en kısa sürede iletişime geçeceğiz.</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <p style="text-align:center;">
+                                    Teklif formumuzu doldurarak <a target="_blank" style="text-decoration:underline" href="/gizlilik">Kişisel Verilerin İşlenmesine İlişkin Aydınlatma Metnimizi</a> kabul etmiş sayılırsınız.
+
+                                </p>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <input type="submit" value="Form'u Gönder" class="eg-btn btn--submit w-100">
+
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+@section js{
+
+    <!-- Event snippet for İletişime Geçme Linkine Tıklandı conversion page -->
+    <script>
+        gtag('event', 'conversion', {
+            'send_to': 'AW-11292749385/d6qKCM2rub8ZEMnc5ogq',
+            'value': 10.0,
+            'currency': 'TRY'
+        });
+    </script>
+
+
+    <script>
+        $(document).ready(function () {
+            var serviceList = [];
+            $(".proposalService").change(function () {
+                if ($(this).prop("checked") == true) {
+                    serviceList.push($(this).val());
+
+                }
+                else {
+                    serviceList.reduce(serviceList.find($(this).val()))
+                }
+                $("#ServiceValues").val(serviceList.toString());
+            })
+        })
+    </script>
+}

@@ -1,0 +1,70 @@
+﻿<main>
+
+
+    <section class="form-sec">
+        <div class="left">
+            <div class="bg">
+                <div class="image">
+                    <img src="/themes/uploads/card2.webp" alt="">
+                </div>
+            </div>
+            <div class="inner">
+                <div class="exchanges-sec-Card">
+                    <div class="icon">
+                        <img src="@Model.Exchanges.Icon" alt="">
+                    </div>
+                    <div class="count">
+                        @Model.Exchanges.Name <span>@Model.Exchanges.Count%</span>
+                    </div>
+                    <div class="desc">
+                        EU-Einlagensicherung bis <span>100.000 €</span> Zinsertrag <span>4.850,00 €</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="inner">
+            @await Html.PartialAsync("_contactFormPartial")
+        </div>
+    </section>
+
+</main>
+
+
+@section js {
+    <script>
+        $(document).ready(function () {
+            $(".Contactform").submit(function (e) {
+                e.preventDefault();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/contact",
+                    data: $(".form").serialize(),
+                    success: function (response) {
+                        if (response == true) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Ihre Anfrage wurde erfolgreich gesendet.',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            setTimeout(function () {
+                                window.location.href = "/";
+                            }, 1500);
+                        }
+                        else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Ihre Anfrage wurde nicht gesendet.',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }
+
+                        $(".Contactform")[0].reset();
+                    }
+                });
+            });
+        });
+    </script>
+}

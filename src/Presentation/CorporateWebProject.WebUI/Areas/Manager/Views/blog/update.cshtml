@@ -1,0 +1,124 @@
+﻿@model CorporateWebProject.WebUI.Models.ServiceVM
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Manager/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-6">
+                <h3>@(Model.Modul!=null?Model.Modul.Title:"")</h3>
+            </div>
+            <div class="col-6">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="@(Model.Modul!=null?"/manager"+Model.Modul.Url:"")@(Model.Page!=null?Model.Page.Url:"/index")">
+                            <svg class="stroke-icon">
+                                <use href="/manager/assets/svg/icon-sprite.svg#stroke-home"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">@(Model.Modul!=null?Model.Modul.Title:"")</li>
+                    <li class="breadcrumb-item active">@(Model.Page!=null?Model.Page.Title:Model.Modul.Title+" Ekle")</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+
+                <div class="card-body add-post">
+                    <form class="row needs-validation" id="frmBlog" action="/manager/blog/update" method="post" enctype="multipart/form-data" novalidate="">
+                        @Html.HiddenFor(x => x.Blog.ItemGuid)
+                        <div class=" row col-sm-12">
+                            <div class="mb-3">
+                                <label asp-for="Blog.Title">Başlık:</label>
+                                <input class="form-control input-validate" type="text" asp-for="Blog.Title" data-error="Lütfen blog başlığını giriniz." placeholder="Blog başlığını" required="">
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="Blog.ShortDescription">Blog Özeti:</label>
+                                <textarea class="form-control input-validate" type="text" asp-for="Blog.ShortDescription" data-error="Lütfen blog kısa açıklamasını giriniz." placeholder="Blog özetini giriniz" required=""></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <div class="col-form-label">
+                                    Kategori:
+                                    @Html.DropDownListFor(x => x.Blog.CategoryId, new SelectList(Model.CategoryList, "Id", "Name"), "Lütfen kategori seçiniz", new { @class = "js-example-placeholder-multiple col-sm-12 input-validate", placeholder = "Lütfen kategori seçiniz.", multiple = "multiple" })
+
+                                </div>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label class="form-label" for="editor">Blog Açıklaması</label>
+                                <textarea class="form-control input-valid ispageinputs" placeholder="Lütfen kategorizin tüm içeriğini giriniz" id="editor" asp-for="Blog.FullDescription" data-error="Lütfen bir açıklama giriniz."></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="Blog.MetaDescription">Blog Meta Açıklaması Giriniz:</label>
+                                <textarea rows="4" class="form-control input-validate" type="text" asp-for="Blog.MetaDescription" data-error="Lütfen blog meta açıklamasını giriniz." placeholder="Blog meta açıklaması giriniz" ></textarea>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label class="form-label" asp-for="Blog.Tags">Blog Etiketlerini Giriniz</label>
+                                <textarea class="form-control  " asp-for="Blog.Tags" placeholder="Virgül ile ayırarak blog etiketlerini girebilirsiniz Örn: begos,buca,giyim,organize,sanayi"></textarea>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label class="form-label" asp-for="Blog.Tags">Blog Fotoğrafı</label>
+                                <input class="form-control input-validate" type="file" data-error="Lütfen blog fotoğrafını giriniz." name="files" />
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label class="form-label">Blog Galerisi</label>
+                                <input class="form-control input-validate" type="file" multiple="multiple" data-error="Lütfen blog galerisini giriniz." name="pictures" />
+                            </div>
+                            <div class="col-6 mb-3">
+                                <label class="form-label" asp-for="Blog.IsPin">Blogu Öne Çıkar</label>
+                                <select asp-for="Blog.IsPin" class="form-control">
+                                    <option value="false">Hayır</option>
+                                    <option value="true">Evet</option>
+                                </select>
+                            </div>
+
+                            <div class="col-6 mb-3">
+                                <label class="form-label" asp-for="Blog.IsHomePage">Blogu Ana Sayfada Göster</label>
+                                <select asp-for="Blog.IsHomePage" class="form-control">
+                                    <option value="false">Hayır</option>
+                                    <option value="true">Evet</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="Blog.LangId">Blog Dilin Seçiniz:</label>
+                                @Html.DropDownListFor(x => x.Blog.LangId, new SelectList(Model.LanguageList, "Id", "Name"), "Lütfen bir dil seçiniz", new { @class = "form-control input-validate", data_error = "Lütfen blog meta açıklamasını giriniz.", placeholder = "Blog meta açıklaması giriniz", required = "" })
+                            </div>
+                        </div>
+                        <div style="position:absolute;bottom:10px;right:10px" class="btn-showcase text-end">
+                            <button class="btn btn-primary" type="submit">Kaydet</button>
+                            <input class="btn btn-light" type="reset" value="Sıfırla">
+                        </div>
+                    </form>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->
+
+@section css {
+    <link rel="stylesheet" type="text/css" href="/manager/assets/css/vendors/quill.snow.css">
+    <link rel="stylesheet" type="text/css" href="/manager/assets/css/vendors/select2.css">
+    <link rel="stylesheet" type="text/css" href="/manager/assets/css/vendors/dropzone.css">
+}
+@section js {
+    <script src="/manager/assets/js/dropzone/dropzone.js"></script>
+    <script src="/manager/assets/js/dropzone/dropzone-script.js"></script>
+    <script src="/manager/assets/js/select2/select2.full.min.js"></script>
+    <script src="/manager/assets/js/select2/select2-custom.js"></script>
+    <script src="/manager/assets/js/editors/quill.js"></script>
+    <script src="/manager/assets/js/form-validation-custom.js"></script>
+   
+
+}

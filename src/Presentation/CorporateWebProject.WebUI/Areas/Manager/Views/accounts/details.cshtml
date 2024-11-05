@@ -1,0 +1,501 @@
+﻿
+@{
+    ViewData["Title"] = "details";
+    Layout = "~/Areas/Manager/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-6">
+                <h3>@(Model.Modul!=null?Model.Modul.Title:"")</h3>
+            </div>
+            <div class="col-6">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="@(Model.Modul!=null?"/manager/"+Model.Modul.Url:"")@(Model.Page!=null?Model.Page.Url:"/index")">
+                            <svg class="stroke-icon">
+                                <use href="/manager/assets/svg/icon-sprite.svg#stroke-home"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">@(Model.Modul!=null?Model.Modul.Title:"")</li>
+                    <li class="breadcrumb-item active">@(Model.Page!=null?Model.Page.Title:"Liste")</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row starter-main">
+        <div class="col-sm-10">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <h4>@Model.Account.Title</h4>
+                        <a data-bs-toggle="modal" style="cursor:pointer" data-bs-target="#createBank" class="btn btn-outline-success btnCreate"><i class="fa fa-edit" style="margin-right:4px"></i>Düzenle</a>
+                        
+                    
+                    </div>
+                    <div class="row" style="margin-top:25px">
+                        <div class="col-xl-4">
+                            <div class="card widget-1" style="cursor:pointer" onclick="window.location.href='/manager/potentialClients'">
+                                <div class="card-body">
+                                    <div class="widget-content">
+                                        <div class="widget-round secondary">
+                                            <div class="bg-round">
+                                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M9.5 13.75C9.5 14.72 10.25 15.5 11.17 15.5H13.05C13.85 15.5 14.5 14.82 14.5 13.97C14.5 13.06 14.1 12.73 13.51 12.52L10.5 11.47C9.91 11.26 9.51001 10.94 9.51001 10.02C9.51001 9.17999 10.16 8.48999 10.96 8.48999H12.84C13.76 8.48999 14.51 9.26999 14.51 10.24" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M12 7.5V16.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M22 12C22 17.52 17.52 22 12 22C6.48 22 2 17.52 2 12C2 6.48 6.48 2 12 2" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M22 6V2H18" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M17 7L22 2" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <h4> @Model.AccountTransactionList.Where(x => x.TransactionType == "GİRDİ").Sum(x => x.Amount).ToString("N0") @Model.Account.CurrencyType</h4><span class="f-light">Toplam Gelirler</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4">
+                            <div class="card widget-1" style="cursor:pointer" onclick="window.location.href='/manager/potentialClients'">
+                                <div class="card-body">
+                                    <div class="widget-content">
+                                        <div class="widget-round secondary">
+                                            <div class="bg-round">
+                                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M9.5 13.75C9.5 14.72 10.25 15.5 11.17 15.5H13.05C13.85 15.5 14.5 14.82 14.5 13.97C14.5 13.06 14.1 12.73 13.51 12.52L10.5 11.47C9.91 11.26 9.51001 10.94 9.51001 10.02C9.51001 9.17999 10.16 8.48999 10.96 8.48999H12.84C13.76 8.48999 14.51 9.26999 14.51 10.24" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M12 7.5V16.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M22 12C22 17.52 17.52 22 12 22C6.48 22 2 17.52 2 12C2 6.48 6.48 2 12 2" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M17 3V7H21" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M22 2L17 7" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg> </div>
+                                        </div>
+                                        <div>
+                                            <h4> @Model.AccountTransactionList.Where(x => x.TransactionType == "ÇIKTI").Sum(x => x.Amount).ToString("N0") @Model.Account.CurrencyType</h4><span class="f-light">Toplam Giderler</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4">
+                            <div class="card widget-1" style="cursor:pointer" onclick="window.location.href='/manager/potentialClients'">
+                                <div class="card-body">
+                                    <div class="widget-content">
+                                        <div class="widget-round secondary">
+                                            <div class="bg-round">
+                                                <svg fill="#ffffff" height="200px" width="200px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 239 239" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M204,123.5v-71h-15v-12h-40v12h-9v-31H63v31h-8v-12H15v12H0v149h82v16h157v-94H204z M83,41.5h37v11H83V41.5z M225,191.823 L205.152,202.5h-87.64l-2.104-1l0,0L96,191.566v-42.174l21.512-11.893h86.821h0.819L225,149.136V191.823z"></path> <path d="M173.141,170.095c-2.415-2.163-5.993-3.813-10.646-4.906c-3.431-0.787-4.838-1.659-5.39-2.123 c-0.685-0.564-1.004-1.305-1.004-2.346c-0.014-1.644,0.558-2.469,1.132-2.95c0.878-0.749,2.293-1.27,4.111-1.27h0.104 c1.544,0,2.036,0.422,2.867,1.152c0.781,0.686,1.292,1.952,1.526,3.693l0.353,2.214l9.698-0.045l-0.093-2.687 c-0.214-4.032-1.763-7.278-4.623-9.67c-1.68-1.37-3.183-2.329-5.303-2.875l-0.022-5.121l-10.076,0.07l0.04,5.322 c-1.953,0.584-3.707,1.517-5.228,2.78c-2.937,2.428-4.476,5.713-4.451,9.498c0.019,3.313,1.272,6.245,3.637,8.489 c2.182,2.042,5.403,3.569,9.574,4.539c3.928,0.921,5.719,1.873,6.524,2.506c0.884,0.697,1.278,1.565,1.278,2.813 c0,1.686-0.452,2.87-1.43,3.731c-1.053,0.935-2.653,1.417-4.742,1.435c-2.082,0-2.902-0.421-3.979-1.388 c-0.623-0.539-1.455-1.525-1.492-3.895l-0.094-2.508l-9.667,0.035l-0.273,3.488l0.003,0.108c0.102,3.422,1.664,6.46,4.676,9.054 c1.979,1.639,3.682,2.785,5.897,3.434l0.039,6.046l10.077-0.025l-0.045-6.031c2.438-0.647,4.552-1.757,6.284-3.296 c3.141-2.684,4.721-6.163,4.695-10.331C177.1,175.53,175.733,172.441,173.141,170.095z"></path> <path d="M192.533,170.535c0,5.663,4.606,10.27,10.27,10.27c5.662,0,10.269-4.606,10.269-10.27s-4.606-10.27-10.269-10.27 C197.14,160.266,192.533,164.872,192.533,170.535z"></path> <path d="M119.273,160.266c-5.663,0-10.27,4.606-10.27,10.27s4.606,10.27,10.27,10.27s10.27-4.606,10.27-10.27 S124.936,160.266,119.273,160.266z"></path> </g> </g></svg>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <h4> @Model.AccountTransactionList.Sum(x => x.Amount).ToString("N0") @Model.Account.CurrencyType</h4><span class="f-light">Toplam Tutar</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="dt-ext table-responsive ">
+                        <table class="display" id="export-button">
+                            <thead>
+                                <tr>
+                                    <th>Tarih</th>
+                                    <th>İşlem</th>
+                                    <th>Kullanıcı</th>
+                                    <th>Hesap</th>
+                                    <th>Açıklama</th>
+                                    <th>Borç</th>
+                                    <th>Alacak</th>
+                                    <th>Bakiye</th>
+                                    <th>Fişno</th>
+                                    <th>Dosyalar</th>
+                                    <th>İşlemler</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var item in Model.AccountTransactionList.OrderByDescending(x => x.TransactionDate).ToList())
+                                {
+                                    var user = Model.UserList.FirstOrDefault(x => x.ItemGuid == item.CreateUserGuid);
+                                    var accountAmount = Model.AccountTransactionList.Where(x => x.TransactionDate <= item.TransactionDate).ToList();
+                                    <tr>
+                                        <td><span hidden>@item.TransactionDate.Ticks</span>@item.TransactionDate.ToString("dd.MM.yyyy")</td>
+                                        <td>@(item.TransactionType=="GİRDİ"?"Para Girişi":"Para Çıkışı")</td>
+                                        <td>@(user!=null?user.DisplayName:"")</td>
+                                        <td></td>
+                                        <td width="150">@item.Description</td>
+                                        <td>@(item.TransactionType=="GİRDİ"?item.Amount+" "+Model.Account.CurrencyType:"00,00 " + Model.Account.CurrencyType)</td>
+                                        <td>@(item.TransactionType!="GİRDİ"?item.Amount + " " + Model.Account.CurrencyType : "00,00 " + Model.Account.CurrencyType)</td>
+                                        <td>@(accountAmount.Sum(x => x.Amount) + " " + Model.Account.CurrencyType)</td>
+                                        <td>@item.ReceiptNumber</td>
+                                        <td><button data-id="@item.ItemGuid" data-files="@item.Files" class="btn btn-outline-success custom-text-white btnFiles" style="height:40px">Dosyalar</button></td>
+                                        <td>
+                                            <ul class="action">
+                                                <li class="edit"> <a name="@(item.TransactionType=="GİRDİ"?"Para Girişi":"Para Çıkışı")" style="cursor:pointer" data-id="@item.ItemGuid" class="btnTransactions"><i style="font-size: 18px" class="icon-pencil-alt"></i></a></li>
+                                                <li class=""> <a style="cursor:pointer" onclick="btnPassive('@item.ItemGuid', '/manager/@Model.Modul.Url/passive')"><i style="color: orange !important;  font-size: 18px" class="icon-archive"></i></a></li>
+                                                <li class="delete"><a style="cursor:pointer" onclick="btnDelete('@item.ItemGuid', '/manager/@Model.Modul.Url/delete')"><i style="font-size:18px" class="icon-trash"></i></a></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Tarih</th>
+                                    <th>İşlem</th>
+                                    <th>Kullanıcı</th>
+                                    <th>Hesap</th>
+                                    <th>Açıklama</th>
+                                    <th>Borç</th>
+                                    <th>Alacak</th>
+                                    <th>Bakiye</th>
+                                    <th>Fişno</th>
+                                    <th>Dosyalar</th>
+                                    <th>İşlemler</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-2">
+            <div class="card">
+                <div class="card-header">
+                    <h4>İşlemler</h4>
+                </div>
+                <div class="card-body">
+                    <div class="col-xxl-12 col-md-12 col-sm-12">
+                        <button type="button" data-type="GİRDİ" data-name="Para Girişi Yap" class="btn btn-outline-success btn-fs w-100 btnAccountTransaction">Para Girişi Yap</button>
+
+                    </div>
+                    <div style="margin-top:15px" class="col-xxl-12 col-md-12 col-sm-12">
+                        <button type="button" data-type="ÇIKTI" data-name="Para Çıkışı Yap" class="btn btn-outline-primary btn-fs w-100 btnAccountTransaction">Para Çıkışı Yap</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->
+
+
+<style>
+    .btn-fs {
+        font-size: 18px
+    }
+</style>
+
+
+
+<div class="modal fade bd-example-modal-xl" id="moneyTransaction" data-id="" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myLargeModalLabel">
+                    Kasa Ekle
+                </h4>
+                <button class="btn-close py-0" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/manager/accountTransactions/create" enctype="multipart/form-data" method="post" class="modal-body dark-modal">
+                <input hidden type="text" asp-for="AccountTransaction.TransactionType" />
+                <input hidden type="text" asp-for="AccountTransaction.ItemGuid" />
+                <input hidden type="text" asp-for="Account.ItemGuid" />
+                <div class="row">
+                    <div class="col-12">
+                        <div class="project-box">
+                            <div class="form-group">
+                                <label>Açıklama</label>
+                                <input asp-for="AccountTransaction.Description" class="form-control custom-text-white " required placeholder="Bir Açıklama Giriniz" />
+                            </div>
+                            <div class="form-group">
+                                <label>İşlem Tarihi</label>
+                                <input asp-for="AccountTransaction.TransactionDate" type="date" class="form-control custom-text-white " required placeholder="İşlem Tarihini Giriniz" />
+                            </div>
+                            <div class="form-group">
+                                <label>Tutar</label>
+                                <input min="0" asp-for="AccountTransaction.Amount" data-type="currency" class="form-control custom-text-white " required placeholder="Tutarı Giriniz" />
+                            </div>
+                            <div class="form-group">
+                                <label>Fiş No veya Hesap No (Zorunlu Değil)</label>
+                                <input asp-for="AccountTransaction.ReceiptNumber" data-val="false" type="text" class="form-control custom-text-white " placeholder="Fiş numarasını veya işlem numarasını giriniz" />
+                            </div>
+                            <div class="form-group">
+                                <label>Dosyalar (Zorunlu Değil)</label>
+                                <input name="files" type="file" style="border:1px solid gray" class="form-control custom-text-white " placeholder="Dosya ekleyiniz" />
+                            </div>
+                            <div class="form-group">
+                                <label>Tip</label>
+                                <select class="form-control">
+                                    <option>Araç Gideri</option>
+                                    <option>Personel Gideri</option>
+                                    <option>Kira</option>
+                                    <option>Fuar</option>
+                                    <option>Yönetici</option>
+                                    <option>Personel Motiviasyon</option>
+                                    <option>Uçak Bileti</option>
+                                </select>
+                            </div>
+                            <div class="mt-3">
+                                <button class="btn btn-outline-success w-100" type="submit">Kaydet</button>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-xl" id="createCase" data-id="" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myLargeModalLabel">
+                    Kasa Ekle
+                </h4>
+                <button class="btn-close py-0" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/manager/accounts/create" method="post" class="modal-body dark-modal">
+                <input hidden type="text" asp-for="Account.AccountType" value="KASA" />
+                <input hidden class="accountitemguid" type="text" asp-for="Account.ItemGuid" value="BANKA" />
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="project-box">
+                            <div class="form-group">
+                                <label>Hesap İsmi</label>
+                                <input asp-for="Account.Title" class="form-control custom-text-white Account_Title" required placeholder="Hesap ismini giriniz" />
+                            </div>
+                            <div class="form-group">
+                                <label>Hesap Numarası (Zorunlu Değil)</label>
+                                <input asp-for="Account.AccountNumber" data-val="false" class="form-control custom-text-white Account_AccountNumber" placeholder="Hesap numarası giriniz" />
+                            </div>
+                            <div class="form-group">
+                                <label>Döviz Cinsi</label>
+                                <select asp-for="Account.CurrencyType" class="form-control custom-text-white currencyData Account_CurrencyType"></select>
+                            </div>
+                            <div class="form-group">
+                                <label>Açılış Bakiyesi (Zorunlu Değil)</label>
+                                <input data-type="currency" data-val="false" placeholder="Açılış Bakiyesi giriniz" name="startAmount" class="form-control custom-text-white currencyData" />
+                            </div>
+                            <div class="form-group">
+                                <label>Renk</label>
+                                <input asp-for="Account.Color" type="color" class="form-control custom-text-white Account_Color" required placeholder="Hesap ismini giriniz" />
+                            </div>
+                            <div class="d-flex justify-content-end mt-2">
+                                <button class="btn btn-outline-success" type="submit">Kaydet</button>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade bd-example-modal-xl" id="createBank" data-id="" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myLargeModalLabel">
+                    Banka Ekle
+                </h4>
+                <button class="btn-close py-0" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/manager/accounts/create" method="post" class="modal-body dark-modal">
+                <input hidden type="text" asp-for="Account.AccountType" value="BANKA" />
+                <input hidden class="accountitemguid" type="text" asp-for="Account.ItemGuid" value="BANKA" />
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="project-box">
+                            <div class="form-group">
+                                <label>Hesap İsmi</label>
+                                <input asp-for="Account.Title" class="form-control custom-text-white Account_Title" required placeholder="Hesap ismini giriniz" />
+                            </div>
+                            <div class="form-group">
+                                <label>Hesap Numarası (Zorunlu Değil)</label>
+                                <input asp-for="Account.AccountNumber" data-val="false" class="form-control custom-text-white Account_AccountNumber" placeholder="Hesap numarası giriniz" />
+                            </div>
+                            <div class="form-group">
+                                <label>Döviz Cinsi</label>
+                                <select asp-for="Account.CurrencyType" class="form-control custom-text-white currencyData Account_CurrencyType"></select>
+                            </div>
+                            <div class="form-group">
+                                <label>Açılış Bakiyesi (Zorunlu Değil)</label>
+                                <input data-type="currency" data-val="false" placeholder="Açılış Bakiyesi giriniz" name="startAmount" class="form-control custom-text-white currencyData" />
+                            </div>
+                            <div class="form-group">
+                                <label>Renk</label>
+                                <input asp-for="Account.Color" type="color" class="form-control custom-text-white Account_Color" required placeholder="Hesap ismini giriniz" />
+                            </div>
+                            <hr />
+                            <div class="form-group">
+                                <label>Banka İsmi</label>
+                                <input asp-for="Account.BankName" class="form-control custom-text-white" required placeholder="Banka ismini giriniz" />
+                            </div>
+                            <div class="form-group">
+                                <label>Banka Şubesi</label>
+                                <input asp-for="Account.BankBranch" class="form-control custom-text-white" required placeholder="Banka şubesini giriniz" />
+                            </div>
+                            <div class="form-group">
+                                <label>Hesap Numarası</label>
+                                <input asp-for="Account.BankAccountNumber" class="form-control custom-text-white" required placeholder="Hesap Numarasını giriniz" />
+                            </div>
+                            <div class="form-group">
+                                <label>IBAN</label>
+                                <input asp-for="Account.IBAN" class="form-control custom-text-white" required placeholder="IBAN Bilgisini giriniz" />
+                            </div>
+                            <div class="d-flex justify-content-end mt-2">
+                                <button class="btn btn-outline-success" type="submit">Kaydet</button>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="modal fade bd-example-modal-xl" id="mdlfiles" data-id="" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myLargeModalLabel">
+                   Dosyalar
+                </h4>
+                <button class="btn-close py-0" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body dark-modal">
+                <div class="dt-ext table-responsive">
+                    <table class="display table table-hover table-striped" id="export-button">
+                        <thead>
+                            <tr>
+                                <th>Dosya</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyFiles">
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Dosya</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section js{
+    <script>
+
+        $(document).ready(function () {
+            $(".btnAccountUpdate").click(function () {
+                var id = $(this).data("id");
+                var type = $(this).data("type");
+
+                $.ajax({
+                    url: "/manager/accounts/get",
+                    type: "Get",
+                    data: { id: id },
+                    success: function (data) {
+                        $(".Account_Title").val(data.title);
+                        $(".Account_AccountNumber").val(data.accountNumber);
+                        $(".Account_CurrencyType").val(data.currencyType);
+                        $("#startAmount").val(data.title);
+                        $(".Account_Color").val(data.color);
+                        $("#Account_BankName").val(data.bankName);
+                        $("#Account_BankBranch").val(data.bankBranch);
+                        $("#Account_BankAccountNumber").val(data.bankAccountNumber);
+                        $("#Account_IBAN").val(data.iban);
+                        $(".accountitemguid").val(data.itemGuid);
+                        if (type == "BANKA") {
+                            $("#createBank").modal("show");
+                        } else {
+                            $("#createCase").modal("show");
+                        }
+                    }
+                })
+            })
+            $(".btnAccountTransaction").click(function () {
+                var type = $(this).data("type");
+                var name = $(this).data("name");
+                $("#moneyTransaction").find(".modal-title").text(name);
+                $("#moneyTransaction").find("input[name='AccountTransaction.TransactionType']").val(type);
+                $("#moneyTransaction").modal("show");
+            })
+
+            $(".btnFiles").click(function () {
+                var fileList = $(this).data("files");
+                if (fileList == "") {
+                    alert("Dosya bulunamadı");
+                    return;
+                }
+                var tbody = $("#tbodyFiles");
+                var id = $(this).data("id");
+                tbody.empty();
+                for (var i = 0; i < fileList.length; i++) {
+                    tbody.append(`<tr><td><a href="${fileList[i]}" target="_blank">${fileList[i]}</a></td>
+                    
+                    <td>
+                                            <ul class="action">
+        <li class="edit"> <a  style="cursor:pointer" data-id="${id}" class="btnTransactions"><i style="font-size: 18px" class="icon-pencil-alt"></i></a></li>
+        <li class=""> <a style="cursor:pointer" onclick="btnPassive('${id}', '/manager/accountTransactions/passive')"><i style="color: orange !important;  font-size: 18px" class="icon-archive"></i></a></li>
+
+        <li class="delete"><a style="cursor:pointer" onclick="btnDelete('${id}', '/manager/accountTransactions/delete')"><i style="font-size:18px" class="icon-trash"></i></a></li>
+
+</ul>
+                    </td>
+                    </tr>
+
+                            `)
+                    }
+                    $("#mdlfiles").modal("show");
+                })
+
+                $(".btnTransactions").click(function () {
+                    var id = $(this).data("id");
+                    var name = $(this).data("name");
+                    $.ajax({
+                        url: "/manager/accountTransactions/get",
+                        type: "Get",
+                        data: { id: id },
+                        success: function (data) {
+                            $("#moneyTransaction").find(".modal-title").text(name);
+                            $("#moneyTransaction").find("input[name='AccountTransaction.Description']").val(data.description);
+                            $("#moneyTransaction").find("input[name='AccountTransaction.TransactionDate']").val((new Date(data.transactionDate)).toString('yyyy-MM-dd'));
+                            if (data.amount < 0) {
+                                data.amount = data.amount * -1;
+                            }
+                            $("#moneyTransaction").find("input[name='AccountTransaction.Amount']").val(data.amount);
+                            $("#moneyTransaction").find("input[name='AccountTransaction.ReceiptNumber']").val(data.receiptNumber);
+                            $("#moneyTransaction").find("input[name='AccountTransaction.ItemGuid']").val(data.itemGuid);
+                            $("#moneyTransaction").find("input[name='AccountTransaction.TransactionType']").val(data.transactionType);
+
+
+                        }
+                    })
+
+                    $("#moneyTransaction").modal("show");
+                })
+            })
+
+    </script>
+}

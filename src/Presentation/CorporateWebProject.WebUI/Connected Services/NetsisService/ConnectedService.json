@@ -1,0 +1,16 @@
+{
+  "ExtendedData": {
+    "inputs": [
+      "https://begosservice.kaktusyazilim.com/NetsisService.asmx"
+    ],
+    "collectionTypes": [
+      "System.Array",
+      "System.Collections.Generic.Dictionary`2"
+    ],
+    "namespaceMappings": [
+      "*, NetsisService"
+    ],
+    "targetFramework": "net6.0",
+    "typeReuseMode": "All"
+  }
+}

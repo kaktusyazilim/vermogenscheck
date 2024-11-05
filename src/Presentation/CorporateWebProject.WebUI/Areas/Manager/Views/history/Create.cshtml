@@ -1,0 +1,138 @@
+﻿@model CorporateWebProject.WebUI.Models.ServiceVM
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Manager/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-6">
+                <h3>@(Model.Modul!=null?Model.Modul.Title:"")</h3>
+            </div>
+            <div class="col-6">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="@(Model.Modul!=null?"/manager"+Model.Modul.Url:"")@(Model.Page!=null?Model.Page.Url:"/index")">
+                            <svg class="stroke-icon">
+                                <use href="/manager/assets/svg/icon-sprite.svg#stroke-home"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">@(Model.Modul!=null?Model.Modul.Title:"")</li>
+                    <li class="breadcrumb-item active">@(Model.Page!=null?Model.Page.Title:Model.Modul.Title+" Ekle")</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row starter-main">
+        <div class="col-sm-12">
+            <div class="card">
+
+                <div class="card-body">
+                    <form class="row g-3 needs-validation custom-input" enctype="multipart/form-data" action="/manager/@Model.Modul!.Url/create" method="post" novalidate="">
+                        <div class="col-12">
+                            <label class="form-label" asp-for="History.Queue">Sıra</label>
+                            <input class="form-control input-validate" data-error="Lütfen tarihçe sırasını giriniz" asp-for="History.Queue" type="text" placeholder="Tarihçe sırasını giriniz." required="">
+
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label" asp-for="History.Title">Başlık</label>
+                            <input class="form-control input-validate" data-error="Lütfen tarihçe Başlığını giriniz" asp-for="History.Title" type="text" placeholder="Tarihçe başlığını bilginizi giriniz." required="">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label" asp-for="History.Description">Açıklama</label>
+                            <textarea rows="4" class="form-control input-validate " data-error="Lütfen tarihçe Açıklamasını giriniz" asp-for="History.Description" type="text" placeholder="Tarihçe Açılmasını bilginizi giriniz." required=""></textarea>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label" asp-for="History.Year">Tarihçe Yılı</label>
+                            <input class="form-control input-validate" data-error="Lütfen tarihçe yılını giriniz" asp-for="History.Year" type="text" placeholder="Tarihçe yılını  giriniz." required="">
+                        </div>
+
+                        <div class="col-12">
+                            <button class="btn btn-primary" type="submit">Kaydet</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Container-fluid Ends-->
+
+
+
+
+@section js{
+    <script src="/manager/assets/js/dropzone/dropzone.js"></script>
+    <script src="/manager/assets/js/dropzone/dropzone-script.js"></script>
+    <script src="/manager/assets/js/select2/select2.full.min.js"></script>
+    <script src="/manager/assets/js/select2/select2-custom.js"></script>
+    <script src="/manager/assets/js/editors/quill.js"></script>
+    <script src="/manager/assets/js/form-validation-custom.js"></script>
+    <script src="https://cdn.ckeditor.com/4.16.0/full-all/ckeditor.js"></script>
+
+    <script>
+        var editor = CKEDITOR.replaceAll('editor2', {
+            on: {
+                instanceReady: function (ev) {
+                    // Editör yüklendiğinde çalışacak kod
+                    this.document.on('keyup', function (event) {
+                        // Kullanıcı tuşa bastığında çalışacak kod
+                        removePTags();
+                    });
+                }
+            },
+            toolbar: 'Full',
+            toolbar_Full:
+                [
+                    { name: 'document', items: ['Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates'] },
+                    { name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo'] },
+                    { name: 'editing', items: ['Find', 'Replace', '-', 'SelectAll', '-', 'SpellChecker', 'Scayt'] },
+                    {
+                        name: 'forms', items: ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton',
+                            'HiddenField']
+                    },
+                    '/',
+                    { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat'] },
+                    {
+                        name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv',
+                            '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl']
+                    },
+                    { name: 'links', items: ['Link', 'Unlink', 'Anchor'] },
+                    { name: 'insert', items: ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe'] },
+                    '/',
+                    { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
+                    { name: 'colors', items: ['TextColor', 'BGColor'] },
+                    { name: 'tools', items: ['Maximize', 'ShowBlocks', '-', 'About'] }
+                ],
+            extraPlugins: 'iframe',
+            autoParagraph: false,
+            enterMode: CKEDITOR.ENTER_BR,
+            shiftEnterMode: CKEDITOR.ENTER_P,
+            filebrowserBrowseUrl: '/manager/files/Browse',
+            filebrowserUploadUrl: '/manager/files/create'
+      });
+
+        function removePTags() {
+            var editorContent = CKEDITOR.instances.editor1.getData();
+            editorContent = editorContent.replace(/<p[^>]*>/g, '').replace(/<\/p>/g, '');
+            CKEDITOR.instances.editor1.setData(editorContent);
+        }
+
+
+    </script>
+   
+}
+
+@section css {
+    <link rel="stylesheet" type="text/css" href="/manager/assets/css/vendors/quill.snow.css">
+    <link rel="stylesheet" type="text/css" href="/manager/assets/css/vendors/select2.css">
+    <link rel="stylesheet" type="text/css" href="/manager/assets/css/vendors/dropzone.css">
+}

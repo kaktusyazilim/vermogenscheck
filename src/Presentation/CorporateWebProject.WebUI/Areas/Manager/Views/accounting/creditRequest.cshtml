@@ -1,0 +1,168 @@
+﻿
+@{
+    ViewData["Title"] = "creditRequest";
+    Layout = "~/Areas/Manager/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-6">
+                <h3>Kredi Kartı ile Ödeme Yapılmasını Talep Et</h3>
+            </div>
+            <div class="col-6">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/manager/accounting/advanceRequest">
+                            <svg class="stroke-icon">
+                                <use href="/manager/assets/svg/icon-sprite.svg#stroke-home"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">Muhasebe</li>
+                    <li class="breadcrumb-item active">Kredi Kartı ile Ödeme Yapılmasını Talep Et</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row starter-main">
+        <div class="card">
+            <div class="card-body">
+                <div class="col-lg-12 col-sm-12">
+                    <div class="form-group">
+                        <label><i class="fa fa-money"></i> Kredi Kartı ile Ödeme Yapılmasını Talep Et</label>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-lg-3 col-sm-12">
+                        <div class="form-group">
+                            <label>Tarih</label>
+                            <input class="form-control custom-text-white" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" disabled />
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-sm-12">
+                        <div class="form-group">
+                            <label>Talep Eden</label>
+                            <input class="form-control custom-text-white" value="@Model.CurrentUser.DisplayName" placeholder="Talebi oluşturan danışman" type="text" />
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-12">
+                        <div class="form-group">
+                            <label>Ödeme Tipi Seçiniz</label>
+                            <select class="form-control custom-text-white">
+                                <option>Ödeme Tipi Seçiniz</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-12">
+                        <div class="form-group">
+                            <label>Müşteri Adı</label>
+                            <input class="form-control custom-text-white" placeholder="Müşteri Adı" type="text" />
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12">
+                        <div class="row">
+                            <div class="col-lg-6 col-sm-12">
+                                <div class="form-group">
+                                    <label>
+                                        Çekilecek Tutar
+                                    </label>
+                                    <input class="form-control custom-text-white" data-type="currency" placeholder="Çekilecek Tutar" type="text" />
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-12">
+                                <div class="form-group">
+                                    <label>Para Birimi</label>
+                                    <select class="form-control custom-text-white currencyData">
+                                        <option>Ödeme Tipi Seçiniz</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12">
+                        <div class="form-group">
+                            <label>Evrak</label>
+                            <input class="form-control custom-text-white" placeholder="Evrak" type="file" />
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-sm-12">
+                        <div class="form-group">
+                            <label>Açıklama</label>
+                            <textarea class="form-control custom-text-white" placeholder="Evrak" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-sm-12 mt-3">
+                        <div class="d-flex justify-content-center">
+                            <div class="form-group">
+                                <button class="btn btn-light"><i class="fa fa-money"></i> Ödeme Talep Et</button>
+                            </div>
+                        </div>
+                      
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="col-lg-12 col-sm-12">
+                    <div class="form-group">
+                        <label><i class="fa fa-history"></i> Geçmiş Taleplerim</label>
+                    </div>
+                </div>
+                <hr />
+                <div class="col-lg-12 col-sm-12">
+                    <div class="dt-ext table-responsive dataTable">
+                        @*<table class="display visaTable staticTable">*@
+                        <table class="display dataTable table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Danışman</th>
+                                    <th>Müşteri Adı</th>
+                                    <th>Çekilecek Döviz</th>
+                                    <th>Müşteriden Alınan TL</th>
+                                    <th>Gelen Evrak</th>
+                                    <th>Açıklama</th>
+                                    <th>Yönetim Not</th>
+                                  
+                                </tr>
+                            </thead>
+                           <tbody>
+                               
+                           </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Danışman</th>
+                                    <th>Müşteri Adı</th>
+                                    <th>Çekilecek Döviz</th>
+                                    <th>Müşteriden Alınan TL</th>
+                                    <th>Gelen Evrak</th>
+                                    <th>Açıklama</th>
+                                    <th>Yönetim Not</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+                <hr />
+            </div>
+        </div>
+    </div>
+</div>
+
+@section js{ 
+    <script>
+        $(document).ready(function () {
+            fillCurrencyData();
+        })
+    </script>
+}

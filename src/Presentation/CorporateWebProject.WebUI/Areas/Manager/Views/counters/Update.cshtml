@@ -1,0 +1,76 @@
+﻿@model CorporateWebProject.WebUI.Models.ServiceVM
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Manager/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-6">
+                <h3>@(Model.Modul!=null?Model.Modul.Title:"")</h3>
+            </div>
+            <div class="col-6">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="@(Model.Modul!=null?"/manager"+Model.Modul.Url:"")@(Model.Page!=null?Model.Page.Url:"/index")">
+                            <svg class="stroke-icon">
+                                <use href="/manager/assets/svg/icon-sprite.svg#stroke-home"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">@(Model.Modul!=null?Model.Modul.Title:"")</li>
+                    <li class="breadcrumb-item active">@(Model.Page!=null?Model.Page.Title:Model.Modul.Title+" Ekle")</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row starter-main">
+        <div class="col-sm-12">
+            <div class="card">
+
+                <div class="card-body">
+                    <form class="row g-3 needs-validation custom-input" enctype="multipart/form-data" action="/manager/@Model.Modul!.Url/update" method="post" novalidate="">
+                        @Html.HiddenFor(x=>x.Counter.ItemGuid)
+                        <div class="col-12">
+                            <label class="form-label" asp-for="Counter.Queue">Sayaç Sırası</label>
+                            <input ty class="form-control input-validate" data-error="Lütfen sayaç sırasını giriniz" asp-for="Counter.Queue" type="text" placeholder="Sayaç sırasını giriniz" required="">
+
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label" asp-for="Counter.Name">Sayaç Adı</label>
+                            <input ty class="form-control input-validate" data-error="Lütfen sayaç adını giriniz" asp-for="Counter.Name" type="text" placeholder="Sayaç adını giriniz" required="">
+
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label" asp-for="Counter.Value">Sayaç Değeri</label>
+                            <input ty class="form-control input-validate" data-error="Lütfen sayaç değerini giriniz" asp-for="Counter.Value" type="text" placeholder="Sayaç değerini giriniz" required="">
+
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label" asp-for="Counter.Value">Sayaç İkonu</label>
+                            <input class="form-control input-validate" data-error="Lütfen sayaç ikonunu giriniz" type="file" name="files" >
+
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label" asp-for="Counter.LangId">Sayaç Dili</label>
+                            @Html.DropDownListFor(x => x.Counter.LangId, new SelectList(Model.LanguageList, "Id", "Name"), "Lütfen bir dil seçiniz", new { @class = "form-control input-validate", data_error = "Lütfen sayaç için bir dil seçiniz", required = "" })
+
+                        </div>
+
+
+                        <div class="col-12">
+                            <button class="btn btn-primary" type="submit">Kaydet</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Container-fluid Ends-->

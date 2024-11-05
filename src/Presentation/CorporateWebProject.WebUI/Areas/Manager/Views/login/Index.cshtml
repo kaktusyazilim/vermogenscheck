@@ -1,0 +1,110 @@
+﻿@{
+    Layout = null;
+
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="robots" content="noindex, nofollow" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="@WebSettings.MetaDescription">
+    <meta name="keywords" content="@WebSettings.Keywords">
+    <meta name="author" content="@WebSettings.Author">
+    <link rel="icon" href="https://uplifeacademy.com/uploads/63846Uplife-Favicon.png" type="image/x-icon">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://uplifeacademy.com/uploads/63846Uplife-Favicon.png">
+    <link rel="icon" type="image/png" href="https://uplifeacademy.com/uploads/63846Uplife-Favicon.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://uplifeacademy.com/uploads/63846Uplife-Favicon.png" sizes="16x16">
+    <title>@WebSettings.SiteTitle</title>
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/manager/assets/css/font-awesome.css">
+    <!-- ico-font-->
+    <link rel="stylesheet" type="text/css" href="~/manager/assets/css/vendors/icofont.css">
+    <!-- Themify icon-->
+    <link rel="stylesheet" type="text/css" href="~/manager/assets/css/vendors/themify.css">
+    <!-- Flag icon-->
+    <link rel="stylesheet" type="text/css" href="~/manager/assets/css/vendors/flag-icon.css">
+    <!-- Feather icon-->
+    <link rel="stylesheet" type="text/css" href="~/manager/assets/css/vendors/feather-icon.css">
+    <!-- Plugins css start-->
+    <!-- Plugins css Ends-->
+    <!-- Bootstrap css-->
+    <link rel="stylesheet" type="text/css" href="~/manager/assets/css/vendors/bootstrap.css">
+    <!-- App css-->
+    <link rel="stylesheet" type="text/css" href="~/manager/assets/css/style.css">
+    <link id="color" rel="stylesheet" href="~/manager/assets/css/color-1.css" media="screen">
+    <!-- Responsive css-->
+    <link rel="stylesheet" type="text/css" href="~/manager/assets/css/responsive.css">
+
+</head>
+<body>
+    <!-- login page start-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-7"><img class="bg-img-cover bg-center" src="~/manager/assets/images/logo/landing2.webp" alt="looginpage"></div>
+            <div class="col-xl-5 p-0">
+                <div class="login-card login-dark">
+                    <div>
+                        <div><a class="logo text-start" href="index.html"><img class="img-fluid for-light" style="max-width:300px" src="~/manager/assets/images/logo/logo2.svg" alt="looginpage"><img width="350" height="100%" class="img-fluid for-dark" src="https://www.uplifeacademy.com/uploads/63846Uplife_webSite_white_logo.png" alt="looginpage"></a></div>
+                        <div class="login-main">
+                            <form class="theme-form needs-validation custom-input" novalidate="" action="/manager/login" method="post">
+                                <h4>Oturum açın</h4>
+                                <p>Giriş yapmak için e-postanızı ve şifrenizi girin</p>
+                                <div class="form-group">
+                                    <label class="col-form-label">Kullanıcı Adı</label>
+                                    <input asp-for="LoginDTO.Username" class="form-control" type="email" required="" placeholder="ornek@alanadiniz.com">
+                                        <div class="invalid-feedback">Please enter your valid </div>
+                                        <div class="valid-feedback">
+                                            Looks's Good!
+                                        </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-form-label">Şifre</label>
+                                    <div class="form-input position-relative">
+                                        <input asp-for="LoginDTO.Password" class="form-control" type="password"  required="" placeholder="*********">
+                                        <div class="show-hide"><span class="show">                         </span></div>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-0">
+                                    <div class="checkbox p-0">
+                                        <input id="checkbox1" type="checkbox">
+                                        <label class="text-muted" for="checkbox1">Beni Hatırla</label>
+                                    </div>
+                                    <button class="btn btn-primary btn-block w-100" type="submit">Oturum aç</button>
+                                </div>
+                                <h6 class="text-muted mt-4 or">Sosyal Medya</h6>
+                                <div class="social mt-4">
+                                    <div class="btn-showcase"><a class="btn btn-light" href="https://www.linkedin.com/login" target="_blank"><i class="txt-linkedin" data-feather="linkedin"></i> LinkedIn </a><a class="btn btn-light" href="https://twitter.com/login?lang=en" target="_blank"><i class="txt-twitter" data-feather="twitter"></i>twitter</a><a class="btn btn-light" href="https://www.facebook.com/" target="_blank"><i class="txt-fb" data-feather="facebook"></i>facebook</a></div>
+                                </div>
+                                <p class="mt-4 mb-0 text-center"><a target="_blank" class="ms-2" href="https://kaktusyazilim.com">Kaktüs Yazılım Gelişmiş Web Sistemleri</a></p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- latest jquery-->
+        <script src="~/manager/assets/js/jquery-3.6.0.min.js"></script>
+        <!-- Bootstrap js-->
+        <script src="~/manager/assets/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- feather icon js-->
+        <script src="~/manager/assets/js/icons/feather-icon/feather.min.js"></script>
+        <script src="~/manager/assets/js/icons/feather-icon/feather-icon.js"></script>
+        <!-- scrollbar js-->
+        <!-- Sidebar jquery-->
+        <script src="~/manager/assets/js/config.js"></script>
+        <!-- Plugins JS start-->
+        <!-- Plugins JS Ends-->
+        <!-- Theme js-->
+        <script src="~/manager/assets/js/form-validation-custom.js"></script>
+        <script src="~/manager/assets/js/height-equal.js"></script>
+        <script src="~/manager/assets/js/script.js"></script>
+
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,245 @@
+﻿@model CorporateWebProject.WebUI.Models.ServiceVM
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Manager/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-6">
+                <h3>@(Model.Modul!=null?Model.Modul.Title:"")</h3>
+            </div>
+            <div class="col-6">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="@(Model.Modul!=null?"/manager"+Model.Modul.Url:"")@(Model.Page!=null?Model.Page.Url:"/index")">
+                            <svg class="stroke-icon">
+                                <use href="/manager/assets/svg/icon-sprite.svg#stroke-home"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">@(Model.Modul!=null?Model.Modul.Title:"")</li>
+                    <li class="breadcrumb-item active">@(Model.Page!=null?Model.Page.Title:Model.Modul.Title+" Ekle")</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row starter-main">
+        <div class="col-sm-12">
+            <div class="card">
+
+                <div class="card-body">
+                    <form class="row g-3 needs-validation custom-input" enctype="multipart/form-data" action="/manager/@Model.Modul!.Url/general" method="post" novalidate="">
+                        <div class="col-6">
+                            <label class="form-label" asp-for="Setting.Url">Site Url</label>
+                            <input data-val="false" class="form-control input-validate" data-error="Lütfen sitenin urlsini giriniz" asp-for="Setting.Url" type="text" placeholder="Web sitenizin browserda gözüken url adresi" required="">
+
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label" asp-for="Setting.SiteName">Website Adı</label>
+                            <input data-val="false"  class="form-control input-validate" asp-for="Setting.SiteName" data-error="Lütfen site adınızı giriniz." type="text" placeholder="Website adınızı giriniz." required="">
+
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label" asp-for="Setting.Title">Website Başlığı</label>
+                            <input data-val="false"  class="form-control input-validate" asp-for="Setting.Title" data-error="Lütfen web site başlığınızı giriniz." type="text" placeholder="Website başlığınızı giriniz." required="">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label" asp-for="Setting.WebDescription">Website Açıklaması</label>
+                            <textarea data-val="false"  rows="3" class="form-control input-validate" asp-for="Setting.WebDescription" data-error="Lütfen web site açıklamanızı giriniz." type="text" placeholder="Website açıklamanızı giriniz." required=""></textarea>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Meta Description</label>
+                                <textarea data-val="false"  type="text" placeholder="Meta açıklamanızı giriniz google da gözükecek olan açılamanızdır" class="form-control" asp-for="Setting.MetaDescription"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Cep Telefon</label>
+                                <input data-val="false"  type="tel" class="form-control input-validate" placeholder="Cep telefonu numaranızı giriniz aynı zamanda bu numaranız whatsapp iletişim olarakta geçecektir." data-error="Lütfen cep telefonu numaranızı giriniz" required="" asp-for="Setting.Phone1" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Sabit Telefon</label>
+                                <input data-val="false"  type="tel" class="form-control input-validate" placeholder="Sabit hat telefon numaranızı giriniz." data-error="Lütfen sabit telefon numaranızı giriniz." required="" asp-for="Setting.Phone2" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>İletişim Mail</label>
+                                <input data-val="false"  type="text" class="form-control" placeholder="İletişim mail adresinizi giriniz" data-error="Lütfen mail adresinizi giriniz" required="" asp-for="Setting.Mail" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Dark Logo</label>
+                                <input data-val="false"  type="file" class="form-control" data-error="Lütfen siyah formatlar için logonuzu giriniz" required="" name="DarkLogo" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Video</label>
+                                <input data-val="false"  type="file" class="form-control" data-error="Lütfen beyaz formatlar için logonuzu giriniz" required="" name="WhiteLogo" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Favicon</label>
+                                <input data-val="false"  type="file" class="form-control" data-error="Lütfen faviconunuzu giriniz" required="" name="Favicon" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Header Scripts</label>
+                                <textarea data-val="false"  type="text" class="form-control" placeholder="Header tagleri için script girebilirsiniz." asp-for="Setting.HeaderScripts"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Body Scripts</label>
+                                <textarea data-val="false"  type="text" class="form-control" placeholder="Body tagleri için script girebilirsiniz." asp-for="Setting.BodyScripts"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Footer Scripts</label>
+                                <textarea data-val="false"  type="text" class="form-control" placeholder="Footer tagleri için script girebilirsiniz." asp-for="Setting.FooterScripts">
+</textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Breadcrumb Fotoğraf</label>
+                                <input data-val="false"  type="file" name="BreadcrumbPhoto" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Seperator Fotoğraf</label>
+                                <input data-val="false"  type="file" name="SeperatorPhoto" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Google Site Veritificaton Kodu</label>
+                                <input data-val="false"  type="text" placeholder="Search Console için google site kodunuzu giriniz." class="form-control" asp-for="Setting.GoogleSiteVeritification" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Adres</label>
+                                <textarea data-val="false"  type="text" class="form-control" placeholder="Adres bilginizi giriniz, web sitesinde faturalarınız vb yerlerde gözükecek" data-error="Lütfen adresiniz giriniz" required="" asp-for="Setting.Address"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Google Map</label>
+                                <textarea data-val="false"  type="text" class="form-control" placeholder="Web sitenizin iletişim kısmındaki harita iframe ile düzenleyin" asp-for="Setting.GoogleMap"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Facebook Domain Veritification Kodu</label>
+                                <input data-val="false"  type="text" placeholder="Meta için facebook site kodunuzu giriniz." class="form-control" class="form-control" asp-for="Setting.FacebookDomainVeritification" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Twitter ID</label>
+                                <input data-val="false"  type="text" placeholder="Twitter için site kodunuzu giriniz." class="form-control" class="form-control" asp-for="Setting.TwitterId" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Yandex Veritification Kodu</label>
+                                <input data-val="false"  type="text" placeholder="Yandex için site kodunuzu giriniz." class="form-control" class="form-control" asp-for="Setting.YandexVeritification" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Çalışma Saatleri</label>
+                                <input data-val="false"  type="text" class="form-control" placeholder="Çalışma saatlerinizi giriniz" asp-for="Setting.WorkHours" />
+                            </div>
+                        </div>
+
+
+                        <div class="col-12">
+                            <label class="form-label" asp-for="Setting.LangId">Ayar Dili</label>
+                            @Html.DropDownListFor(x => x.Setting.LangId, new SelectList(Model.LanguageList, "Id", "Name"), "Lütfen bir dil seçiniz", new { @class = "form-control input-validate", data_error = "Lütfen ayarlar için bir dil seçiniz", required = "" })
+
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-primary" type="submit">Kaydet</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Container-fluid Ends-->
+
+@section js{
+    <script src="/manager/assets/js/dropzone/dropzone.js"></script>
+    <script src="/manager/assets/js/dropzone/dropzone-script.js"></script>
+    <script src="/manager/assets/js/select2/select2.full.min.js"></script>
+    <script src="/manager/assets/js/select2/select2-custom.js"></script>
+    <script src="/manager/assets/js/editors/quill.js"></script>
+    <script src="/manager/assets/js/form-validation-custom.js"></script>
+    <script src="https://cdn.ckeditor.com/4.16.0/full-all/ckeditor.js"></script>
+
+    <script>
+        CKEDITOR.replace('editor', {
+            toolbar: 'Full',
+            toolbar_Full:
+                [
+                    { name: 'document', items: ['Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates'] },
+                    { name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo'] },
+                    { name: 'editing', items: ['Find', 'Replace', '-', 'SelectAll', '-', 'SpellChecker', 'Scayt'] },
+                    {
+                        name: 'forms', items: ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton',
+                            'HiddenField']
+                    },
+                    '/',
+                    { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat'] },
+                    {
+                        name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv',
+                            '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl']
+                    },
+                    { name: 'links', items: ['Link', 'Unlink', 'Anchor'] },
+                    { name: 'insert', items: ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe'] },
+                    '/',
+                    { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
+                    { name: 'colors', items: ['TextColor', 'BGColor'] },
+                    { name: 'tools', items: ['Maximize', 'ShowBlocks', '-', 'About'] }
+                ],
+            extraPlugins: 'iframe',
+            enterMode: CKEDITOR.ENTER_BR,
+            shiftEnterMode: CKEDITOR.ENTER_P,
+            filebrowserBrowseUrl: '/manager/files/Browse',
+            filebrowserUploadUrl: '/manager/files/create'
+        });
+
+
+    </script>
+
+}
+
+@section css {
+    <link rel="stylesheet" type="text/css" href="/manager/assets/css/vendors/quill.snow.css">
+    <link rel="stylesheet" type="text/css" href="/manager/assets/css/vendors/select2.css">
+    <link rel="stylesheet" type="text/css" href="/manager/assets/css/vendors/dropzone.css">
+}

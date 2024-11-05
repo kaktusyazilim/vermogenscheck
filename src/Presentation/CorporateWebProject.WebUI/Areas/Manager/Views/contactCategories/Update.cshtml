@@ -1,0 +1,60 @@
+﻿@model CorporateWebProject.WebUI.Models.ServiceVM
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Manager/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-6">
+                <h3>@(Model.Modul!=null?Model.Modul.Title:"")</h3>
+            </div>
+            <div class="col-6">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="@(Model.Modul!=null?"/manager"+Model.Modul.Url:"")@(Model.Page!=null?Model.Page.Url:"/index")">
+                            <svg class="stroke-icon">
+                                <use href="/manager/assets/svg/icon-sprite.svg#stroke-home"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">@(Model.Modul!=null?Model.Modul.Title:"")</li>
+                    <li class="breadcrumb-item active">@(Model.Page!=null?Model.Page.Title:Model.Modul.Title+" Ekle")</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row starter-main">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <form class="row g-3 needs-validation custom-input" enctype="multipart/form-data" action="/manager/@Model.Modul.Url/update" method="post">
+                        @Html.HiddenFor(x => x.ContactCategories.ItemGuid)
+
+                        <div class="col-12">
+                            <label class="form-label" asp-for="ContactCategories.Name">Başlık</label>
+                            <input class="form-control input-validate" data-error="Lütfen bir başlık giriniz" placeholder="Başlık giriniz." asp-for="ContactCategories.Name" required type="text" />
+                            <span asp-validation-for="ContactCategories.Name"></span>
+
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label" asp-for="ContactCategories.LangId">Dili</label>
+                            @Html.DropDownListFor(x => x.ContactCategories.LangId, new SelectList(Model.LanguageList, "Id", "Name"), "Lütfen bir dil seçiniz", new { @class = "form-control input-validate", data_error = "Lütfen kategori için bir dil seçiniz", required = "" })
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-primary" type="submit">Kaydet</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Container-fluid Ends-->

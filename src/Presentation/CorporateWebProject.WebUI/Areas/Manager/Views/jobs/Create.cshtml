@@ -1,0 +1,122 @@
+﻿
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/manager/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-6">
+                <h3>İş İlanları</h3>
+            </div>
+            <div class="col-6">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/manager/dashboard">
+                            <svg class="stroke-icon">
+                                <use href="/manager/assets/svg/icon-sprite.svg#stroke-home"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">Kariyer Yönetimi</li>
+                    <li class="breadcrumb-item active">İş İlanı Ekle</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row starter-main">
+        <div class="col-sm-12">
+            <div class="card">
+
+                <div class="card-body">
+                    <form class="row g-3 needs-validation custom-input" enctype="multipart/form-data" action="/manager/jobs/create" method="post" novalidate="">
+                        <div class="col-12">
+                            <label class="form-label" asp-for="Job.CompanyGuid">İş İlanını Yayınlayan Firma</label>
+                            @Html.DropDownListFor(x => x.Job.CompanyGuid, new SelectList(Model.CompanyList, "ItemGuid", "Name"), "Lütfen bir şirket seçiniz", new { @class = "form-control input-validate", data_error = "Lütfen server bilginizi giriniz", required = "" })
+
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label" asp-for="Job.Title">İş Başlığı</label>
+                            <input class="form-control input-validate" asp-for="Job.Title" data-error="Lütfen bir iş başlığı giriniz" placeholder="İş başlığı giriniz" type="text" required="">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label" asp-for="Job.SortDescription">İş Tanımı</label>
+                            <textarea class="form-control input-validate" asp-for="Job.SortDescription" data-error="Lütfen bir iş tanımı giriniz." placeholder="İş tanımını giriniz Örn; Muhasebe Elemanı" type="text" required=""></textarea>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label" asp-for="Job.FullDescription">İstenen Yetenek ve Uzmanlıklar</label>
+                            <textarea class="form-control input-validate editor" asp-for="Job.FullDescription" data-error="" placeholder="İstenen yetenek ve uzmanlıkları giriniz, her alt satıra geçtiğinizde bu bir madde olarak sayar" type="text" required=""></textarea>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label" asp-for="Job.TimeType">Çalışma Zaman Tipi</label>
+                            <textarea class="form-control input-validate" asp-for="Job.TimeType" data-error="" placeholder="Çalışma zaman tipini giriniz Örn; Tam Zamanlı, Yarı Zamanlı veya Sezonluk" type="text" required=""></textarea>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label" asp-for="Job.Mail">İletişim Maili</label>
+                            <input class="form-control input-validate" asp-for="Job.Mail" data-error="" placeholder="Lütfeni iletişim mail adresini giriniz." type="text" required="" />
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label" asp-for="Job.Phone">İletişim Telefonu</label>
+                            <input class="form-control input-validate" asp-for="Job.Phone" data-error="" placeholder="Lütfeni iletişim telefon numarasını giriniz." type="text" required="" />
+                        </div>
+
+
+                        <div class="col-6">
+                            <label class="form-label" asp-for="Job.StartDate">Başlangıç Tarihi</label>
+                            <input class="form-control input-validate" asp-for="Job.StartDate" value="@DateTime.Now.ToString("yyyy-MM-dd")" data-error="" placeholder="Lütfeni iletişim telefon numarasını giriniz." type="date" required="" />
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label" asp-for="Job.EndDate">Bitiş Tarihi ( Sürekli bir iş ilanı olmasını isiyorsanız bitiş tarihi 2030 olarak veya daha fazlası olarka girebilirsiniz.)</label>
+                            <input class="form-control input-validate" asp-for="Job.EndDate" data-error="" value="@DateTime.Now.AddDays(30).ToString("yyyy-MM-dd")"  placeholder="Lütfeni iletişim telefon numarasını giriniz." type="date" required="" />
+                        </div>
+
+
+                        <div class="col-12">
+                            <label class="form-label" asp-for="Category.IsLink">İş İlanını Önceliği</label>
+                            <select class="form-control input-valid categoryislink" asp-for="Category.IsLink" data-error="Lütfen bir seçenek seçiniz.">
+                                <option>Bir seçenek seçiniz</option>
+                                <option value="false">Normal</option>
+
+                                <option value="true">Acil</option>
+                            </select>
+
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-primary" type="submit">Kaydet</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Container-fluid Ends-->
+
+
+@section js{ 
+    <script>
+        $("#Job_CompanyGuid").change(function () {
+            var companyCode = $(this).val();
+            $.ajax({
+                url: "/manager/company/GetCompnyDetailForCode",
+                data: { code: companyCode },
+                success: function (data) {
+                    if (data != null) {
+                        $("#Job_Mail").val(data.mail);
+                        $("#Job_Phone").val(data.phone);
+
+                    }
+                }
+            })
+        })
+    </script>
+}

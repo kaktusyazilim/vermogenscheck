@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewData["Title"] = "Sizinle iletişime geçeceğiz";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div style="margin-top:100px;z-index:0 !important" class="inner-banner">
+    <img src="assets/images/bg/inner-bannerdot.png" class="inner-bannerdot" alt="image">
+    <img src="assets/images/bg/inner-bannerwave.png" class="inner-bannerwave" alt="image">
+    <a class="down-arrow-icon" href="#faq">
+        <svg viewBox="0 0 14 26" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M13.8182 18.469L7.24862 25.7462L0.679032 18.469C0.272584 18.0188 0.592074 17.3 1.19862 17.3L6.74862 17.3L6.74862 1C6.74862 0.723857 6.97248 0.5 7.24862 0.5C7.52477 0.5 7.74862 0.723857 7.74862 1L7.74862 17.3L13.2986 17.3C13.9052 17.3 14.2247 18.0188 13.8182 18.469Z" />
+        </svg>
+    </a>
+    <div class="container">
+        <div class="row d-flex justify-content-center align-items-center text-center">
+            <div class="col-md-6">
+                <h2 class="inner-banner-title wow fadeInLeft" data-wow-duration="1.5s" data-wow-delay=".2s">İletişime geçeceğiz</h2>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb gap-3">
+                        <li class="breadcrumb-item"><a href="/">Anasayfa</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">İletişime Geçeceğiz</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="faq-section pt-120 pb-120" id="faq">
+    <div class="container">
+        <div class="row g-4 justify-content-center">
+
+            <div class="col-lg-12">
+
+                <div class="section-title primary4">
+                    <span>İşleminiz Başarılı !</span>
+                    <h3>Mesajınız Ulaştı!</h3>
+                    <p class="para">Kaktüs Yazılım ekibiyle <strong>başarıyla</strong> iletişime geçtiniz. Müşteri hizmetlerimiz en kısa sürede sizinle iletişime geçecek</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="join-section pb-120">
+    <div class="container">
+        <div class="joinus-area d-flex align-items-center wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.2s">
+            <div class="row d-flex align-items-center g-4">
+                <div class="col-lg-7 justify-content-lg-start justify-content-center text-lg-start text-center">
+                    <h2>
+                        Projelerinizi inşa etmeye hazırız
+                    </h2>
+                </div>
+                <div class="col-lg-5 d-flex justify-content-lg-end justify-content-center">
+                    <a href="tel:@Model.CurrentSettings.Phone1" class="eg-btn btn--primary capsule joinus-btn">Hemen Arayın</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section js{
+    <!-- Event snippet for İletişim Formu Dolduruldu conversion page -->
+    <script>
+        gtag('event', 'conversion', {
+            'send_to': 'AW-11292749385/QqypCKe3vb8ZEMnc5ogq',
+            'value': 10.0,
+            'currency': 'TRY'
+        });
+    </script>
+
+}

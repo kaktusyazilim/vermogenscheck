@@ -1,0 +1,81 @@
+﻿
+
+@model CorporateWebProject.WebUI.Models.ServiceVM
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Manager/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-6">
+                <h3>Cache Yönetimi</h3>
+            </div>
+            <div class="col-6">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/manager/cacheManager">
+                            <svg class="stroke-icon">
+                                <use href="/manager/assets/svg/icon-sprite.svg#stroke-home"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">Cache Yönetimi</li>
+                    <li class="breadcrumb-item active">Cache Yönetimi</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row starter-main">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-end">
+                        <a href="/manager/cacheManager/clearCache" class="btn btn-danger btnCreate"><i class="fa fa-trash"></i> Tümünü Sil</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="dt-ext table-responsive">
+                        <table class="display" id="export-button">
+                            <thead>
+                                <tr>
+                                    <th>Tarih</th>
+                                    <th>İşlemler</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var item in Model.StringList)
+                                {
+                                    <tr>
+                                        <td>@item</td>
+                                        <td>
+                                            <ul class="action">
+                                                <li class="edit"> <a href="/manager/cacheManager/update?id=@item"><i style="font-size: 18px" class="icon-pencil-alt"></i></a></li>
+                                                <li class=""> <a style="cursor:pointer" onclick="btnPassive('@item', '/manager/cacheManager/passive')"><i style="color: orange !important;  font-size: 18px" class="icon-archive"></i></a></li>
+                                                <li class="delete"><a style="cursor:pointer" onclick="btnDelete('@item', '/manager/cacheManager/delete')"><i style="font-size:18px" class="icon-trash"></i></a></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Tarih</th>
+                                    <th>İşlemler</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Container-fluid Ends-->
